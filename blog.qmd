@@ -5,9 +5,9 @@ listing:
   sort: "date desc"
   type: default
   categories: false
-  sort-ui: true
-  filter-ui: true
+  sort-ui: false
+  filter-ui: false
   fields: [date, title, author, description, categories]
-page-layout: full
+page-layout: article
 ---
 ## Blogs

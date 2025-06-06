@@ -1,7 +1,8 @@
 ---
 title: ""
-page-layout: full
+page-layout: article
 toc: false
+title-block-banner: true
 ---
 
 # Welcome

@@ -2,7 +2,7 @@
 title: "Exciting News: I'm Joining Google Summer of Code 2025!"
 author: "Vanshaj Bindal"
 date: "2025-05-21"
-categories: [GSoC, QuantumComputing, OpenSource, Python]
+categories: [GSoC, OpenSource, Python, quantum]
 image: "gsoc-banner.jpg"
 ---
 
