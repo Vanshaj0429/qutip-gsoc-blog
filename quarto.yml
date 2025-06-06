@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "QuTiP GSoC 2025 Blog"
+  description: "My journey of doing a QuTiP (NUMFOCUS) project as Google Summer of Code contributor"
+  site-url: "https://vanshaj0429.github.io/qutip-gsoc-blog"
+  repo-url: "https://github.com/Vanshaj0429/qutip-gsoc-blog"
+  
+  navbar:
+    background: white
+    foreground: black
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Blog"
+        href: blog.qmd
+      - text: "About"
+        href: about.qmd
+    right:
+      - icon: github
+        href: "https://github.com/Vanshaj0429"
+      - icon: linkedin
+        href: "https://www.linkedin.com/in/vanshaj-bindal-487953244/"
+
+  sidebar:
+    - title: "Blog Posts"
+      contents:
+        - blog.qmd
+        - posts/
+
+format:
+  html:
+    theme: none
+    css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    html-math-method: katex
+
+execute:
+  freeze: auto
