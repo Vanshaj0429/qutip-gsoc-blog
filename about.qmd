@@ -1,0 +1,48 @@
+---
+title: "About"
+---
+
+## Hello!
+
+I'm a physicst with a passion for quantum computing and open-source software. Currently, I'm participating in **Google Summer of Code 2025**, working on developing a comprehensive Hamiltonian Library for QuTiP.
+
+## Current Work
+
+**Google Summer of Code 2025 Contributor**  
+*May 2025 - Present*
+
+Working with NumFOCUS on developing a Hamiltonian Library for QuTiP (Quantum Toolbox in Python). The project aims to create a standardized, comprehensive library of quantum system Hamiltonians to reduce redundant work in the quantum computing research community.
+
+**Key contributions:**
+- Developing ready-to-use implementations of common quantum systems
+- Creating standardized APIs for consistency across different models
+- Implementing JSON serialization for cross-platform compatibility
+- Adding LaTeX representation capabilities for clear documentation
+
+## Interests
+
+- **Quantum Computing:** Simulation, algorithms, and practical applications
+- **Open Source:** Contributing to scientific computing libraries
+- **Python Development:** Scientific computing, data analysis, and automation
+- **Research:** Quantum mechanics, numerical methods, and computational physics
+
+## Technical Skills
+
+- **Languages:** Python, Julia 
+- **Quantum Computing:** QuTiP, Qiskit, quantum algorithms
+- **Tools:** Git, GitHub, Jupyter, LaTeX, 
+- **Web Development:** Quarto
+
+## Education
+
+
+
+## Contact
+
+Feel free to reach out if you'd like to discuss quantum computing, open source projects, or potential collaborations.
+
+- **Email:** vanshajbindal98@gmail.com
+- **GitHub:** [github.com/Vanshaj0429](https://github.com/Vanshaj0429)
+- **LinkedIn:** [linkedin.com/in/vanshaj-bindal](https://www.linkedin.com/in/vanshaj-bindal-487953244/)
+
+---
