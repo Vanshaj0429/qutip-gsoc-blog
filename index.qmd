@@ -6,7 +6,7 @@ toc: false
 
 # Welcome
 
-Hi, I'm Vanshaj - MSc Physics graduate and quantum computing enthusiast currently participating in Google Summer of Code 2025.
+Hi, I'm **Vanshaj** – a MSc Physics graduate and quantum computing enthusiast currently participating in Google Summer of Code 2025.
 
 I'm working on developing a **Hamiltonian Library for QuTiP**, contributing to the open-source quantum simulation ecosystem. This blog documents my journey through GSoC and explores various topics in quantum computing, software development, and open source.
 
@@ -19,11 +19,10 @@ A few months ago, I decided to apply for Google Summer of Code, hoping to contri
 
 [Read more →](posts/gsoc-2025-selection.qmd)
 
----
 
 ## About This Site
 
-This site is built with [Quarto](https://quarto.org) and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions.
+This site is built with [Quarto](https://quarto.org) and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions while doing this project.
 
 **Topics I write about:**
 - Quantum computing and simulation
@@ -35,8 +34,8 @@ This site is built with [Quarto](https://quarto.org) and hosted on GitHub Pages.
 ## Connect
 
 - **GitHub:** [github.com/Vanshaj0429](https://github.com/Vanshaj0429)
-- **Email:** vanshajbindal98@gmail.com
-- **Linkedin:** [Vanshaj Bindal](https://www.linkedin.com/in/vanshaj-bindal-487953244/)
+- **Email:** vanshajbindal90@gmail.com
+- **LinkedIn:** [Vanshaj Bindal](https://linkedin.com/in/vanshaj-bindal)
 
 ---
 
