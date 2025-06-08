@@ -2,76 +2,76 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome",
+    "title": "Welcome to My GSoC 2025 Journey",
     "section": "",
-    "text": "Hi, I’m Vanshaj – a MSc Physics graduate and quantum computing enthusiast currently participating in Google Summer of Code 2025.\nI’m working on developing a Hamiltonian Library for QuTiP, contributing to the open-source quantum simulation ecosystem. This blog documents my journey through GSoC and explores various topics in quantum computing, software development, and open source.\n\n\n\n\nJune 5, 2025\nA few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact…\nRead more →\n\n\n\n\nThis site is built with Quarto and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions while doing this project.\nTopics I write about: - Quantum computing and simulation - Open source software development\n- Python programming - GSoC 2025 journey - Technical tutorials and insights\n\n\n\n\nGitHub: github.com/Vanshaj0429\nEmail: vanshajbindal90@gmail.com\nLinkedIn: Vanshaj Bindal\n\n\nLast updated: June 2025"
+    "text": "Hi, I’m Vanshaj Bindal – a MSc Physics graduate with a passion for quantum information, theoretical physics and newfound interest in open-source development. I’m thrilled to be participating in Google Summer of Code 2025 with NumFOCUS, working on an exciting project that bridges quantum physics and computational tools.\nThis blog is a record of my GSoC experience, technical discoveries, and the fascinating world of quantum simulation software.\n\n\n\n\n\n\n\n\n\nI’m developing a comprehensive Hamiltonian Library for QuTiP (Quantum Toolbox in Python), one of the most widely-used quantum simulation frameworks. Currently, QuTiP users must frequently recreate common quantum system Hamiltonians from scratch, leading to redundant work and potential inconsistencies.\nWhat I’m Building:\n\nReady-to-use implementations of frequently used quantum systems including Jaynes-Cummings, Rabi, Dicke, and various spin-chain models\nA standardized API with JSON serialization for cross-platform compatibility\nTime-dependent parameter support for dynamic quantum systems\n\nLaTeX representation capabilities for clear mathematical documentation\nComprehensive documentation, tutorials, and seamless integration with QuTiP’s existing functionality\n\nTechnologies & Tools:\n\nPrimary: Python, QuTiP, NumPy, SciPy\nDevelopment: Git, GitHub, Jupyter Notebooks\nDocumentation: LaTeX, Matplotlib\n\nTesting: pytest framework\n\nMentors: Alex Pitchford, Neill Lambert, Eric Giguere and Simon Cross\nThis project will enhance the user experience for quantum researchers and reduce redundancy in quantum simulations.\n🔗 View Project Details on GSoC Website\n\n\n\n\n\n\nMay 21st, 2025\nA few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact…\nRead more →\n\n\n\n\nThis site is built with Quarto and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions while doing this project.\nTopics I write about:\n\nQuantum mechanics and simulation\nDifferent quantum systems\nOpen source development\n\nPython programming\nGSoC 2025 journey\nTechnical tutorials and insights\n\n\n\n\n\nGitHub: github.com/Vanshaj0429\nEmail: vanshajbindal98@gmail.com\nLinkedIn: Vanshaj Bindal\n\n\nLast updated: June 2025"
+  },
+  {
+    "objectID": "index.html#about-the-project",
+    "href": "index.html#about-the-project",
+    "title": "Welcome to My GSoC 2025 Journey",
+    "section": "",
+    "text": "I’m developing a comprehensive Hamiltonian Library for QuTiP (Quantum Toolbox in Python), one of the most widely-used quantum simulation frameworks. Currently, QuTiP users must frequently recreate common quantum system Hamiltonians from scratch, leading to redundant work and potential inconsistencies.\nWhat I’m Building:\n\nReady-to-use implementations of frequently used quantum systems including Jaynes-Cummings, Rabi, Dicke, and various spin-chain models\nA standardized API with JSON serialization for cross-platform compatibility\nTime-dependent parameter support for dynamic quantum systems\n\nLaTeX representation capabilities for clear mathematical documentation\nComprehensive documentation, tutorials, and seamless integration with QuTiP’s existing functionality\n\nTechnologies & Tools:\n\nPrimary: Python, QuTiP, NumPy, SciPy\nDevelopment: Git, GitHub, Jupyter Notebooks\nDocumentation: LaTeX, Matplotlib\n\nTesting: pytest framework\n\nMentors: Alex Pitchford, Neill Lambert, Eric Giguere and Simon Cross\nThis project will enhance the user experience for quantum researchers and reduce redundancy in quantum simulations.\n🔗 View Project Details on GSoC Website"
   },
   {
     "objectID": "index.html#recent-posts",
     "href": "index.html#recent-posts",
-    "title": "Welcome",
+    "title": "Welcome to My GSoC 2025 Journey",
     "section": "",
-    "text": "June 5, 2025\nA few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact…\nRead more →"
+    "text": "May 21st, 2025\nA few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact…\nRead more →"
   },
   {
     "objectID": "index.html#about-this-site",
     "href": "index.html#about-this-site",
-    "title": "Welcome",
+    "title": "Welcome to My GSoC 2025 Journey",
     "section": "",
-    "text": "This site is built with Quarto and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions while doing this project.\nTopics I write about: - Quantum computing and simulation - Open source software development\n- Python programming - GSoC 2025 journey - Technical tutorials and insights"
+    "text": "This site is built with Quarto and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions while doing this project.\nTopics I write about:\n\nQuantum mechanics and simulation\nDifferent quantum systems\nOpen source development\n\nPython programming\nGSoC 2025 journey\nTechnical tutorials and insights"
   },
   {
     "objectID": "index.html#connect",
     "href": "index.html#connect",
-    "title": "Welcome",
+    "title": "Welcome to My GSoC 2025 Journey",
     "section": "",
-    "text": "GitHub: github.com/Vanshaj0429\nEmail: vanshajbindal90@gmail.com\nLinkedIn: Vanshaj Bindal\n\n\nLast updated: June 2025"
+    "text": "GitHub: github.com/Vanshaj0429\nEmail: vanshajbindal98@gmail.com\nLinkedIn: Vanshaj Bindal\n\n\nLast updated: June 2025"
   },
   {
-    "objectID": "posts/gsoc-2025-selection.html",
-    "href": "posts/gsoc-2025-selection.html",
+    "objectID": "posts/intro/gsoc-2025-selection.html",
+    "href": "posts/intro/gsoc-2025-selection.html",
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "",
     "text": "A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of anticipation…\nI’m thrilled to announce that I’ve been selected as a Google Summer of Code 2025 contributor! 🚀"
   },
   {
-    "objectID": "posts/gsoc-2025-selection.html#the-project",
-    "href": "posts/gsoc-2025-selection.html#the-project",
-    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
-    "section": "The Project",
-    "text": "The Project\nI’ll be working on developing a Hamiltonian Library for QuTiP – a project that’s both technically exciting and practically valuable. For those unfamiliar, QuTiP is the Quantum Toolbox in Python, a leading framework that researchers use to simulate quantum systems."
-  },
-  {
-    "objectID": "posts/gsoc-2025-selection.html#what-ill-be-working-on",
-    "href": "posts/gsoc-2025-selection.html#what-ill-be-working-on",
+    "objectID": "posts/intro/gsoc-2025-selection.html#what-ill-be-working-on",
+    "href": "posts/intro/gsoc-2025-selection.html#what-ill-be-working-on",
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "What I’ll Be Working On",
     "text": "What I’ll Be Working On\nHere’s the problem I’m helping to solve: currently, QuTiP users often need to recreate common quantum system Hamiltonians from scratch, leading to duplicated effort and potential inconsistencies. My project aims to change that by creating a comprehensive library of ready-to-use implementations.\nThe project will include:\n\nReady-to-use quantum system models (Jaynes-Cummings, Rabi, Dicke, and various spin-chain models)\nStandardized APIs for consistency across different quantum models\nJSON serialization for cross-platform compatibility\nTime-dependent parameter support for dynamic quantum systems\nLaTeX representation for clear mathematical documentation\n\nThis will essentially provide researchers with a well-tested, standardized toolkit for quantum simulations, reducing redundant work and improving consistency across the field."
   },
   {
-    "objectID": "posts/gsoc-2025-selection.html#looking-forward",
-    "href": "posts/gsoc-2025-selection.html#looking-forward",
+    "objectID": "posts/intro/gsoc-2025-selection.html#looking-forward",
+    "href": "posts/intro/gsoc-2025-selection.html#looking-forward",
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "Looking Forward",
     "text": "Looking Forward\nI’m genuinely excited about this opportunity. The selection process was competitive, and I’m grateful to have been chosen to work on something that will directly benefit the quantum computing research community.\nWhen I first submitted my application, I knew it was a long shot – but I’m glad I took the chance. Now I get to spend the summer contributing to open-source software that actual researchers will use in their work."
   },
   {
-    "objectID": "posts/gsoc-2025-selection.html#whats-coming-next",
-    "href": "posts/gsoc-2025-selection.html#whats-coming-next",
+    "objectID": "posts/intro/gsoc-2025-selection.html#whats-coming-next",
+    "href": "posts/intro/gsoc-2025-selection.html#whats-coming-next",
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "What’s Coming Next",
     "text": "What’s Coming Next\nOver the next few months, I’ll be: - Developing and testing the core Hamiltonian library components - Learning deeper aspects of quantum mechanics and numerical methods - Contributing to a project that will be used by researchers worldwide - Documenting the entire development process"
   },
   {
-    "objectID": "posts/gsoc-2025-selection.html#acknowledgments",
-    "href": "posts/gsoc-2025-selection.html#acknowledgments",
+    "objectID": "posts/intro/gsoc-2025-selection.html#acknowledgments",
+    "href": "posts/intro/gsoc-2025-selection.html#acknowledgments",
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "Acknowledgments",
     "text": "Acknowledgments\nI want to thank the QuTiP community and NumFOCUS for this incredible opportunity. The mentorship and support they’ve already provided has been exceptional, and I’m looking forward to working closely with them throughout the summer."
   },
   {
-    "objectID": "posts/gsoc-2025-selection.html#follow-the-journey",
-    "href": "posts/gsoc-2025-selection.html#follow-the-journey",
+    "objectID": "posts/intro/gsoc-2025-selection.html#follow-the-journey",
+    "href": "posts/intro/gsoc-2025-selection.html#follow-the-journey",
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "Follow the Journey",
     "text": "Follow the Journey\nI’ll be sharing updates about my progress right here on this blog. You can expect: - Technical insights about quantum computing and library development - Challenges and solutions encountered during the project - Code examples and implementation details - Reflections on contributing to open-source scientific software\nThis summer promises to be an exciting blend of learning, coding, and contributing to the quantum computing community. Stay tuned!\n\nIf you’re interested in quantum computing, open-source development, or just want to follow along with my GSoC journey, feel free to connect. And if you’re a fellow GSoC participant this year, I’d love to hear about your projects too!\n\n\n\n\n\n\nInterested in QuTiP?\n\n\n\nCheck out the QuTiP documentation to learn more about quantum simulations in Python!\n\n\nTags: GSoC2025, QuantumComputing, OpenSource, Python, QuTiP, NumFOCUS, StudentDeveloper"

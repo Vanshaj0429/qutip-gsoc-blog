@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Google Summer of Code 2025 - Quantum and Code"
+  title: "Google Summer of Code 2025 | QuTiP | NumFOCUS"
   
   navbar:
     background: primary

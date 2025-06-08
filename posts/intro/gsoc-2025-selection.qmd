@@ -2,17 +2,15 @@
 title: "Exciting News: I'm Joining Google Summer of Code 2025!"
 author: "Vanshaj Bindal"
 date: "2025-05-21"
+page-layout: article
 categories: [GSoC, OpenSource, Python, quantum]
-image: "gsoc-banner.jpg"
+title-block-banner: true
 ---
 
 A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of anticipation...
 
 **I'm thrilled to announce that I've been selected as a Google Summer of Code 2025 contributor!** 🚀
 
-## The Project
-
-I'll be working on developing a **Hamiltonian Library for QuTiP** – a project that's both technically exciting and practically valuable. For those unfamiliar, QuTiP is the **Quantum Toolbox in Python**, a leading framework that researchers use to simulate quantum systems.
 
 ## What I'll Be Working On
 

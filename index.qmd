@@ -5,20 +5,49 @@ toc: false
 title-block-banner: true
 ---
 
-# Welcome
+# Welcome to My GSoC 2025 Journey
 
-Hi, I'm **Vanshaj** – a MSc Physics graduate and quantum computing enthusiast currently participating in Google Summer of Code 2025.
+Hi, I'm **Vanshaj Bindal** – a MSc Physics graduate with a passion for quantum information, theoretical physics and newfound interest in open-source development. I'm thrilled to be participating in **Google Summer of Code 2025** with NumFOCUS, working on an exciting project that bridges quantum physics and computational tools.
 
-I'm working on developing a **Hamiltonian Library for QuTiP**, contributing to the open-source quantum simulation ecosystem. This blog documents my journey through GSoC and explores various topics in quantum computing, software development, and open source.
+This blog is a record of my GSoC experience, technical discoveries, and the fascinating world of quantum simulation software.
+
+![](Images/thumb.png){width=75% fig-align="center"}
+
+## About the Project
+
+### Hamiltonian Library for QuTiP
+
+I'm developing a **comprehensive Hamiltonian Library** for [QuTiP](https://qutip.org/) (Quantum Toolbox in Python), one of the most widely-used quantum simulation frameworks. Currently, QuTiP users must frequently recreate common quantum system Hamiltonians from scratch, leading to redundant work and potential inconsistencies.
+
+**What I'm Building:**
+
+- Ready-to-use implementations of frequently used quantum systems including Jaynes-Cummings, Rabi, Dicke, and various spin-chain models
+- A standardized API with JSON serialization for cross-platform compatibility
+- Time-dependent parameter support for dynamic quantum systems  
+- LaTeX representation capabilities for clear mathematical documentation
+- Comprehensive documentation, tutorials, and seamless integration with QuTiP's existing functionality
+
+**Technologies & Tools:**
+
+- **Primary:** Python, QuTiP, NumPy, SciPy
+- **Development:** Git, GitHub, Jupyter Notebooks
+- **Documentation:** LaTeX, Matplotlib  
+- **Testing:** pytest framework
+
+**Mentors:** Alex Pitchford, Neill Lambert, Eric Giguere and Simon Cross
+
+This project will enhance the user experience for quantum researchers and reduce redundancy in quantum simulations.
+
+🔗 **[View Project Details on GSoC Website](https://summerofcode.withgoogle.com/programs/2025/projects/TgdXdTXP)**
 
 ## Recent Posts
 
 ### 🎉 Exciting News: I'm Joining Google Summer of Code 2025!
-*June 5, 2025*
+*May 21st, 2025*
 
 A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact...
 
-[Read more →](posts/gsoc-2025-selection.qmd)
+[Read more →](posts/intro/gsoc-2025-selection.qmd)
 
 
 ## About This Site
@@ -26,8 +55,10 @@ A few months ago, I decided to apply for Google Summer of Code, hoping to contri
 This site is built with [Quarto](https://quarto.org) and hosted on GitHub Pages. It serves as both a technical blog and a documentation of my open-source contributions while doing this project.
 
 **Topics I write about:**
-- Quantum computing and simulation
-- Open source software development  
+
+- Quantum mechanics and simulation
+- Different quantum systems
+- Open source development  
 - Python programming
 - GSoC 2025 journey
 - Technical tutorials and insights
@@ -35,8 +66,8 @@ This site is built with [Quarto](https://quarto.org) and hosted on GitHub Pages.
 ## Connect
 
 - **GitHub:** [github.com/Vanshaj0429](https://github.com/Vanshaj0429)
-- **Email:** vanshajbindal90@gmail.com
-- **LinkedIn:** [Vanshaj Bindal](https://linkedin.com/in/vanshaj-bindal)
+- **Email:** vanshajbindal98@gmail.com
+- **LinkedIn:** [Vanshaj Bindal](https://www.linkedin.com/in/vanshaj-bindal-487953244/)
 
 ---
 

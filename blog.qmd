@@ -1,13 +1,16 @@
 ---
 title: ""
 listing:
-  contents: posts
+  contents: 
+    - "posts/*/*.qmd"
   sort: "date desc"
   type: default
   categories: false
   sort-ui: false
   filter-ui: false
   fields: [date, title, author, description, categories]
+  
 page-layout: article
+title-block-banner: true
 ---
 ## Blogs
