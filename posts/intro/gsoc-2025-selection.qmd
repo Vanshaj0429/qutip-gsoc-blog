@@ -3,14 +3,13 @@ title: "Exciting News: I'm Joining Google Summer of Code 2025!"
 author: "Vanshaj Bindal"
 date: "2025-05-21"
 page-layout: article
-categories: [GSoC, OpenSource, Python, quantum]
-title-block-banner: true
+categories: [GSoC 2025, OpenSource, Python, quantum]
+title-block-banner: false
 ---
 
 A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of anticipation...
 
 **I'm thrilled to announce that I've been selected as a Google Summer of Code 2025 contributor!** 🚀
-
 
 ## What I'll Be Working On
 
@@ -28,31 +27,24 @@ This will essentially provide researchers with a well-tested, standardized toolk
 
 ## Looking Forward
 
-I'm genuinely excited about this opportunity. The selection process was competitive, and I'm grateful to have been chosen to work on something that will directly benefit the quantum computing research community.
+I'm genuinely excited about this opportunity. The selection process was competitive, and I'm grateful to have been chosen to work on something that will directly benefit the quantum computing and physics research community.
 
 When I first submitted my application, I knew it was a long shot – but I'm glad I took the chance. Now I get to spend the summer contributing to open-source software that actual researchers will use in their work.
 
-## What's Coming Next
-
 Over the next few months, I'll be:
+
 - Developing and testing the core Hamiltonian library components
 - Learning deeper aspects of quantum mechanics and numerical methods
 - Contributing to a project that will be used by researchers worldwide
-- Documenting the entire development process
+- Documenting the entire development process right here on this blog
+
+You can expect regular updates including technical insights about quantum computing and library development, challenges and solutions encountered during the project, code examples and implementation details, and reflections on contributing to open-source scientific software.
+
+This summer promises to be an exciting blend of learning, coding, and contributing to the quantum computing community. Stay tuned!
 
 ## Acknowledgments
 
-I want to thank the **QuTiP community** and **NumFOCUS** for this incredible opportunity. The mentorship and support they've already provided has been exceptional, and I'm looking forward to working closely with them throughout the summer.
-
-## Follow the Journey
-
-I'll be sharing updates about my progress right here on this blog. You can expect:
-- Technical insights about quantum computing and library development
-- Challenges and solutions encountered during the project
-- Code examples and implementation details
-- Reflections on contributing to open-source scientific software
-
-This summer promises to be an exciting blend of learning, coding, and contributing to the quantum computing community. Stay tuned!
+I want to thank the **QuTiP team** for this incredible opportunity. The mentorship and support they've already provided has been exceptional, and I'm looking forward to working closely with them throughout the summer.
 
 ---
 

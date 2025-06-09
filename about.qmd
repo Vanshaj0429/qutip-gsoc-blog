@@ -1,6 +1,7 @@
 ---
-title: "About"
+title: ""
 page-layout: article
+
 ---
 
 ## Hello!

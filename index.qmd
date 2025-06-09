@@ -63,12 +63,6 @@ This site is built with [Quarto](https://quarto.org) and hosted on GitHub Pages.
 - GSoC 2025 journey
 - Technical tutorials and insights
 
-## Connect
-
-- **GitHub:** [github.com/Vanshaj0429](https://github.com/Vanshaj0429)
-- **Email:** vanshajbindal98@gmail.com
-- **LinkedIn:** [Vanshaj Bindal](https://www.linkedin.com/in/vanshaj-bindal-487953244/)
-
 ---
 
 *Last updated: June 2025*
