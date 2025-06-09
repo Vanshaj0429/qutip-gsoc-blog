@@ -55,4 +55,4 @@ I want to thank the **QuTiP team** for this incredible opportunity. The mentorsh
 Check out the [QuTiP documentation](https://qutip.org/) to learn more about quantum simulations in Python!
 :::
 
-**Tags:** GSoC2025, QuantumComputing, OpenSource, Python, QuTiP, NumFOCUS, StudentDeveloper
+**Tags:** GSoC2025, QuantumComputing, OpenSource, Python, QuTiP, NumFOCUS, 
