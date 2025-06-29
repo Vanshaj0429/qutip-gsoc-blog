@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vanshaj Bindal">
+<meta name="dcterms.date" content="2025-06-10">
 
-<title>blog – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
+<title>Week 1: Diving Deep into Library Design and the Jaynes-Cummings Model – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -143,17 +114,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Google Summer of Code 2025 | QuTiP | NumFOCUS</span>
     </a>
   </div>
@@ -164,15 +135,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -200,7 +171,7 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -208,152 +179,223 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#blogs" id="toc-blogs" class="nav-link active" data-scroll-target="#blogs">Blogs</a></li>
+  <li><a href="#team-meeting-insights-june-3rd" id="toc-team-meeting-insights-june-3rd" class="nav-link active" data-scroll-target="#team-meeting-insights-june-3rd">Team Meeting Insights (June 3rd)</a>
+  <ul class="collapse">
+  <li><a href="#base-class-vs.-model-specific-design" id="toc-base-class-vs.-model-specific-design" class="nav-link" data-scroll-target="#base-class-vs.-model-specific-design">Base Class vs.&nbsp;Model-Specific Design</a></li>
+  <li><a href="#building-complete-quantum-systems" id="toc-building-complete-quantum-systems" class="nav-link" data-scroll-target="#building-complete-quantum-systems">Building Complete Quantum Systems</a></li>
+  <li><a href="#the-json-serialization-challenge" id="toc-the-json-serialization-challenge" class="nav-link" data-scroll-target="#the-json-serialization-challenge">The JSON Serialization Challenge</a></li>
+  <li><a href="#functions-vs.-classes-debate" id="toc-functions-vs.-classes-debate" class="nav-link" data-scroll-target="#functions-vs.-classes-debate">Functions vs.&nbsp;Classes Debate</a></li>
+  <li><a href="#repository-strategy" id="toc-repository-strategy" class="nav-link" data-scroll-target="#repository-strategy">Repository Strategy</a></li>
+  </ul></li>
+  <li><a href="#understanding-open-quantum-systems-why-they-matter" id="toc-understanding-open-quantum-systems-why-they-matter" class="nav-link" data-scroll-target="#understanding-open-quantum-systems-why-they-matter">Understanding Open Quantum Systems: Why They Matter</a>
+  <ul class="collapse">
+  <li><a href="#the-idealized-vs.-real-world" id="toc-the-idealized-vs.-real-world" class="nav-link" data-scroll-target="#the-idealized-vs.-real-world">The Idealized vs.&nbsp;Real World</a></li>
+  <li><a href="#what-makes-a-system-open" id="toc-what-makes-a-system-open" class="nav-link" data-scroll-target="#what-makes-a-system-open">What Makes a System “Open”?</a></li>
+  <li><a href="#the-master-equation-approach" id="toc-the-master-equation-approach" class="nav-link" data-scroll-target="#the-master-equation-approach">The Master Equation Approach</a></li>
+  <li><a href="#common-types-of-environmental-effects" id="toc-common-types-of-environmental-effects" class="nav-link" data-scroll-target="#common-types-of-environmental-effects">Common Types of Environmental Effects</a></li>
+  </ul></li>
+  <li><a href="#getting-to-know-the-jaynes-cummings-model-with-dissipation" id="toc-getting-to-know-the-jaynes-cummings-model-with-dissipation" class="nav-link" data-scroll-target="#getting-to-know-the-jaynes-cummings-model-with-dissipation">Getting to Know the Jaynes-Cummings Model (With Dissipation!)</a>
+  <ul class="collapse">
+  <li><a href="#the-complete-physics-picture" id="toc-the-complete-physics-picture" class="nav-link" data-scroll-target="#the-complete-physics-picture">The Complete Physics Picture</a></li>
+  <li><a href="#key-parameters-for-complete-systems" id="toc-key-parameters-for-complete-systems" class="nav-link" data-scroll-target="#key-parameters-for-complete-systems">Key Parameters for Complete Systems</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters">Why This Matters</a></li>
+  </ul></li>
+  <li><a href="#technical-tasks-ahead" id="toc-technical-tasks-ahead" class="nav-link" data-scroll-target="#technical-tasks-ahead">Technical Tasks Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 1: Diving Deep into Library Design and the Jaynes-Cummings Model</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">GSoC 2025</div>
+    <div class="quarto-category">Week 1</div>
+    <div class="quarto-category">QuTiP</div>
+    <div class="quarto-category">Jaynes-Cummings</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="blogs" class="level2">
-<h2 class="anchored" data-anchor-id="blogs">Blogs</h2>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vanshaj Bindal </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 10, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
+
+</header>
+
+
+<p>The coding phase has officially begun! Week 1 has been a fascinating deep dive into thinking about the design of the Hamiltonian Library and understanding that we’re building much more than just Hamiltonians, we’re creating complete quantum systems with collapse operators for Lindblad dynamics. Here’s what went down in my first week of GSoC 2025.</p>
+<section id="team-meeting-insights-june-3rd" class="level2">
+<h2 class="anchored" data-anchor-id="team-meeting-insights-june-3rd">Team Meeting Insights (June 3rd)</h2>
+<p>Our Tuesday meeting with the QuTiP team was incredibly productive, covering several key decisions that will shape the entire project:</p>
+<section id="base-class-vs.-model-specific-design" class="level3">
+<h3 class="anchored" data-anchor-id="base-class-vs.-model-specific-design">Base Class vs.&nbsp;Model-Specific Design</h3>
+<p>One of the biggest questions we tackled was whether to create a simple base class for basic Hamiltonian structure or develop model-specific base classes. After discussion, we decided on a model-specific approach where each quantum system (like Jaynes-Cummings) gets its own class with standardized methods.</p>
+<p>For example, a <code>Jaynes_Cummings</code> or <code>JCM</code> class would include:</p>
+<ul>
+<li><code>__init__()</code> for parameter initialization</li>
+<li><code>build_hamiltonian()</code> for constructing the quantum operators</li>
+<li><code>build_collapse_operators()</code> for dissipation and decoherence</li>
+<li><code>to_json()</code> for serialization</li>
+<li><code>to_latex()</code> for mathematical representation</li>
+</ul>
+<p>The parameters and time-dependent parameters would be handled in the <code>__init__</code> method, while the actual operators, Hamiltonian, and collapse operators are constructed in their respective build methods.</p>
+</section>
+<section id="building-complete-quantum-systems" class="level3">
+<h3 class="anchored" data-anchor-id="building-complete-quantum-systems">Building Complete Quantum Systems</h3>
+<p>There was a suggestion made by the mentors that expanded my understanding of the project scope - we’re not just building isolated Hamiltonians, but complete quantum systems that include:</p>
+<ul>
+<li><strong>Coherent dynamics</strong>: The Hamiltonian evolution</li>
+<li><strong>Incoherent dynamics</strong>: Collapse operators for dissipation, decoherence, and environmental effects</li>
+<li><strong>System evolution</strong>: Ready-to-use setups for solving the master equation</li>
+</ul>
+<p>This means each model will provide everything needed to simulate realistic open quantum systems using QuTiP’s Lindblad master equation solver.</p>
+</section>
+<section id="the-json-serialization-challenge" class="level3">
+<h3 class="anchored" data-anchor-id="the-json-serialization-challenge">The JSON Serialization Challenge</h3>
+<p>The <code>to_json</code> method emerged as one of the trickier aspects of the project. As noted in our discussion with Neill and Eric, serializing quantum operators and complex mathematical objects isn’t straightforward. The static data can be represented in a JSON, but it’s dynamical aspects that seems concerning. Though this is something we decided to tackle when the time comes.</p>
+</section>
+<section id="functions-vs.-classes-debate" class="level3">
+<h3 class="anchored" data-anchor-id="functions-vs.-classes-debate">Functions vs.&nbsp;Classes Debate</h3>
+<p>We also discussed whether to use class-based structures or simple functions. The consensus was that functions might actually be more user-friendly for reusability, users can easily copy and paste function calls and modify parameters as needed. However, I personally feel classes provide better structure for the JSON serialization requirements and managing both Hamiltonians and collapse operators together.</p>
+</section>
+<section id="repository-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="repository-strategy">Repository Strategy</h3>
+<p>For now, I’ll be starting development in my own repository until we decide whether this becomes part of QuTiP core or remains a separate package. This gives us flexibility to experiment with the architecture.</p>
+</section>
+</section>
+<section id="understanding-open-quantum-systems-why-they-matter" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-open-quantum-systems-why-they-matter">Understanding Open Quantum Systems: Why They Matter</h2>
+<p>Before diving into specific models like Jaynes-Cummings, it’s helpful to understand a little bit about open quantum systems and why it is important simulating these open systems. Well, all of it comes down to a fundamental reality: real quantum systems are never truly isolated.</p>
+<section id="the-idealized-vs.-real-world" class="level3">
+<h3 class="anchored" data-anchor-id="the-idealized-vs.-real-world">The Idealized vs.&nbsp;Real World</h3>
+<p>In introductory quantum mechanics courses, we often work with closed systems described by the Schrödinger equation:</p>
+<p><span class="math display">i\hbar \frac{d|\psi\rangle}{dt} = H |\psi\rangle</span></p>
+<p>This assumes our quantum system exists in perfect isolation, with no external influences. While mathematically elegant, this is rarely realistic. Every quantum system, whether it’s an atom in a laser field, a qubit in a quantum computer, or photons in an optical cavity, interacts with its environment.</p>
+</section>
+<section id="what-makes-a-system-open" class="level3">
+<h3 class="anchored" data-anchor-id="what-makes-a-system-open">What Makes a System “Open”?</h3>
+<p>An open quantum system is one that exchanges energy, information, or particles with its surroundings. These environmental interactions lead to:</p>
+<ul>
+<li><strong>Decoherence</strong>: Loss of quantum phase relationships</li>
+<li><strong>Dissipation</strong>: Energy loss to the environment<br>
+</li>
+<li><strong>Noise</strong>: Random fluctuations that affect system dynamics</li>
+<li><strong>Irreversibility</strong>: The system’s evolution becomes non-unitary</li>
+</ul>
+</section>
+<section id="the-master-equation-approach" class="level3">
+<h3 class="anchored" data-anchor-id="the-master-equation-approach">The Master Equation Approach</h3>
+<p>To handle these effects, we use the Lindblad master equation for the density matrix <span class="math inline">\rho</span>:</p>
+<p><span class="math display">\frac{d\rho}{dt} = -i[H, \rho] + \sum_i \left(C_i \rho C_i^\dagger - \frac{1}{2}\{C_i^\dagger C_i, \rho\}\right)</span></p>
+<p>Here:</p>
+<ul>
+<li><span class="math inline">H</span> is the system Hamiltonian</li>
+<li><span class="math inline">\rho</span> is the density matrix of the system</li>
+<li><span class="math inline">C_i</span> are collapse operators describing environmental effects</li>
+<li>The first term gives unitary evolution, the second term adds dissipation</li>
+</ul>
+</section>
+<section id="common-types-of-environmental-effects" class="level3">
+<h3 class="anchored" data-anchor-id="common-types-of-environmental-effects">Common Types of Environmental Effects</h3>
+<p>Different quantum systems experience characteristic environmental interactions:</p>
+<ul>
+<li><strong>Spontaneous emission</strong>: Atoms lose energy by emitting photons</li>
+<li><strong>Cavity decay</strong>: Photons leak out of imperfect mirrors</li>
+<li><strong>Dephasing</strong>: Phase relationships decay without energy loss</li>
+<li><strong>Thermal noise</strong>: Environmental temperature causes random excitations</li>
+<li><strong>1/f noise</strong>: Low-frequency fluctuations in system parameters</li>
+</ul>
+<p>Real experiments always involve environmental effects. A cavity has photon leakage, atoms undergo spontaneous emission, and qubits experience dephasing. Accounting for the right external factors influencing the dynamics of quantum systems is an area of active research. Knowing the right combination of these factors in a give situtation helps modelling and simulating the quantum systems more realistically.</p>
+</section>
+</section>
+<section id="getting-to-know-the-jaynes-cummings-model-with-dissipation" class="level2">
+<h2 class="anchored" data-anchor-id="getting-to-know-the-jaynes-cummings-model-with-dissipation">Getting to Know the Jaynes-Cummings Model (With Dissipation!)</h2>
+<p>I’ve been diving deep into the complete Jaynes-Cummings system, here is a brief overview.</p>
+<section id="the-complete-physics-picture" class="level3">
+<h3 class="anchored" data-anchor-id="the-complete-physics-picture">The Complete Physics Picture</h3>
+<p>The Jaynes-Cummings model describes the interaction between a two-level atom and a single mode of an electromagnetic field. For the complete open system, we need:</p>
+<p><strong>Hamiltonian (Coherent Dynamics):</strong></p>
+<p><span class="math display">H = \omega_c a^\dagger a + \frac{\omega_a}{2} \sigma_z + g(a^\dagger \sigma_- + a \sigma_+)</span></p>
+<p><strong>Collapse Operators (Incoherent Dynamics):</strong></p>
+<ul>
+<li>Cavity decay: <span class="math inline">C_1 = \sqrt{\kappa (1 + n)} a</span> (photons leak out of the cavity)</li>
+<li>Atomic decay: <span class="math inline">C_2 = \sqrt{\gamma} \sigma_-</span> (spontaneous emission)</li>
+<li>Atomic dephasing: <span class="math inline">C_3 = \sqrt{\gamma_\phi} \sigma_z</span> (pure dephasing without energy loss)</li>
+</ul>
+<p>The master equation becomes:</p>
+<p><span class="math display">\frac{d\rho}{dt} = -i[H, \rho] + \sum_i \left(C_i \rho C_i^\dagger - \frac{1}{2}\{C_i^\dagger C_i, \rho\}\right)</span></p>
+</section>
+<section id="key-parameters-for-complete-systems" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters-for-complete-systems">Key Parameters for Complete Systems</h3>
+<p>Based on my research and the full system requirements, the key parameters for the JSON “recipe book” will include:</p>
+<p><strong>Coherent Parameters:</strong></p>
+<ul>
+<li><strong><span class="math inline">\omega_c</span></strong>: Cavity frequency</li>
+<li><strong><span class="math inline">\omega_a</span></strong>: Atomic frequency</li>
+<li><strong><span class="math inline">g</span></strong>: Coupling strength</li>
+</ul>
+<p><strong>Incoherent Parameters:</strong></p>
+<ul>
+<li><strong><span class="math inline">\kappa</span></strong>: Cavity decay rate</li>
+<li><strong><span class="math inline">\gamma</span></strong>: Atomic decay rate</li>
+<li><strong><span class="math inline">\gamma_\phi</span></strong>: Pure dephasing rate</li>
+<li><strong><span class="math inline">n</span></strong>: Average thermal photons number</li>
+</ul>
+<p><strong>System Parameters:</strong></p>
+<ul>
+<li><strong><span class="math inline">N_{cav}</span></strong>: Cavity dimension (Hilbert space truncation)</li>
+<li><strong><span class="math inline">N_{atom}</span></strong>: Atomic levels (usually 2)</li>
+</ul>
+</section>
+<section id="why-this-matters" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h3>
+<p>Building complete systems rather than isolated Hamiltonians makes the library much more powerful. Researchers can:</p>
+<ul>
+<li>Get physically realistic simulations</li>
+<li>Study decoherence effects and environmental influence</li>
+<li>Compare different dissipation mechanisms</li>
+<li>Have ready-to-use setups for master equation evolution</li>
+</ul>
+</section>
+</section>
+<section id="technical-tasks-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="technical-tasks-ahead">Technical Tasks Ahead</h2>
+<p>My immediate tasks for the coming days include:</p>
+<ol type="1">
+<li><strong>Research Phase</strong>: Identify five different quantum system models and map out what parameters (both coherent and incoherent) each would need</li>
+<li><strong>Prototype Development</strong>: Start with a driven Jaynes-Cummings implementation including both Hamiltonian and collapse operators</li>
+<li><strong>JSON Schema Design</strong>: Figure out how to represent complete quantum systems in the parameter “recipe book”</li>
+<li><strong>Master Equation Integration</strong>: Ensure the output integrates seamlessly with QuTiP’s <code>mesolve()</code> function</li>
+</ol>
+<p>It seems like a lot more detail needs to be included in these models than previously anticipated, but I think that’s challenge.</p>
+<hr>
+<p><em>Next week: From theory to code - implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON.</em></p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwMiUyQ1F1VGlQJTJDUmFiaSUyME1vZGVsJTJDUHJvamVjdCUyME1hbmFnZW1lbnQ=" data-listing-date-sort="1750111200000" data-listing-file-modified-sort="1751210113809" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="957">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-2/week2.html" class="no-external">Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDI='); return false;">Week 2</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UmFiaSUyME1vZGVs'); return false;">Rabi Model</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvamVjdCUyME1hbmFnZW1lbnQ='); return false;">Project Management</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-2/week2.html" class="no-external">
-Week 2 has been all about making crucial project decisions and expanding our understanding of quantum models. From timeline adjustments to repository strategies, plus a deep…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-2/week2.html" class="no-external">
-<div class="listing-date">
-Jun 17, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwMSUyQ1F1VGlQJTJDSmF5bmVzLUN1bW1pbmdz" data-listing-date-sort="1749506400000" data-listing-file-modified-sort="1751206661595" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1086">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-1/week1.html" class="no-external">Week 1: Diving Deep into Library Design and the Jaynes-Cummings Model</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDE='); return false;">Week 1</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SmF5bmVzLUN1bW1pbmdz'); return false;">Jaynes-Cummings</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-1/week1.html" class="no-external">
-The coding phase has officially begun! Week 1 has been a fascinating deep dive into thinking about the design of the Hamiltonian Library and understanding that we’re…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-1/week1.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="R1NvQyUyMDIwMjUlMkNDb21tdW5pdHklMjBCb25kaW5nJTJDUXVUaVA=" data-listing-date-sort="1748642400000" data-listing-file-modified-sort="1749512941954" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Community Bonding/community-bonding.html" class="no-external">Community Bonding Period: Setting the Foundation for Success</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q29tbXVuaXR5JTIwQm9uZGluZw=='); return false;">Community Bonding</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Community Bonding/community-bonding.html" class="no-external">
-The community bonding period (May 10 - June 1) has almost officially wrapped up! This three-week phase was all about getting acquainted with the QuTiP community…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Community Bonding/community-bonding.html" class="no-external">
-<div class="listing-date">
-May 31, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="R1NvQyUyMDIwMjUlMkNPcGVuU291cmNlJTJDUHl0aG9uJTJDcXVhbnR1bQ==" data-listing-date-sort="1747778400000" data-listing-file-modified-sort="1749513239686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro/gsoc-2025-selection.html" class="no-external">Exciting News: I’m Joining Google Summer of Code 2025!</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T3BlblNvdXJjZQ=='); return false;">OpenSource</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVhbnR1bQ=='); return false;">quantum</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/intro/gsoc-2025-selection.html" class="no-external">
-A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro/gsoc-2025-selection.html" class="no-external">
-<div class="listing-date">
-May 21, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

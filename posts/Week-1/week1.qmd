@@ -1,0 +1,163 @@
+---
+title: "Week 1: Diving Deep into Library Design and the Jaynes-Cummings Model"
+author: "Vanshaj Bindal"
+date: "2025-06-10"
+page-layout: article
+categories: [GSoC 2025, Week 1, QuTiP, Jaynes-Cummings]
+---
+
+The coding phase has officially begun! Week 1 has been a fascinating deep dive into thinking about the design of the Hamiltonian Library and understanding that we're building much more than just Hamiltonians, we're creating complete quantum systems with collapse operators for Lindblad dynamics. Here's what went down in my first week of GSoC 2025.
+
+## Team Meeting Insights (June 3rd)
+
+Our Tuesday meeting with the QuTiP team was incredibly productive, covering several key decisions that will shape the entire project:
+
+### Base Class vs. Model-Specific Design
+
+One of the biggest questions we tackled was whether to create a simple base class for basic Hamiltonian structure or develop model-specific base classes. After discussion, we decided on a model-specific approach where each quantum system (like Jaynes-Cummings) gets its own class with standardized methods.
+
+For example, a `Jaynes_Cummings` or `JCM` class would include:
+
+- `__init__()` for parameter initialization
+- `build_hamiltonian()` for constructing the quantum operators
+- `build_collapse_operators()` for dissipation and decoherence
+- `to_json()` for serialization
+- `to_latex()` for mathematical representation
+
+The parameters and time-dependent parameters would be handled in the `__init__` method, while the actual operators, Hamiltonian, and collapse operators are constructed in their respective build methods.
+
+### Building Complete Quantum Systems
+
+There was a suggestion made by the mentors that expanded my understanding of the project scope - we're not just building isolated Hamiltonians, but complete quantum systems that include:
+
+- **Coherent dynamics**: The Hamiltonian evolution
+- **Incoherent dynamics**: Collapse operators for dissipation, decoherence, and environmental effects
+- **System evolution**: Ready-to-use setups for solving the master equation
+
+This means each model will provide everything needed to simulate realistic open quantum systems using QuTiP's Lindblad master equation solver.
+
+### The JSON Serialization Challenge
+
+The `to_json` method emerged as one of the trickier aspects of the project. As noted in our discussion with Neill and Eric, serializing quantum operators and complex mathematical objects isn't straightforward. The static data can be represented in a JSON, but it's dynamical aspects that seems concerning. Though this is something we decided to tackle when the time comes.
+
+### Functions vs. Classes Debate
+
+We also discussed whether to use class-based structures or simple functions. The consensus was that functions might actually be more user-friendly for reusability, users can easily copy and paste function calls and modify parameters as needed. However, I personally feel classes provide better structure for the JSON serialization requirements and managing both Hamiltonians and collapse operators together. 
+
+### Repository Strategy
+
+For now, I'll be starting development in my own repository until we decide whether this becomes part of QuTiP core or remains a separate package. This gives us flexibility to experiment with the architecture.
+
+## Understanding Open Quantum Systems: Why They Matter
+
+Before diving into specific models like Jaynes-Cummings, it's helpful to understand a little bit about open quantum systems and why it is important simulating these open systems. Well, all of it comes down to a fundamental reality: real quantum systems are never truly isolated.
+
+### The Idealized vs. Real World
+
+In introductory quantum mechanics courses, we often work with closed systems described by the Schrödinger equation:
+
+$$i\hbar \frac{d|\psi\rangle}{dt} = H |\psi\rangle$$
+
+This assumes our quantum system exists in perfect isolation, with no external influences. While mathematically elegant, this is rarely realistic. Every quantum system, whether it's an atom in a laser field, a qubit in a quantum computer, or photons in an optical cavity, interacts with its environment.
+
+### What Makes a System "Open"?
+
+An open quantum system is one that exchanges energy, information, or particles with its surroundings. These environmental interactions lead to:
+
+- **Decoherence**: Loss of quantum phase relationships
+- **Dissipation**: Energy loss to the environment  
+- **Noise**: Random fluctuations that affect system dynamics
+- **Irreversibility**: The system's evolution becomes non-unitary
+
+### The Master Equation Approach
+
+To handle these effects, we use the Lindblad master equation for the density matrix $\rho$:
+
+$$\frac{d\rho}{dt} = -i[H, \rho] + \sum_i \left(C_i \rho C_i^\dagger - \frac{1}{2}\{C_i^\dagger C_i, \rho\}\right)$$
+
+Here:
+
+- $H$ is the system Hamiltonian 
+- $\rho$ is the density matrix of the system
+- $C_i$ are collapse operators describing environmental effects
+- The first term gives unitary evolution, the second term adds dissipation
+
+### Common Types of Environmental Effects
+
+Different quantum systems experience characteristic environmental interactions:
+
+- **Spontaneous emission**: Atoms lose energy by emitting photons
+- **Cavity decay**: Photons leak out of imperfect mirrors
+- **Dephasing**: Phase relationships decay without energy loss
+- **Thermal noise**: Environmental temperature causes random excitations
+- **1/f noise**: Low-frequency fluctuations in system parameters
+
+Real experiments always involve environmental effects. A cavity has photon leakage, atoms undergo spontaneous emission, and qubits experience dephasing. Accounting for the right external factors influencing the dynamics of quantum systems is an area of active research. Knowing the right combination of these factors in a give situtation helps modelling and simulating the quantum systems more realistically. 
+
+## Getting to Know the Jaynes-Cummings Model (With Dissipation!)
+
+I've been diving deep into the complete Jaynes-Cummings system, here is a brief overview.
+
+### The Complete Physics Picture
+
+The Jaynes-Cummings model describes the interaction between a two-level atom and a single mode of an electromagnetic field. For the complete open system, we need:
+
+**Hamiltonian (Coherent Dynamics):**
+
+$$H = \omega_c a^\dagger a + \frac{\omega_a}{2} \sigma_z + g(a^\dagger \sigma_- + a \sigma_+)$$
+
+**Collapse Operators (Incoherent Dynamics):**
+
+- Cavity decay: $C_1 = \sqrt{\kappa (1 + n)} a$ (photons leak out of the cavity)
+- Atomic decay: $C_2 = \sqrt{\gamma} \sigma_-$ (spontaneous emission)
+- Atomic dephasing: $C_3 = \sqrt{\gamma_\phi} \sigma_z$ (pure dephasing without energy loss)
+
+The master equation becomes:
+
+$$\frac{d\rho}{dt} = -i[H, \rho] + \sum_i \left(C_i \rho C_i^\dagger - \frac{1}{2}\{C_i^\dagger C_i, \rho\}\right)$$
+
+### Key Parameters for Complete Systems
+
+Based on my research and the full system requirements, the key parameters for the JSON "recipe book" will include:
+
+**Coherent Parameters:**
+
+- **$\omega_c$**: Cavity frequency
+- **$\omega_a$**: Atomic frequency
+- **$g$**: Coupling strength
+
+**Incoherent Parameters:**
+
+- **$\kappa$**: Cavity decay rate
+- **$\gamma$**: Atomic decay rate
+- **$\gamma_\phi$**: Pure dephasing rate
+- **$n$**: Average thermal photons number 
+
+**System Parameters:**
+
+- **$N_{cav}$**: Cavity dimension (Hilbert space truncation)
+- **$N_{atom}$**: Atomic levels (usually 2)
+
+### Why This Matters
+
+Building complete systems rather than isolated Hamiltonians makes the library much more powerful. Researchers can:
+
+- Get physically realistic simulations 
+- Study decoherence effects and environmental influence
+- Compare different dissipation mechanisms
+- Have ready-to-use setups for master equation evolution
+
+## Technical Tasks Ahead
+
+My immediate tasks for the coming days include:
+
+1. **Research Phase**: Identify five different quantum system models and map out what parameters (both coherent and incoherent) each would need
+2. **Prototype Development**: Start with a driven Jaynes-Cummings implementation including both Hamiltonian and collapse operators
+3. **JSON Schema Design**: Figure out how to represent complete quantum systems in the parameter "recipe book"
+4. **Master Equation Integration**: Ensure the output integrates seamlessly with QuTiP's `mesolve()` function
+
+It seems like a lot more detail needs to be included in these models than previously anticipated, but I think that's challenge. 
+
+---
+
+*Next week: From theory to code - implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON.*
