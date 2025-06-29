@@ -32,11 +32,11 @@ This decision simplifies the immediate development path significantly and lets u
 
 ### Repository Strategy: Staying in QuTiP Core
 
-Eric raised an important concern about separate repositories potentially not being maintained long-term. The solution? We'll develop directly in QuTiP core, within a new `quantum_systems` folder. Eric will create a development branch called `dev.qsystem`, and I'll be pushing commits and PRs to this branch for testing and review.
+Eric raised an important concern about separate repositories potentially not being maintained long term. The solution? We'll develop directly in QuTiP core, within a new `quantum_systems` folder. Eric will create a development branch called `dev.qsystem`, and I'll be pushing commits and PRs to this branch for testing and review.
 
 This approach has several advantages:
 
-- Ensures long-term maintenance and integration
+- Ensures long term maintenance and integration
 - Makes collaboration with the QuTiP team seamless
 - Provides immediate access to QuTiP's existing infrastructure
 - Facilitates testing with the broader QuTiP ecosystem
@@ -45,7 +45,7 @@ This approach has several advantages:
 
 The architectural direction became clearer this week. The main module will contain functions that create structured objects for quantum systems. I'll be sharing a Jaynes-Cummings example for team review, which will serve as the template for other quantum models.
 
-This function-based approach strikes a nice balance between usability and structure, users get simple function calls, but the underlying system maintains proper object-oriented design for extensibility.
+This function based approach strikes a nice balance between usability and structure, users get simple function calls, but the underlying system maintains proper object-oriented design for extensibility.
 
 ## Exploring the Rabi Model: Beyond the Rotating Wave Approximation
 
@@ -85,7 +85,7 @@ The master equation structure remains the same, but the Hamiltonian evolution in
 
 Including both Rabi and Jaynes-Cummings models in our library provides users with:
 
-- **JCM**: Fast, well-understood dynamics for weak coupling
+- **JCM**: Fast, well understood dynamics for weak coupling
 - **Rabi**: Accurate physics for strong coupling regimes
 - **Educational value**: Direct comparison of approximations vs exact models
 - **Research flexibility**: Users can easily switch between models
@@ -116,7 +116,7 @@ The coming week will focus on:
 
 This week felt like a turning point where the project crystallized from abstract planning into concrete development. The decision to park JSON serialization removes a major complexity, while the timeline extension provides breathing room for quality implementation.
 
-The repository decision to stay within QuTiP core is particularly exciting, it means our work will have immediate access to the full QuTiP ecosystem and a clear path to long-term maintenance.
+The repository decision to stay within QuTiP core is particularly exciting, it means our work will have immediate access to the full QuTiP ecosystem and a clear path to long term maintenance.
 
 Diving into the Rabi model has also been intellectually rewarding. Understanding how it relates to the Jaynes-Cummings model provides a perfect example of why having a comprehensive quantum systems library matters, researchers need easy access to both approximate and exact models depending on their specific use case.
 

@@ -12,9 +12,9 @@ The coding phase has officially begun! Week 1 has been a fascinating deep dive i
 
 Our Tuesday meeting with the QuTiP team was incredibly productive, covering several key decisions that will shape the entire project:
 
-### Base Class vs. Model-Specific Design
+### Base Class vs. Model Specific Design
 
-One of the biggest questions we tackled was whether to create a simple base class for basic Hamiltonian structure or develop model-specific base classes. After discussion, we decided on a model-specific approach where each quantum system (like Jaynes-Cummings) gets its own class with standardized methods.
+One of the biggest questions we tackled was whether to create a simple base class for basic Hamiltonian structure or develop model specific base classes. After discussion, we decided on a model specific approach where each quantum system (like Jaynes-Cummings) gets its own class with standardized methods.
 
 For example, a `Jaynes_Cummings` or `JCM` class would include:
 
@@ -24,15 +24,15 @@ For example, a `Jaynes_Cummings` or `JCM` class would include:
 - `to_json()` for serialization
 - `to_latex()` for mathematical representation
 
-The parameters and time-dependent parameters would be handled in the `__init__` method, while the actual operators, Hamiltonian, and collapse operators are constructed in their respective build methods.
+The parameters and time dependent parameters would be handled in the `__init__` method, while the actual operators, Hamiltonian, and collapse operators are constructed in their respective build methods.
 
 ### Building Complete Quantum Systems
 
-There was a suggestion made by the mentors that expanded my understanding of the project scope - we're not just building isolated Hamiltonians, but complete quantum systems that include:
+There was a suggestion made by the mentors that expanded my understanding of the project scope, we're not just building isolated Hamiltonians, but complete quantum systems that include:
 
 - **Coherent dynamics**: The Hamiltonian evolution
 - **Incoherent dynamics**: Collapse operators for dissipation, decoherence, and environmental effects
-- **System evolution**: Ready-to-use setups for solving the master equation
+- **System evolution**: Ready to use setups for solving the master equation
 
 This means each model will provide everything needed to simulate realistic open quantum systems using QuTiP's Lindblad master equation solver.
 
@@ -42,7 +42,7 @@ The `to_json` method emerged as one of the trickier aspects of the project. As n
 
 ### Functions vs. Classes Debate
 
-We also discussed whether to use class-based structures or simple functions. The consensus was that functions might actually be more user-friendly for reusability, users can easily copy and paste function calls and modify parameters as needed. However, I personally feel classes provide better structure for the JSON serialization requirements and managing both Hamiltonians and collapse operators together. 
+We also discussed whether to use class based structures or simple functions. The consensus was that functions might actually be more user friendly for reusability, users can easily copy and paste function calls and modify parameters as needed. However, I personally feel classes provide better structure for the JSON serialization requirements and managing both Hamiltonians and collapse operators together. 
 
 ### Repository Strategy
 
@@ -90,7 +90,7 @@ Different quantum systems experience characteristic environmental interactions:
 - **Cavity decay**: Photons leak out of imperfect mirrors
 - **Dephasing**: Phase relationships decay without energy loss
 - **Thermal noise**: Environmental temperature causes random excitations
-- **1/f noise**: Low-frequency fluctuations in system parameters
+- **1/f noise**: Low frequency fluctuations in system parameters
 
 Real experiments always involve environmental effects. A cavity has photon leakage, atoms undergo spontaneous emission, and qubits experience dephasing. Accounting for the right external factors influencing the dynamics of quantum systems is an area of active research. Knowing the right combination of these factors in a give situtation helps modelling and simulating the quantum systems more realistically. 
 
@@ -145,7 +145,7 @@ Building complete systems rather than isolated Hamiltonians makes the library mu
 - Get physically realistic simulations 
 - Study decoherence effects and environmental influence
 - Compare different dissipation mechanisms
-- Have ready-to-use setups for master equation evolution
+- Have ready to use setups for master equation evolution
 
 ## Technical Tasks Ahead
 
@@ -160,4 +160,4 @@ It seems like a lot more detail needs to be included in these models than previo
 
 ---
 
-*Next week: From theory to code - implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON.*
+*Next week: From theory to code, implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON.*

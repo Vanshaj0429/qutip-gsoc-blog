@@ -181,7 +181,7 @@ window.Quarto = {
   <ul>
   <li><a href="#team-meeting-insights-june-3rd" id="toc-team-meeting-insights-june-3rd" class="nav-link active" data-scroll-target="#team-meeting-insights-june-3rd">Team Meeting Insights (June 3rd)</a>
   <ul class="collapse">
-  <li><a href="#base-class-vs.-model-specific-design" id="toc-base-class-vs.-model-specific-design" class="nav-link" data-scroll-target="#base-class-vs.-model-specific-design">Base Class vs.&nbsp;Model-Specific Design</a></li>
+  <li><a href="#base-class-vs.-model-specific-design" id="toc-base-class-vs.-model-specific-design" class="nav-link" data-scroll-target="#base-class-vs.-model-specific-design">Base Class vs.&nbsp;Model Specific Design</a></li>
   <li><a href="#building-complete-quantum-systems" id="toc-building-complete-quantum-systems" class="nav-link" data-scroll-target="#building-complete-quantum-systems">Building Complete Quantum Systems</a></li>
   <li><a href="#the-json-serialization-challenge" id="toc-the-json-serialization-challenge" class="nav-link" data-scroll-target="#the-json-serialization-challenge">The JSON Serialization Challenge</a></li>
   <li><a href="#functions-vs.-classes-debate" id="toc-functions-vs.-classes-debate" class="nav-link" data-scroll-target="#functions-vs.-classes-debate">Functions vs.&nbsp;Classes Debate</a></li>
@@ -249,8 +249,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="team-meeting-insights-june-3rd">Team Meeting Insights (June 3rd)</h2>
 <p>Our Tuesday meeting with the QuTiP team was incredibly productive, covering several key decisions that will shape the entire project:</p>
 <section id="base-class-vs.-model-specific-design" class="level3">
-<h3 class="anchored" data-anchor-id="base-class-vs.-model-specific-design">Base Class vs.&nbsp;Model-Specific Design</h3>
-<p>One of the biggest questions we tackled was whether to create a simple base class for basic Hamiltonian structure or develop model-specific base classes. After discussion, we decided on a model-specific approach where each quantum system (like Jaynes-Cummings) gets its own class with standardized methods.</p>
+<h3 class="anchored" data-anchor-id="base-class-vs.-model-specific-design">Base Class vs.&nbsp;Model Specific Design</h3>
+<p>One of the biggest questions we tackled was whether to create a simple base class for basic Hamiltonian structure or develop model specific base classes. After discussion, we decided on a model specific approach where each quantum system (like Jaynes-Cummings) gets its own class with standardized methods.</p>
 <p>For example, a <code>Jaynes_Cummings</code> or <code>JCM</code> class would include:</p>
 <ul>
 <li><code>__init__()</code> for parameter initialization</li>
@@ -259,15 +259,15 @@ window.Quarto = {
 <li><code>to_json()</code> for serialization</li>
 <li><code>to_latex()</code> for mathematical representation</li>
 </ul>
-<p>The parameters and time-dependent parameters would be handled in the <code>__init__</code> method, while the actual operators, Hamiltonian, and collapse operators are constructed in their respective build methods.</p>
+<p>The parameters and time dependent parameters would be handled in the <code>__init__</code> method, while the actual operators, Hamiltonian, and collapse operators are constructed in their respective build methods.</p>
 </section>
 <section id="building-complete-quantum-systems" class="level3">
 <h3 class="anchored" data-anchor-id="building-complete-quantum-systems">Building Complete Quantum Systems</h3>
-<p>There was a suggestion made by the mentors that expanded my understanding of the project scope - we’re not just building isolated Hamiltonians, but complete quantum systems that include:</p>
+<p>There was a suggestion made by the mentors that expanded my understanding of the project scope, we’re not just building isolated Hamiltonians, but complete quantum systems that include:</p>
 <ul>
 <li><strong>Coherent dynamics</strong>: The Hamiltonian evolution</li>
 <li><strong>Incoherent dynamics</strong>: Collapse operators for dissipation, decoherence, and environmental effects</li>
-<li><strong>System evolution</strong>: Ready-to-use setups for solving the master equation</li>
+<li><strong>System evolution</strong>: Ready to use setups for solving the master equation</li>
 </ul>
 <p>This means each model will provide everything needed to simulate realistic open quantum systems using QuTiP’s Lindblad master equation solver.</p>
 </section>
@@ -277,7 +277,7 @@ window.Quarto = {
 </section>
 <section id="functions-vs.-classes-debate" class="level3">
 <h3 class="anchored" data-anchor-id="functions-vs.-classes-debate">Functions vs.&nbsp;Classes Debate</h3>
-<p>We also discussed whether to use class-based structures or simple functions. The consensus was that functions might actually be more user-friendly for reusability, users can easily copy and paste function calls and modify parameters as needed. However, I personally feel classes provide better structure for the JSON serialization requirements and managing both Hamiltonians and collapse operators together.</p>
+<p>We also discussed whether to use class based structures or simple functions. The consensus was that functions might actually be more user friendly for reusability, users can easily copy and paste function calls and modify parameters as needed. However, I personally feel classes provide better structure for the JSON serialization requirements and managing both Hamiltonians and collapse operators together.</p>
 </section>
 <section id="repository-strategy" class="level3">
 <h3 class="anchored" data-anchor-id="repository-strategy">Repository Strategy</h3>
@@ -324,7 +324,7 @@ window.Quarto = {
 <li><strong>Cavity decay</strong>: Photons leak out of imperfect mirrors</li>
 <li><strong>Dephasing</strong>: Phase relationships decay without energy loss</li>
 <li><strong>Thermal noise</strong>: Environmental temperature causes random excitations</li>
-<li><strong>1/f noise</strong>: Low-frequency fluctuations in system parameters</li>
+<li><strong>1/f noise</strong>: Low frequency fluctuations in system parameters</li>
 </ul>
 <p>Real experiments always involve environmental effects. A cavity has photon leakage, atoms undergo spontaneous emission, and qubits experience dephasing. Accounting for the right external factors influencing the dynamics of quantum systems is an area of active research. Knowing the right combination of these factors in a give situtation helps modelling and simulating the quantum systems more realistically.</p>
 </section>
@@ -375,7 +375,7 @@ window.Quarto = {
 <li>Get physically realistic simulations</li>
 <li>Study decoherence effects and environmental influence</li>
 <li>Compare different dissipation mechanisms</li>
-<li>Have ready-to-use setups for master equation evolution</li>
+<li>Have ready to use setups for master equation evolution</li>
 </ul>
 </section>
 </section>
@@ -390,7 +390,7 @@ window.Quarto = {
 </ol>
 <p>It seems like a lot more detail needs to be included in these models than previously anticipated, but I think that’s challenge.</p>
 <hr>
-<p><em>Next week: From theory to code - implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON.</em></p>
+<p><em>Next week: From theory to code, implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON.</em></p>
 
 
 </section>
