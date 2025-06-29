@@ -118,7 +118,7 @@ This week felt like a turning point where the project crystallized from abstract
 
 The repository decision to stay within QuTiP core is particularly exciting, it means our work will have immediate access to the full QuTiP ecosystem and a clear path to long-term maintenance.
 
-Diving into the Rabi model has also been intellectually rewarding. Understanding how it relates to the Jaynes-Cummings model provides a perfect example of why having a comprehensive quantum systems library matters - researchers need easy access to both approximate and exact models depending on their specific use case.
+Diving into the Rabi model has also been intellectually rewarding. Understanding how it relates to the Jaynes-Cummings model provides a perfect example of why having a comprehensive quantum systems library matters, researchers need easy access to both approximate and exact models depending on their specific use case.
 
 ---
 
