@@ -222,5 +222,82 @@
     "title": "Google Summer of Code 2025 | QuTiP | NumFOCUS",
     "section": "Contact",
     "text": "Contact\nFeel free to reach out if you’d like to discuss quantum computing, open source projects, or potential collaborations.\n\nEmail: vanshajbindal98@gmail.com\nGitHub: github.com/Vanshaj0429\nLinkedIn: linkedin.com/in/vanshaj-bindal"
+  },
+  {
+    "objectID": "posts/Week4/week4_blog.html",
+    "href": "posts/Week4/week4_blog.html",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "",
+    "text": "After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape."
+  },
+  {
+    "objectID": "posts/Week4/week4_blog.html#design-template-dilemma",
+    "href": "posts/Week4/week4_blog.html#design-template-dilemma",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Design Template Dilemma",
+    "text": "Design Template Dilemma\nOne of the main challenges this week was settling on how to structure the code. I found myself wrestling with a fundamental question: should we use a modular approach with separate functions for different components, or a unified function that returns everything at once?\nThis led me to develop two different iterations of the JC model implementation, each representing a different philosophy:\n\nIteration 1: Modular Design Pattern\nThe first approach breaks down the quantum system into distinct, reusable components:\ndef build_jc_operators(n_cavity: int)\ndef build_jc_hamiltonian(n_cavity, omega_c, omega_a, g, rotating_wave, operators)\ndef build_jc_collapse_operators(operators, cavity_decay, atomic_decay, atomic_dephasing, thermal_noise)\ndef jc_latex_representation(rotating_wave)\nThis modular approach offers several advantages:\n\nFlexibility: Users can call individual functions if they only need specific components\nClarity: Each function has a single, well defined responsibility\nDebugging: Easier to test and debug individual components\n\n\n\nIteration 2: Unified Function Design\nThe second approach consolidates everything into a single function:\ndef jaynes_cummings_model(n_cavity, omega_c, omega_a, g, rotating_wave,\n                        cavity_decay, atomic_decay, atomic_dephasing, thermal_noise):\n   # Returns: operators, hamiltonian, c_ops, latex\nThis unified approach provides:\n\nSimplicity: One function call gets you everything\nConsistency: All components are guaranteed to be compatible\nConvenience: Perfect for users who want the complete system\nLess overhead: No need to pass operators between functions"
+  },
+  {
+    "objectID": "posts/Week4/week4_blog.html#implementation-details-and-design-choices",
+    "href": "posts/Week4/week4_blog.html#implementation-details-and-design-choices",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Implementation Details and Design Choices",
+    "text": "Implementation Details and Design Choices\nMost of my time this week was spent ensuring the correctness of the quantum mechanical implementations across both design patterns. Here are the key aspects I focused on:\n\nOperator Construction\nThe fundamental operators form the building blocks of any quantum system. For the JC model, I implemented:\n\nCavity operators: Photon creation/annihilation (a, a_dag) and number operator (n_c)\nAtomic operators: Pauli matrices and raising/lowering operators (sigma_plus, sigma_minus, sigma_z, sigma_x, sigma_y)\n\nEach operator is properly tensorized to work in the combined cavity-atom Hilbert space, which was crucial to get right.\n\n\nParameter Choices and Flexibility\nAfter considerable thought, I settled on the following parameter set for the JC model:\nSystem Parameters:\n\nn_cavity: Hilbert space truncation (default: 10)\nomega_c: Cavity frequency (default: 1.0)\nomega_a: Atomic frequency (default: 1.0)\ng: Coupling strength (default: 0.1)\nrotating_wave: Boolean flag for RWA vs full Rabi model (default: True)\n\nDissipation Parameters:\n\ncavity_decay: Photon leakage rate κ (default: 0.0)\natomic_decay: Spontaneous emission rate γ (default: 0.0)\natomic_dephasing: Pure dephasing rate γ_φ (default: 0.0)\nthermal_noise: Tuple (n_th, kappa) for thermal effects (default: None)\n\nThese defaults provide sensible starting points while allowing full customization for specific research needs.\n\n\nThermal Noise Implementation\nOne interesting aspect was implementing thermal noise correctly. When the cavity is coupled to a thermal bath at finite temperature, we need both absorption and emission processes:\n\nThermal absorption: Rate ∝ κ × n_th (creating photons)\nStimulated emission: Rate ∝ κ × (n_th + 1) (destroying photons)\n\nThis required careful handling of the thermal photon number n_th and the cavity decay rate.\n\n\nThe Driving Term Decision\nAn important design choice was how to handle external driving fields. Rather than building driving terms directly into our functions, I decided to keep them external. This means users can add driving terms right before when setting up their time evolution:\n# Our function provides the base system\nops, H0, c_ops, latex = jaynes_cummings_model(...)\n\n# Users add driving externally  \nH_drive = lambda t, args: driving_amplitude * (ops['a'] * np.exp(-1j * drive_freq * t) + ops['a_dag'] * np.exp(1j * drive_freq * t))\nH_total = H0 + H_drive\nThis approach maintains simplicity in our core functions while providing maximum flexibility for time-dependent problems."
+  },
+  {
+    "objectID": "posts/Week4/week4_blog.html#validation-and-testing",
+    "href": "posts/Week4/week4_blog.html#validation-and-testing",
+    "title": "Week 4: First Code Implementation - Design Decisions and JC Model Development",
+    "section": "Validation and Testing",
+    "text": "Validation and Testing\nMuch of the week was spent on validation - ensuring that:\n\nOperators have the correct dimensions and commutation relations\nThe Hamiltonian produces expected energy eigenvalues for simple cases\nCollapse operators are properly normalized with their rates\nThe rotating wave approximation flag correctly switches between JC and Rabi models"
+  },
+  {
+    "objectID": "posts/Week4/week4_blog.html#reflections-on-design-philosophy",
+    "href": "posts/Week4/week4_blog.html#reflections-on-design-philosophy",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Reflections on Design Philosophy",
+    "text": "Reflections on Design Philosophy\nWorking through both implementation approaches this week has been enlightening. The modular design feels more “software engineering appropriate”, it’s extensible, testable, and follows good separation of concerns. However, the unified approach might be more user friendly for researchers who just want to get a complete quantum system quickly.\nThis tension between software engineering best practices and user convenience is something we’ll likely revisit as we implement more quantum models. The good news is that both approaches are viable, and we can potentially support both patterns depending on user needs."
+  },
+  {
+    "objectID": "posts/Week4/week4_blog.html#looking-ahead",
+    "href": "posts/Week4/week4_blog.html#looking-ahead",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWeek 5 will focus on:\n\nGetting team feedback on both implementation approaches\nRefining the chosen design pattern based on mentor input\nBeginning implementation of the Rabi model (non-RWA version)\nAdding comprehensive documentation and examples\nTesting integration with QuTiP’s master equation solvers\n\nThe foundation is now in place, and having working code makes everything feel much more concrete. The next phase will be about refinement, expansion, and ensuring our design choices scale well to other quantum systems."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html",
+    "href": "posts/Week-4/week4.html",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "",
+    "text": "After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#design-template-dilemma",
+    "href": "posts/Week-4/week4.html#design-template-dilemma",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Design Template Dilemma",
+    "text": "Design Template Dilemma\nOne of the main challenges this week was settling on how to structure the code. I found myself wrestling with a fundamental question: should we use a modular approach with separate functions for different components, or a unified function that returns everything at once?\nThis led me to develop two different iterations of the JC model implementation, each representing a different philosophy:\n\nIteration 1: Modular Design Pattern\nThe first approach breaks down the quantum system into distinct, reusable components:\ndef build_jc_operators(n_cavity: int)\ndef build_jc_hamiltonian(n_cavity, omega_c, omega_a, g, rotating_wave, operators)\ndef build_jc_collapse_operators(operators, cavity_decay, atomic_decay, atomic_dephasing, thermal_noise)\ndef jc_latex_representation(rotating_wave)\nThis modular approach offers several advantages:\n\nFlexibility: Users can call individual functions if they only need specific components\nClarity: Each function has a single, well defined responsibility\nDebugging: Easier to test and debug individual components\n\n\n\nIteration 2: Unified Function Design\nThe second approach consolidates everything into a single function:\ndef jaynes_cummings_model(n_cavity, omega_c, omega_a, g, rotating_wave,\n                        cavity_decay, atomic_decay, atomic_dephasing, thermal_noise):\n   # Returns: operators, hamiltonian, c_ops, latex\nThis unified approach provides:\n\nSimplicity: One function call gets you everything\nConsistency: All components are guaranteed to be compatible\nConvenience: Perfect for users who want the complete system\nLess overhead: No need to pass operators between functions"
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#implementation-details-and-design-choices",
+    "href": "posts/Week-4/week4.html#implementation-details-and-design-choices",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Implementation Details and Design Choices",
+    "text": "Implementation Details and Design Choices\nMost of my time this week was spent ensuring the correctness of the quantum mechanical implementations across both design patterns. Here are the key aspects I focused on:\n\nOperator Construction\nThe fundamental operators form the building blocks of any quantum system. For the JC model, I implemented:\n\nCavity operators: Photon creation/annihilation (a, a_dag) and number operator (n_c)\nAtomic operators: Pauli matrices and raising/lowering operators (sigma_plus, sigma_minus, sigma_z, sigma_x, sigma_y)\n\nEach operator is properly tensorized to work in the combined cavity-atom Hilbert space, which was crucial to get right.\n\n\nParameter Choices and Flexibility\nAfter considerable thought, I settled on the following parameter set for the JC model:\nSystem Parameters:\n\nn_cavity: Hilbert space truncation (default: 10)\nomega_c: Cavity frequency (default: 1.0)\nomega_a: Atomic frequency (default: 1.0)\ng: Coupling strength (default: 0.1)\nrotating_wave: Boolean flag for RWA vs full Rabi model (default: True)\n\nDissipation Parameters:\n\ncavity_decay: Photon leakage rate κ (default: 0.0)\natomic_decay: Spontaneous emission rate γ (default: 0.0)\natomic_dephasing: Pure dephasing rate γ_φ (default: 0.0)\nthermal_noise: Tuple (n_th, kappa) for thermal effects (default: None)\n\nThese defaults provide sensible starting points while allowing full customization for specific research needs.\n\n\nThermal Noise Implementation\nOne interesting aspect was implementing thermal noise correctly. When the cavity is coupled to a thermal bath at finite temperature, we need both absorption and emission processes:\n\nThermal absorption: Rate ∝ κ × n_th (creating photons)\nStimulated emission: Rate ∝ κ × (n_th + 1) (destroying photons)\n\nThis required careful handling of the thermal photon number n_th and the cavity decay rate.\n\n\nThe Driving Term Decision\nAn important design choice was how to handle external driving fields. Rather than building driving terms directly into our functions, I decided to keep them external. This means users can add driving terms right before when setting up their time evolution:\n# Our function provides the base system\nops, H0, c_ops, latex = jaynes_cummings_model(...)\n\n# Users add driving externally  \nH_drive = lambda t, args: driving_amplitude * (ops['a'] * np.exp(-1j * drive_freq * t) + ops['a_dag'] * np.exp(1j * drive_freq * t))\nH_total = H0 + H_drive\nThis approach maintains simplicity in our core functions while providing maximum flexibility for time-dependent problems."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#reflections-on-design-philosophy",
+    "href": "posts/Week-4/week4.html#reflections-on-design-philosophy",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Reflections on Design Philosophy",
+    "text": "Reflections on Design Philosophy\nWorking through both implementation approaches this week has been enlightening. The modular design feels more “software engineering appropriate”, it’s extensible, testable, and follows good separation of concerns. However, the unified approach might be more user friendly for researchers who just want to get a complete quantum system quickly.\nThis tension between software engineering best practices and user convenience is something we’ll likely revisit as we implement more quantum models. The good news is that both approaches are viable, and we can potentially support both patterns depending on user needs."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#looking-ahead",
+    "href": "posts/Week-4/week4.html#looking-ahead",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWeek 5 will focus on:\n\nGetting team feedback on both implementation approaches\nRefining the chosen design pattern based on mentor input\nBeginning implementation of the Rabi model (non-RWA version)\nAdding comprehensive documentation and examples\nTesting integration with QuTiP’s master equation solvers\n\nThe foundation is now in place, and having working code makes everything feel much more concrete. The next phase will be about refinement, expansion, and ensuring our design choices scale well to other quantum systems."
   }
 ]

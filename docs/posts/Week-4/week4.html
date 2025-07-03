@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vanshaj Bindal">
+<meta name="dcterms.date" content="2025-06-24">
 
-<title>blog – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
+<title>Week 4: First Code Implementation - Code Structure and Development – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +22,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,91 +104,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Google Summer of Code 2025 | QuTiP | NumFOCUS</span>
     </a>
   </div>
@@ -164,15 +127,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -200,7 +163,7 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -208,185 +171,172 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#blogs" id="toc-blogs" class="nav-link active" data-scroll-target="#blogs">Blogs</a></li>
+  <li><a href="#design-template-dilemma" id="toc-design-template-dilemma" class="nav-link active" data-scroll-target="#design-template-dilemma">Design Template Dilemma</a>
+  <ul class="collapse">
+  <li><a href="#iteration-1-modular-design-pattern" id="toc-iteration-1-modular-design-pattern" class="nav-link" data-scroll-target="#iteration-1-modular-design-pattern">Iteration 1: Modular Design Pattern</a></li>
+  <li><a href="#iteration-2-unified-function-design" id="toc-iteration-2-unified-function-design" class="nav-link" data-scroll-target="#iteration-2-unified-function-design">Iteration 2: Unified Function Design</a></li>
+  </ul></li>
+  <li><a href="#implementation-details-and-design-choices" id="toc-implementation-details-and-design-choices" class="nav-link" data-scroll-target="#implementation-details-and-design-choices">Implementation Details and Design Choices</a>
+  <ul class="collapse">
+  <li><a href="#operator-construction" id="toc-operator-construction" class="nav-link" data-scroll-target="#operator-construction">Operator Construction</a></li>
+  <li><a href="#parameter-choices-and-flexibility" id="toc-parameter-choices-and-flexibility" class="nav-link" data-scroll-target="#parameter-choices-and-flexibility">Parameter Choices and Flexibility</a></li>
+  <li><a href="#thermal-noise-implementation" id="toc-thermal-noise-implementation" class="nav-link" data-scroll-target="#thermal-noise-implementation">Thermal Noise Implementation</a></li>
+  <li><a href="#the-driving-term-decision" id="toc-the-driving-term-decision" class="nav-link" data-scroll-target="#the-driving-term-decision">The Driving Term Decision</a></li>
+  </ul></li>
+  <li><a href="#reflections-on-design-philosophy" id="toc-reflections-on-design-philosophy" class="nav-link" data-scroll-target="#reflections-on-design-philosophy">Reflections on Design Philosophy</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 4: First Code Implementation - Code Structure and Development</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">GSoC 2025</div>
+    <div class="quarto-category">Week 4</div>
+    <div class="quarto-category">QuTiP</div>
+    <div class="quarto-category">Implementation</div>
+    <div class="quarto-category">JC Model</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="blogs" class="level2">
-<h2 class="anchored" data-anchor-id="blogs">Blogs</h2>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vanshaj Bindal </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 24, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
+
+</header>
+
+
+<p>After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape.</p>
+<section id="design-template-dilemma" class="level2">
+<h2 class="anchored" data-anchor-id="design-template-dilemma">Design Template Dilemma</h2>
+<p>One of the main challenges this week was settling on how to structure the code. I found myself wrestling with a fundamental question: should we use a modular approach with separate functions for different components, or a unified function that returns everything at once?</p>
+<p>This led me to develop two different iterations of the JC model implementation, each representing a different philosophy:</p>
+<section id="iteration-1-modular-design-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="iteration-1-modular-design-pattern">Iteration 1: Modular Design Pattern</h3>
+<p>The first approach breaks down the quantum system into distinct, reusable components:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_jc_operators(n_cavity: <span class="bu">int</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_jc_hamiltonian(n_cavity, omega_c, omega_a, g, rotating_wave, operators)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_jc_collapse_operators(operators, cavity_decay, atomic_decay, atomic_dephasing, thermal_noise)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jc_latex_representation(rotating_wave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This modular approach offers several advantages:</p>
+<ul>
+<li><strong>Flexibility</strong>: Users can call individual functions if they only need specific components</li>
+<li><strong>Clarity</strong>: Each function has a single, well defined responsibility</li>
+<li><strong>Debugging</strong>: Easier to test and debug individual components</li>
+</ul>
+</section>
+<section id="iteration-2-unified-function-design" class="level3">
+<h3 class="anchored" data-anchor-id="iteration-2-unified-function-design">Iteration 2: Unified Function Design</h3>
+<p>The second approach consolidates everything into a single function:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jaynes_cummings_model(n_cavity, omega_c, omega_a, g, rotating_wave,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                        cavity_decay, atomic_decay, atomic_dephasing, thermal_noise):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Returns: operators, hamiltonian, c_ops, latex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This unified approach provides:</p>
+<ul>
+<li><strong>Simplicity</strong>: One function call gets you everything</li>
+<li><strong>Consistency</strong>: All components are guaranteed to be compatible</li>
+<li><strong>Convenience</strong>: Perfect for users who want the complete system</li>
+<li><strong>Less overhead</strong>: No need to pass operators between functions</li>
+</ul>
+</section>
+</section>
+<section id="implementation-details-and-design-choices" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-details-and-design-choices">Implementation Details and Design Choices</h2>
+<p>Most of my time this week was spent ensuring the correctness of the quantum mechanical implementations across both design patterns. Here are the key aspects I focused on:</p>
+<section id="operator-construction" class="level3">
+<h3 class="anchored" data-anchor-id="operator-construction">Operator Construction</h3>
+<p>The fundamental operators form the building blocks of any quantum system. For the JC model, I implemented:</p>
+<ul>
+<li><strong>Cavity operators</strong>: Photon creation/annihilation (<code>a</code>, <code>a_dag</code>) and number operator (<code>n_c</code>)</li>
+<li><strong>Atomic operators</strong>: Pauli matrices and raising/lowering operators (<code>sigma_plus</code>, <code>sigma_minus</code>, <code>sigma_z</code>, <code>sigma_x</code>, <code>sigma_y</code>)</li>
+</ul>
+<p>Each operator is properly tensorized to work in the combined cavity-atom Hilbert space, which was crucial to get right.</p>
+</section>
+<section id="parameter-choices-and-flexibility" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-choices-and-flexibility">Parameter Choices and Flexibility</h3>
+<p>After considerable thought, I settled on the following parameter set for the JC model:</p>
+<p><strong>System Parameters:</strong></p>
+<ul>
+<li><code>n_cavity</code>: Hilbert space truncation (default: 10)</li>
+<li><code>omega_c</code>: Cavity frequency (default: 1.0)</li>
+<li><code>omega_a</code>: Atomic frequency (default: 1.0)</li>
+<li><code>g</code>: Coupling strength (default: 0.1)</li>
+<li><code>rotating_wave</code>: Boolean flag for RWA vs full Rabi model (default: True)</li>
+</ul>
+<p><strong>Dissipation Parameters:</strong></p>
+<ul>
+<li><code>cavity_decay</code>: Photon leakage rate κ (default: 0.0)</li>
+<li><code>atomic_decay</code>: Spontaneous emission rate γ (default: 0.0)</li>
+<li><code>atomic_dephasing</code>: Pure dephasing rate γ_φ (default: 0.0)</li>
+<li><code>thermal_noise</code>: Tuple (n_th, kappa) for thermal effects (default: None)</li>
+</ul>
+<p>These defaults provide sensible starting points while allowing full customization for specific research needs.</p>
+</section>
+<section id="thermal-noise-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="thermal-noise-implementation">Thermal Noise Implementation</h3>
+<p>One interesting aspect was implementing thermal noise correctly. When the cavity is coupled to a thermal bath at finite temperature, we need both absorption and emission processes:</p>
+<ul>
+<li><strong>Thermal absorption</strong>: Rate ∝ κ × n_th (creating photons)</li>
+<li><strong>Stimulated emission</strong>: Rate ∝ κ × (n_th + 1) (destroying photons)</li>
+</ul>
+<p>This required careful handling of the thermal photon number <code>n_th</code> and the cavity decay rate.</p>
+</section>
+<section id="the-driving-term-decision" class="level3">
+<h3 class="anchored" data-anchor-id="the-driving-term-decision">The Driving Term Decision</h3>
+<p>An important design choice was how to handle external driving fields. Rather than building driving terms directly into our functions, I decided to keep them external. This means users can add driving terms right before when setting up their time evolution:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our function provides the base system</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ops, H0, c_ops, latex <span class="op">=</span> jaynes_cummings_model(...)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Users add driving externally  </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>H_drive <span class="op">=</span> <span class="kw">lambda</span> t, args: driving_amplitude <span class="op">*</span> (ops[<span class="st">'a'</span>] <span class="op">*</span> np.exp(<span class="op">-</span><span class="ot">1j</span> <span class="op">*</span> drive_freq <span class="op">*</span> t) <span class="op">+</span> ops[<span class="st">'a_dag'</span>] <span class="op">*</span> np.exp(<span class="ot">1j</span> <span class="op">*</span> drive_freq <span class="op">*</span> t))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>H_total <span class="op">=</span> H0 <span class="op">+</span> H_drive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This approach maintains simplicity in our core functions while providing maximum flexibility for time-dependent problems.</p>
+</section>
+</section>
+<section id="reflections-on-design-philosophy" class="level2">
+<h2 class="anchored" data-anchor-id="reflections-on-design-philosophy">Reflections on Design Philosophy</h2>
+<p>Working through both implementation approaches this week has been enlightening. The modular design feels more “software engineering appropriate”, it’s extensible, testable, and follows good separation of concerns. However, the unified approach might be more user friendly for researchers who just want to get a complete quantum system quickly.</p>
+<p>This tension between software engineering best practices and user convenience is something we’ll likely revisit as we implement more quantum models. The good news is that both approaches are viable, and we can potentially support both patterns depending on user needs.</p>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
+<p>Week 5 will focus on:</p>
+<ul>
+<li>Getting team feedback on both implementation approaches</li>
+<li>Refining the chosen design pattern based on mentor input</li>
+<li>Beginning implementation of the Rabi model (non-RWA version)</li>
+<li>Adding comprehensive documentation and examples</li>
+<li>Testing integration with QuTiP’s master equation solvers</li>
+</ul>
+<p>The foundation is now in place, and having working code makes everything feel much more concrete. The next phase will be about refinement, expansion, and ensuring our design choices scale well to other quantum systems.</p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwNCUyQ1F1VGlQJTJDSW1wbGVtZW50YXRpb24lMkNKQyUyME1vZGVs" data-listing-date-sort="1750703400000" data-listing-file-modified-sort="1751542946271" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-4/week4.html" class="no-external">Week 4: First Code Implementation - Code Structure and Development</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDQ='); return false;">Week 4</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SW1wbGVtZW50YXRpb24='); return false;">Implementation</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SkMlMjBNb2RlbA=='); return false;">JC Model</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-4/week4.html" class="no-external">
-After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-4/week4.html" class="no-external">
-<div class="listing-date">
-Jun 24, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwMiUyQ1F1VGlQJTJDUmFiaSUyME1vZGVsJTJDUHJvamVjdCUyME1hbmFnZW1lbnQ=" data-listing-date-sort="1750098600000" data-listing-file-modified-sort="1751211309678" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="961">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-2/week2.html" class="no-external">Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDI='); return false;">Week 2</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UmFiaSUyME1vZGVs'); return false;">Rabi Model</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvamVjdCUyME1hbmFnZW1lbnQ='); return false;">Project Management</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-2/week2.html" class="no-external">
-Week 2 has been all about making crucial project decisions and expanding our understanding of quantum models. From timeline adjustments to repository strategies, plus a deep…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-2/week2.html" class="no-external">
-<div class="listing-date">
-Jun 17, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwMSUyQ1F1VGlQJTJDSmF5bmVzLUN1bW1pbmdz" data-listing-date-sort="1749493800000" data-listing-file-modified-sort="1751211197286" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1095">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-1/week1.html" class="no-external">Week 1: Diving Deep into Library Design and the Jaynes-Cummings Model</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDE='); return false;">Week 1</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SmF5bmVzLUN1bW1pbmdz'); return false;">Jaynes-Cummings</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-1/week1.html" class="no-external">
-The coding phase has officially begun! Week 1 has been a fascinating deep dive into thinking about the design of the Hamiltonian Library and understanding that we’re…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-1/week1.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="R1NvQyUyMDIwMjUlMkNDb21tdW5pdHklMjBCb25kaW5nJTJDUXVUaVA=" data-listing-date-sort="1748629800000" data-listing-file-modified-sort="1749512941954" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Community Bonding/community-bonding.html" class="no-external">Community Bonding Period: Setting the Foundation for Success</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q29tbXVuaXR5JTIwQm9uZGluZw=='); return false;">Community Bonding</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Community Bonding/community-bonding.html" class="no-external">
-The community bonding period (May 10 - June 1) has almost officially wrapped up! This three-week phase was all about getting acquainted with the QuTiP community…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Community Bonding/community-bonding.html" class="no-external">
-<div class="listing-date">
-May 31, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="R1NvQyUyMDIwMjUlMkNPcGVuU291cmNlJTJDUHl0aG9uJTJDcXVhbnR1bQ==" data-listing-date-sort="1747765800000" data-listing-file-modified-sort="1749513239686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro/gsoc-2025-selection.html" class="no-external">Exciting News: I’m Joining Google Summer of Code 2025!</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T3BlblNvdXJjZQ=='); return false;">OpenSource</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVhbnR1bQ=='); return false;">quantum</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/intro/gsoc-2025-selection.html" class="no-external">
-A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro/gsoc-2025-selection.html" class="no-external">
-<div class="listing-date">
-May 21, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
