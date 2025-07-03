@@ -2,8 +2,9 @@
 title: "Week 4: First Code Implementation - Code Structure and Development"
 author: "Vanshaj Bindal"
 date: "2025-06-24"
+page-layout: article
 categories: [GSoC 2025, Week 4, QuTiP, Implementation, JC Model]
-pagelayout: "article"
+
 ---
 
 After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape.
