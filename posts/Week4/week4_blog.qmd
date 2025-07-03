@@ -1,0 +1,126 @@
+---
+title: "Week 4: First Code Implementation - Code Structure and Development"
+author: "Vanshaj Bindal"
+date: "2025-06-24"
+categories: [GSoC 2025, Week 4, QuTiP, Implementation, JC Model]
+pagelayout: "article"
+---
+
+After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape.
+
+## Design Template Dilemma
+
+One of the main challenges this week was settling on how to structure the code. I found myself wrestling with a fundamental question: should we use a modular approach with separate functions for different components, or a unified function that returns everything at once?
+
+This led me to develop two different iterations of the JC model implementation, each representing a different philosophy:
+
+### Iteration 1: Modular Design Pattern
+
+The first approach breaks down the quantum system into distinct, reusable components:
+
+```python
+def build_jc_operators(n_cavity: int)
+def build_jc_hamiltonian(n_cavity, omega_c, omega_a, g, rotating_wave, operators)
+def build_jc_collapse_operators(operators, cavity_decay, atomic_decay, atomic_dephasing, thermal_noise)
+def jc_latex_representation(rotating_wave)
+
+```
+
+This modular approach offers several advantages:
+
+* **Flexibility**: Users can call individual functions if they only need specific components
+* **Clarity**: Each function has a single, well defined responsibility
+* **Debugging**: Easier to test and debug individual components
+
+### Iteration 2: Unified Function Design
+The second approach consolidates everything into a single function:
+
+```python
+def jaynes_cummings_model(n_cavity, omega_c, omega_a, g, rotating_wave,
+                        cavity_decay, atomic_decay, atomic_dephasing, thermal_noise):
+   # Returns: operators, hamiltonian, c_ops, latex
+```
+
+This unified approach provides:
+
+* **Simplicity**: One function call gets you everything
+* **Consistency**: All components are guaranteed to be compatible
+* **Convenience**: Perfect for users who want the complete system
+* **Less overhead**: No need to pass operators between functions
+
+## Implementation Details and Design Choices
+
+Most of my time this week was spent ensuring the correctness of the quantum mechanical implementations across both design patterns. Here are the key aspects I focused on:
+
+### Operator Construction
+
+The fundamental operators form the building blocks of any quantum system. For the JC model, I implemented:
+
+* **Cavity operators**: Photon creation/annihilation (`a`, `a_dag`) and number operator (`n_c`)
+* **Atomic operators**: Pauli matrices and raising/lowering operators (`sigma_plus`, `sigma_minus`, `sigma_z`, `sigma_x`, `sigma_y`)
+
+Each operator is properly tensorized to work in the combined cavity-atom Hilbert space, which was crucial to get right.
+
+### Parameter Choices and Flexibility
+
+After considerable thought, I settled on the following parameter set for the JC model:
+
+**System Parameters:**
+
+* `n_cavity`: Hilbert space truncation (default: 10)
+* `omega_c`: Cavity frequency (default: 1.0)
+* `omega_a`: Atomic frequency (default: 1.0)
+* `g`: Coupling strength (default: 0.1)
+* `rotating_wave`: Boolean flag for RWA vs full Rabi model (default: True)
+
+**Dissipation Parameters:**
+
+* `cavity_decay`: Photon leakage rate κ (default: 0.0)
+* `atomic_decay`: Spontaneous emission rate γ (default: 0.0)
+* `atomic_dephasing`: Pure dephasing rate γ_φ (default: 0.0)
+* `thermal_noise`: Tuple (n_th, kappa) for thermal effects (default: None)
+
+These defaults provide sensible starting points while allowing full customization for specific research needs.
+
+### Thermal Noise Implementation
+
+One interesting aspect was implementing thermal noise correctly. When the cavity is coupled to a thermal bath at finite temperature, we need both absorption and emission processes:
+
+* **Thermal absorption**: Rate ∝ κ × n_th (creating photons)
+* **Stimulated emission**: Rate ∝ κ × (n_th + 1) (destroying photons)
+
+This required careful handling of the thermal photon number `n_th` and the cavity decay rate.
+
+### The Driving Term Decision
+
+An important design choice was how to handle external driving fields. Rather than building driving terms directly into our functions, I decided to keep them external. This means users can add driving terms right before when setting up their time evolution:
+
+```python
+# Our function provides the base system
+ops, H0, c_ops, latex = jaynes_cummings_model(...)
+
+# Users add driving externally  
+H_drive = lambda t, args: driving_amplitude * (ops['a'] * np.exp(-1j * drive_freq * t) + ops['a_dag'] * np.exp(1j * drive_freq * t))
+H_total = H0 + H_drive
+```
+
+
+This approach maintains simplicity in our core functions while providing maximum flexibility for time-dependent problems.
+
+## Reflections on Design Philosophy
+
+Working through both implementation approaches this week has been enlightening. The modular design feels more "software engineering appropriate", it's extensible, testable, and follows good separation of concerns. However, the unified approach might be more user friendly for researchers who just want to get a complete quantum system quickly.
+
+This tension between software engineering best practices and user convenience is something we'll likely revisit as we implement more quantum models. The good news is that both approaches are viable, and we can potentially support both patterns depending on user needs.
+
+## Looking Ahead
+
+Week 5 will focus on:
+
+* Getting team feedback on both implementation approaches
+* Refining the chosen design pattern based on mentor input
+* Beginning implementation of the Rabi model (non-RWA version)
+* Adding comprehensive documentation and examples
+* Testing integration with QuTiP's master equation solvers
+
+The foundation is now in place, and having working code makes everything feel much more concrete. The next phase will be about refinement, expansion, and ensuring our design choices scale well to other quantum systems.
