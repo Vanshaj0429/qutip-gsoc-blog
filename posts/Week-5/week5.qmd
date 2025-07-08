@@ -1,0 +1,185 @@
+---
+title: "Week 5: Object-Oriented Architecture - Building the QuantumSystem Class"
+author: "Vanshaj Bindal"
+date: "2025-07-08"
+page-layout: article
+categories: [GSoC, QuTiP, Quantum Systems, OOP, Python]
+---
+
+Week 5 has been an important week in transforming our quantum systems library from functional code into a robust, object-oriented architecture. Following the team meeting on July 3rd with Eric, Neill, Alex, and myself, we've made significant progress in establishing the design patterns that will guide the entire project.
+
+## From Functions to Classes
+
+After implementing both modular and unified functional approaches in Week 4, this week's meeting provided crucial clarity on the path forward. Team's suggestion to create a unified `QuantumSystem` class has shifted our approach from "functions that return components" to "objects that encapsulate quantum systems."
+
+The key insight from the meeting was that our output should be a class object (e.g., `QuantumSystem`) with methods like `pretty_print()` and properties like `hamiltonian` and `c_ops`. This design decision immediately clarified several architectural questions that had been lingering.
+
+## Designing the QuantumSystem Base Class
+
+The heart of this week's work has been developing the abstract base class that will serve as the foundation for all quantum models. Here's the core structure we've established:
+
+```python
+from abc import ABC, abstractmethod
+
+class QuantumSystem(ABC):
+    """
+    Base class for quantum systems providing unified interface for operators,
+    Hamiltonian, collapse operators, and LaTeX representation.
+    """
+    
+    def __init__(self, **kwargs):
+        self.parameters = kwargs
+        
+    @abstractmethod
+    def build_operators(self):
+        """Build and return dictionary of operators"""
+        pass
+    
+    @abstractmethod 
+    def build_hamiltonian(self):
+        """Build and return the Hamiltonian"""
+        pass
+    
+    @abstractmethod
+    def build_collapse_operators(self):
+        """Build and return list of collapse operators"""
+        pass
+    
+    @abstractmethod
+    def latex_representation(self):
+        """Return LaTeX representation of the Hamiltonian"""
+        pass
+```
+
+This abstract base class enforces a consistent interface across all quantum models while allowing each system to implement its specific physics.
+
+## Understanding Python's Object-Oriented Concepts
+
+A significant portion of this week was spent understanding fundamental Python OOP concepts that are crucial for this architecture:
+
+### Abstract Base Classes (ABC)
+The `ABC` module ensures that our base class cannot be instantiated directly, it serves purely as a template. Any subclass must implement all abstract methods, guaranteeing consistency across different quantum models.
+
+### The `self` Parameter
+Understanding `self` was crucial for grasping how each quantum system instance maintains its own parameters and state. When we create `jc1 = JaynesCummingsSystem(n_cavity=5)` and `jc2 = JaynesCummingsSystem(n_cavity=10)`, each has its own `self.parameters` without interference.
+
+### Inheritance with `super()`
+The `super()` function allows subclasses to properly call parent class methods, ensuring that common functionality (like parameter storage) is handled consistently across all quantum systems.
+
+## Implementing the Jaynes-Cummings Subclass
+
+Building on our Week 4 functional implementations, we've now created a proper `JaynesCummingsSystem` class:
+
+```python
+class JaynesCummingsSystem(QuantumSystem):
+    def __init__(self, n_cavity=10, omega_c=1.0, omega_a=1.0, g=0.1,
+                 rotating_wave=True, cavity_decay=0.0, atomic_decay=0.0,
+                 atomic_dephasing=0.0, thermal_photons=0.0):
+        super().__init__(
+            n_cavity=n_cavity, omega_c=omega_c, omega_a=omega_a, g=g,
+            rotating_wave=rotating_wave, cavity_decay=cavity_decay,
+            atomic_decay=atomic_decay, atomic_dephasing=atomic_dephasing,
+            thermal_photons=thermal_photons
+        )
+    
+    def build_operators(self):
+        # Implementation for JC operators
+        
+    def build_hamiltonian(self):
+        # Implementation for JC Hamiltonian
+        
+    def build_collapse_operators(self):
+        # Implementation for JC dissipation
+        
+    def latex_representation(self):
+        # LaTeX string for JC model
+```
+
+This design provides a clean, intuitive interface while maintaining all the flexibility of our previous functional approach.
+
+## Technical Improvements and Bug Fixes
+
+### Fixing Thermal Noise Implementation
+We identified and fixed a significant issue in our thermal noise handling. Previously, we were implementing thermal effects twice, once in cavity decay and again as separate thermal operators. The corrected implementation properly incorporates thermal effects into the cavity dynamics:
+
+```python
+# Cavity relaxation: kappa(1 + n_th)
+rate = cavity_decay * (1 + thermal_photons)
+if rate > 0.0:
+    c_ops.append(np.sqrt(rate) * ops['a'])
+
+# Cavity excitation: kappa * n_th  
+rate = cavity_decay * thermal_photons
+if rate > 0.0:
+    c_ops.append(np.sqrt(rate) * ops['a_dag'])
+```
+
+This matches the standard quantum optics formulation and eliminates redundancy.
+
+### Parameter Simplification
+We've streamlined the thermal noise parameter from a tuple `(n_th, kappa)` to a simple float `thermal_photons`, since the cavity decay rate is already specified separately. This reduces parameter redundancy and potential confusion.
+
+## The isinstance Integration Strategy
+
+One of the most exciting aspects discussed in the meeting is the plan to integrate our `QuantumSystem` objects with QuTiP's existing solvers using `isinstance` checks. This will allow code like:
+
+```python
+# Traditional QuTiP usage (still works)
+result = qt.mesolve(H, psi0, times, c_ops)
+
+# New QuantumSystem usage (future)
+jc_system = JaynesCummingsSystem(n_cavity=5, g=0.1)
+result = qt.mesolve(jc_system, psi0, times)  # Automatically extracts H and c_ops
+```
+
+This approach maintains backward compatibility while providing a much cleaner interface for the new quantum systems.
+
+## Extensibility: Multiple Models in One Framework
+
+The beauty of this architecture becomes apparent when considering how easily we can add new quantum models:
+
+```python
+class Spin Models(QuantumSystem):
+    # Implement the same four abstract methods for spin models
+    
+class Lattice Models(QuantumSystem):
+    # Implement the same four abstract methods for lattice models
+```
+
+Each model follows the same interface pattern, making the library consistent and predictable for users while allowing for model specific optimizations.
+
+## Challenges and Learning Curve
+
+The transition from functional to object-oriented thinking required understanding several fundamental Python concepts:
+
+- **Abstract classes** and why they're useful for enforcing interfaces
+- **Inheritance hierarchies** and how `super()` maintains the chain
+- **The `self` parameter** and how it enables multiple instances
+- **Method vs. property** design decisions
+
+Each concept builds on the others, and getting comfortable with the entire stack was essential for making good architectural decisions.
+
+## Looking Ahead: Week 6 and Beyond
+
+### Immediate Goals
+- Implement additional quantum models (Rabi, Dicke) using the new architecture
+- Add comprehensive examples and tutorials for each model
+- Create tests for the exisisting cases.
+
+### Longer-term Vision
+- Support for dictionary based collapse operators in `mesolve`
+- Extensive documentation with physics explanations
+- Performance testing and optimization
+- Tutorial series for educational use
+
+## Reflections on Architecture Evolution
+
+This week has been fascinating from a software design perspective. We've moved from "functions that build quantum systems" to "quantum systems that are objects." This shift brings several benefits:
+
+- **Consistency**: Every quantum model follows the same interface
+- **Extensibility**: Adding new models becomes straightforward
+- **Integration**: QuTiP solvers can work seamlessly with any quantum system
+- **Maintainability**: Clear separation of concerns and responsibilities
+
+The object-oriented approach also aligns perfectly with how physicists think about quantum systems, as entities with specific properties and behaviors rather than just collections of mathematical operators.
+
