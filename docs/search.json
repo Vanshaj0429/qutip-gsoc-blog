@@ -63,6 +63,83 @@
     "text": "Technical Tasks Ahead\nMy immediate tasks for the coming days include:\n\nResearch Phase: Identify five different quantum system models and map out what parameters (both coherent and incoherent) each would need\nPrototype Development: Start with a driven Jaynes-Cummings implementation including both Hamiltonian and collapse operators\nJSON Schema Design: Figure out how to represent complete quantum systems in the parameter “recipe book”\nMaster Equation Integration: Ensure the output integrates seamlessly with QuTiP’s mesolve() function\n\nIt seems like a lot more detail needs to be included in these models than previously anticipated, but I think that’s challenge.\n\nNext week: From theory to code, implementing the first complete Jaynes-Cummings system and tackling the challenge of representing open quantum systems in JSON."
   },
   {
+    "objectID": "posts/Week-7/week7.html",
+    "href": "posts/Week-7/week7.html",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "",
+    "text": "Week 7 marked the implementation of our refined architecture - transforming the conceptual insights from Week 6 into working code. The shift from abstract classes to factory functions is now complete, we have two functional quantum systems almost ready, demonstrating the pattern’s effectiveness."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#from-concept-to-code-the-quantumsystem-class",
+    "href": "posts/Week-7/week7.html#from-concept-to-code-the-quantumsystem-class",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "From Concept to Code: The QuantumSystem Class",
+    "text": "From Concept to Code: The QuantumSystem Class\nThe centerpiece of this week’s work is the new QuantumSystem class - a general-purpose container that follows QuTiP’s design philosophy:\nclass QuantumSystem:\n    \"\"\"\n    General class for quantum systems\n\n    All quantum systems are instances of this class, configured by factory functions.\n    \"\"\"\n\n    def __init__(self, name: str, **kwargs):\n        \"\"\"\n        Initialize quantum system\n\n        Parameters:\n        -----------\n        name : str\n            Name/type of the quantum system\n        **kwargs : dict\n            System-specific parameters\n        \"\"\"\n        self.name = name\n        self.parameters = kwargs\n\n        self.operators = {}\n        self.hamiltonian = None\n        self.c_ops = []\n        self.latex = \"\"\n\n    def get_operators(self) -&gt; Dict:\n        \"\"\"Get operators dictionary (method for QuTiP-style consistency)\"\"\"\n        return self.operators\nThis simple, non-abstract class mirrors how QuTiP’s Qobj serves as a general quantum object container. The beauty lies in its simplicity - no complex inheritance hierarchies, just a straightforward data container that factory functions can populate."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#factory-functions-the-qutip-way",
+    "href": "posts/Week-7/week7.html#factory-functions-the-qutip-way",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Factory Functions: The QuTiP Way",
+    "text": "Factory Functions: The QuTiP Way\nFollowing QuTiP’s patterns (like qt.basis() and qt.coherent() returning Qobj instances), our factory functions return configured QuantumSystem instances:\n# QuTiP pattern: functions return configured objects\npsi = qt.basis(5, 2)        # Returns Qobj\nbell = qt.bell_state('00')  # Returns Qobj\n\n# Our pattern: functions return configured QuantumSystems  \njc = jaynes_cummings(omega_c=1.0, g=0.1)     # Returns QuantumSystem\nspin_chain = linear_spin_chain(N=4, J=1.0)   # Returns QuantumSystem\nBoth approaches create specialized objects through simple function calls while maintaining type consistency."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#jaynes-cummings-factory-function-implementation",
+    "href": "posts/Week-7/week7.html#jaynes-cummings-factory-function-implementation",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Jaynes-Cummings: Factory Function Implementation",
+    "text": "Jaynes-Cummings: Factory Function Implementation\nThe jaynes_cummings() factory function demonstrates the pattern’s elegance:\ndef jaynes_cummings(\n        omega_c: float = 1.0,\n        omega_a: float = 1.0,\n        g: float = 0.1,\n        n_cavity: int = 10,\n        rotating_wave: bool = True,\n        cavity_decay: float = 0.0,\n        atomic_decay: float = 0.0,\n        atomic_dephasing: float = 0.0,\n        thermal_photons: float = 0.0) -&gt; QuantumSystem:\n    \"\"\"\n    Create Jaynes-Cummings system\n\n    The Jaynes-Cummings model describes a two-level atom interacting with a\n    single cavity mode. The Hamiltonian is:\n\n    H = omega_c * a_dag * a + (omega_a/2) * sigma_z + g * (a_dag * sigma_minus + a * sigma_plus)  [with RWA]\n    H = omega_c * a_dag * a + (omega_a / 2) * sigma_z + g * (a_dag + a) * (sigma_plus + sigma_minus) [without RWA]\n\n\n    Parameters:\n    -----------\n    omega_c : float, default=1.0\n        Cavity frequency\n    omega_a : float, default=1.0\n        Atomic transition frequency\n    g : float, default=0.1\n        Atom-cavity coupling strength\n    n_cavity : int, default=10\n        Cavity Fock space  (number of photon states)\n    rotating_wave : bool, default=True\n        Whether to apply rotating wave approximation\n    cavity_decay : float, default=0.0\n        Cavity decay rate, kappa (photon loss rate)\n    atomic_decay : float, default=0.0\n        Atomic decay rate, gamma (spontaneous emission rate)\n    atomic_dephasing : float, default=0.0\n        Atomic pure dephasing rate, gamma_phi\n    thermal_photons : float, default=0.0\n        Mean thermal photon number, n_th (for thermal bath)\n\n    Returns:\n    --------\n    QuantumSystem\n        Configured Jaynes-Cummings system instance\n\n    \"\"\"\nThis approach provides the same functionality as our previous abstract class implementation but with cleaner, more familiar syntax for QuTiP users."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#introducing-spin-chain-physics",
+    "href": "posts/Week-7/week7.html#introducing-spin-chain-physics",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Introducing Spin Chain Physics",
+    "text": "Introducing Spin Chain Physics\nWeek 7’s major physics expansion was implementing linear spin chains - a fundamental model in condensed matter and quantum many-body physics. These systems describe chains of interacting spin-1/2 particles and serve as the theoretical foundation for understanding magnetic materials, quantum phase transitions, and many-body entanglement.\n\nThe Physical Models\nOur implementation supports four canonical spin models, each representing different physical systems and regimes:\nHeisenberg Model: The most general isotropic case:\nH = J \\sum_{\\langle i,j \\rangle} \\vec{S}_i \\cdot \\vec{S}_j = J \\sum_{\\langle i,j \\rangle} (S_i^x S_j^x + S_i^y S_j^y + S_i^z S_j^z)\nThis model describes systems where the spin-spin interaction is the same in all directions, such as many transition metal compounds. It exhibits rich quantum behavior including quantum criticality and is exactly solvable in one dimension via the Bethe ansatz. The ground state properties depend crucially on whether the coupling J is ferromagnetic (J &lt; 0) or antiferromagnetic (J &gt; 0).\nXXZ Model: Anisotropic interactions with controllable Z-coupling:\nH = J \\sum_{\\langle i,j \\rangle} (S_i^x S_j^x + S_i^y S_j^y) + J_z \\sum_{\\langle i,j \\rangle} S_i^z S_j^z\nThe XXZ model interpolates between different physical regimes by varying the anisotropy parameter \\Delta = J_z/J. For \\Delta &lt; 1, the system is in the gapless XY-like phase; for \\Delta &gt; 1, it exhibits Ising-like behavior with gapped excitations. At \\Delta = 1, it reduces to the isotropic Heisenberg model. This model is particularly relevant for describing magnetic materials with crystal field effects.\nXY Model: In-plane interactions only:\nH = J \\sum_{\\langle i,j \\rangle} (S_i^x S_j^x + S_i^y S_j^y)\nThe XY model neglects Z-interactions entirely, making it exactly solvable via Jordan-Wigner transformation to free fermions. It exhibits a quantum phase transition at zero temperature and is the paradigmatic example of a system with algebraic correlations. This model appears in the study of superconductivity (via the XY model of quantum rotors) and quantum magnetism in systems with strong easy-plane anisotropy.\nIsing Model: Classical-like Z-interactions:\nH = J \\sum_{\\langle i,j \\rangle} S_i^z S_j^z\nThe transverse-field Ising model (when combined with a B_x field) is perhaps the most studied quantum many-body system, serving as the canonical example of a quantum phase transition. In the pure Ising form, the model is classical and exactly solvable, but becomes quantum when transverse fields are applied.\n\n\nSystem Parameters\nThe implementation includes comprehensive parameter control for realistic modeling:\n\nCoupling Parameters: J (XY coupling strength) and J_z (Z coupling) allow fine-tuning of the magnetic interactions. The ratio J_z/J determines the anisotropy and phase behavior.\nExternal Fields: Magnetic fields B_x, B_y, and B_z represent laboratory-controllable external fields. A transverse field (B_x or B_y) can drive quantum phase transitions, while a longitudinal field (B_z) breaks Z-symmetry.\nBoundary Conditions: Open chains model finite systems with edge effects, while periodic boundary conditions eliminate edge states and better approximate bulk properties of infinite systems.\n\n\n\nOpen System Dynamics and Collapse Operators\nReal quantum magnetic systems inevitably couple to their environment, requiring open system treatment. Our implementation includes several physically motivated dissipation channels:\n\nSpontaneous Emission (\\gamma_{relaxation}): Each spin can decay from excited (|\\uparrow\\rangle) to ground (|\\downarrow\\rangle) state via coupling to a vacuum bath. The collapse operators are \\sqrt{\\gamma_{relaxation}} \\sigma_i^- for each site i.\nPure Dephasing (\\gamma_{dephasing}): Random fluctuations destroy phase coherence without changing populations. This appears as \\sqrt{\\gamma_{dephasing}} \\sigma_i^z collapse operators, representing fluctuating magnetic fields.\nDepolarizing Channel (\\gamma_{depolarizing}): Complete randomization of individual spins through \\sqrt{\\gamma_{depolarizing}/3}(\\sigma_i^x + \\sigma_i^y + \\sigma_i^z) operators. This models strong coupling to a structureless environment.\n\nThese dissipation mechanisms enable modeling of realistic decoherence in quantum magnetic materials, trapped ion chains, and superconducting qubit arrays - all of which can be mapped to effective spin chain models."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#code-for-spin-chain-work-in-progress",
+    "href": "posts/Week-7/week7.html#code-for-spin-chain-work-in-progress",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Code for Spin Chain: Work In Progress",
+    "text": "Code for Spin Chain: Work In Progress\ndef linear_spin_chain(model_type: str = \"heisenberg\", N: int = 4, J: float = 1.0, \n                     Jz: float = None, boundary_conditions: str = \"open\",\n                     B_x: float = 0.0, B_y: float = 0.0, B_z: float = 0.0,\n                     gamma_relaxation: float = 0.0, gamma_dephasing: float = 0.0,\n                     gamma_depolarizing: float = 0.0) -&gt; QuantumSystem:\n    \"\"\"\n    \n    Creates a 1D chain of spin-1/2 particles with nearest-neighbor interactions.\n    Supports various spin models and open system dynamics.\n    \n    Model Hamiltonians:\n    - Heisenberg: H = J * sum_i [S_i^x * S_{i+1}^x + S_i^y * S_{i+1}^y + S_i^z * S_{i+1}^z]\n\n    - XXZ: H = J * sum_i [S_i^x * S_{i+1}^x + S_i^y * S_{i+1}^y] + Jz * sum_i [S_i^z * S_{i+1}^z]\n\n    - XY: H = J * sum_i [S_i^x * S_{i+1}^x + S_i^y * S_{i+1}^y]\n\n    - Ising: H = J * sum_i [S_i^z * S_{i+1}^z]\n    \n    Parameters:\n    -----------\n    model_type : str, default=\"heisenberg\"\n        Type of spin chain model: \"heisenberg\", \"xxz\", \"xy\", \"ising\"\n    N : int, default=4\n        Number of spins in the chain\n    J : float, default=1.0\n        Coupling strength for XY interactions (Sx*Sx + Sy*Sy terms)\n    Jz : float, default=None\n        Z-coupling strength (Sz*Sz terms). If None, equals J for Heisenberg, 0 for XY\n    boundary_conditions : str, default=\"open\"\n        Boundary conditions: \"open\" or \"periodic\"\n    B_x, B_y, B_z : float, default=0.0\n        External magnetic field components\n    gamma_relaxation : float, default=0.0\n        Spontaneous emission rate (T1 process)\n    gamma_dephasing : float, default=0.0\n        Pure dephasing rate (T2* process)\n    gamma_depolarizing : float, default=0.0\n        Depolarizing channel rate\n    \n    Returns:\n    --------\n    QuantumSystem\n        Configured linear spin chain system instance\n    \"\"\""
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#pattern-validation-and-scalability",
+    "href": "posts/Week-7/week7.html#pattern-validation-and-scalability",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Pattern Validation and Scalability",
+    "text": "Pattern Validation and Scalability\nHaving two very different quantum systems (cavity QED and many-body spins) validates our architecture’s generality. Both follow the same pattern:\n\nFactory function with model-specific parameters\nQuantumSystem instance with populated attributes\nConsistent interface for accessing components\nQuTiP integration through standard objects\n\nThe spin chain implementation required no changes to the QuantumSystem class - confirming the design’s extensibility."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#technical-highlights",
+    "href": "posts/Week-7/week7.html#technical-highlights",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Technical Highlights",
+    "text": "Technical Highlights\n\nDual Access Pattern\nFollowing QuTiP conventions, we support both direct attribute access and method calls:\n# Direct access \nH = system.hamiltonian  \nops = system.operators\n\n# Method access \nH = system.get_hamiltonian()\nops = system.get_operators()\n\n\nRich Operator Sets\nBoth models provide comprehensive operator collections:\n\nJaynes-Cummings: Cavity (a, a_dag, n_c) and atomic (sigma_x, sigma_plus, etc.) operators\nSpin Chains: Individual site operators (S_0_x, S_1_z, etc.), total spin operators, and correlation functions\n\n\n\nIntelligent Dissipation\nEach model implements physically appropriate dissipation mechanisms with proper thermal factors and rate dependencies."
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#architecture-benefits-realized",
+    "href": "posts/Week-7/week7.html#architecture-benefits-realized",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Architecture Benefits Realized",
+    "text": "Architecture Benefits Realized\nThis week’s implementation validates the design decisions from previous weeks:\n\nConsistency: Both quantum systems use identical interfaces\nFamiliarity: QuTiP users recognize the patterns immediately\n\nExtensibility: Adding new models requires no framework changes\nMaintainability: Clear separation between general class and specific physics"
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#looking-forward",
+    "href": "posts/Week-7/week7.html#looking-forward",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Looking Forward",
+    "text": "Looking Forward\nWeek 7 establishes the foundation for rapid expansion. The pattern is proven, the interface seems stable, and the physics implementations looks correct. Future weeks can focus on:\n\nAdditional quantum models following the established pattern\nEnhanced QuTiP solver integration with isinstance checks\nPerformance optimization for large systems\nComprehensive documentation and tutorials"
+  },
+  {
+    "objectID": "posts/Week-7/week7.html#reflections",
+    "href": "posts/Week-7/week7.html#reflections",
+    "title": "Week 7: QuantumSystem Implementation and Spin Chain Physics",
+    "section": "Reflections",
+    "text": "Reflections\nWeek 7 completed the transition from our Week 6 conceptual insights to working code. The factory function approach proved practical - both Jaynes-Cummings and spin chains follow the same pattern while handling very different physics. When implementing spin chains required no changes to the QuantumSystem class, it confirmed we’d found a reasonable abstraction level.\nWorking with spin chains highlighted the scaling differences between quantum systems. The Jaynes-Cummings model has a manageable 2×N dimensional Hilbert space, while spin chains grow as 2^N. This made parameter validation and system size warnings more important than I initially realized.\nThe biggest lesson was that studying QuTiP’s existing patterns (like how qt.basis() and qt.coherent() work) led to better design choices than trying to impose new abstractions. Our factory functions now feel consistent with QuTiP’s ecosystem rather than foreign to it.\nWith the architecture validated across different physics domains, the remaining weeks can focus on expanding the quantum model library rather than fundamental design questions. The pattern works, and adding new models should be straightforward."
+  },
+  {
     "objectID": "posts/Week-5/week5.html",
     "href": "posts/Week-5/week5.html",
     "title": "Week 5: Object-Oriented Architecture - Building the QuantumSystem Class",
@@ -236,6 +313,69 @@
     "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
     "section": "Acknowledgments",
     "text": "Acknowledgments\nI want to thank the QuTiP team for this incredible opportunity. The mentorship and support they’ve already provided has been exceptional, and I’m looking forward to working closely with them throughout the summer.\n\nIf you’re interested in quantum computing, open-source development, or just want to follow along with my GSoC journey, feel free to connect. And if you’re a fellow GSoC participant this year, I’d love to hear about your projects too!\n\n\n\n\n\n\nInterested in QuTiP?\n\n\n\nCheck out the QuTiP documentation to learn more about quantum simulations in Python!\n\n\nTags: GSoC2025, QuantumComputing, OpenSource, Python, QuTiP, NumFOCUS,"
+  },
+  {
+    "objectID": "posts/Week-6/week6.html",
+    "href": "posts/Week-6/week6.html",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "",
+    "text": "Week 6 has been a challenging week personally due to illness, but it’s also been a week of important conceptual breakthrough and understanding what the mentors exactly want for the design. While I was recovering from the flu for most of the week, the time away from active coding allowed me to study QuTiP’s architecture more deeply and led to a crucial insight about our design direction."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#health-challenges-and-reduced-progress",
+    "href": "posts/Week-6/week6.html#health-challenges-and-reduced-progress",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "Health Challenges and Reduced Progress",
+    "text": "Health Challenges and Reduced Progress\nI want to be transparent about this week’s challenges. I came down with the flu around July 12th and have been unwell since then, which significantly impacted my ability to make any progress. This led to canceling our scheduled July 15th meeting, as I wasn’t in a condition to participate meaningfully.\nHowever, sometimes stepping back from active development can provide valuable perspective, and this week proved that point."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#a-key-conceptual-breakthrough",
+    "href": "posts/Week-6/week6.html#a-key-conceptual-breakthrough",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "A Key Conceptual Breakthrough",
+    "text": "A Key Conceptual Breakthrough\nDuring my recovery time, I spent some time studying Object-Oriented Programming concepts and diving deeper into QuTiP’s documentation and source code. This research led to a significant realization about our design direction that I believe represents a major step forward in understanding what we’re trying to build."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#understanding-qutips-design-patterns",
+    "href": "posts/Week-6/week6.html#understanding-qutips-design-patterns",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "Understanding QuTiP’s Design Patterns",
+    "text": "Understanding QuTiP’s Design Patterns\nWhile reading through QuTiP’s codebase, I began to see clear patterns in how QuTiP structures its functionality:\n\nThe Qobj Pattern\nQuTiP has a general Qobj class that represents quantum objects. Rather than having separate classes for different types of quantum objects, QuTiP uses factory functions that return Qobj instances:\n# Factory functions that return Qobj instances\npsi = qt.basis(5, 2)        # Returns Qobj representing |2⟩\nbell = qt.bell_state('00')  # Returns Qobj representing Bell state\ncoherent = qt.coherent(10, 2.0)  # Returns Qobj representing coherent state\nAll of these functions return the same type (Qobj), but each represents a different quantum state with specific properties and initialization.\n\n\nThe Result Pattern\nSimilarly, QuTiP’s solvers use factory-like patterns:\nresult = qt.mesolve(H, psi0, times, c_ops)  # Returns Result instance\nThe mesolve function is essentially a factory that creates Result objects containing the evolution data."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#the-design-insight-factory-functions-general-class",
+    "href": "posts/Week-6/week6.html#the-design-insight-factory-functions-general-class",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "The Design Insight: Factory Functions + General Class",
+    "text": "The Design Insight: Factory Functions + General Class\nThis led me to realize what the team has been suggesting all along: we should follow QuTiP’s established patterns by creating:\n\nA general QuantumSystem class (not abstract) that holds quantum system data\nFactory functions for each model that return QuantumSystem instances\n\nThe analogy would be:\n# Our proposed pattern\njc_system = jaynes_cummings(n_cavity=5, g=0.1)    # Returns QuantumSystem\nspin_chain = spin_chain(n_spin=8, J=0.2)          # Returns QuantumSystem  \ndicke_system = dicke_model(n_atoms=10, g=0.05)    # Returns QuantumSystem\n\n# All return the same type, but with different physics\nThis mirrors exactly how QuTiP handles quantum objects and solver results."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#studying-qutips-internal-architecture",
+    "href": "posts/Week-6/week6.html#studying-qutips-internal-architecture",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "Studying QuTiP’s Internal Architecture",
+    "text": "Studying QuTiP’s Internal Architecture\nMy illness-induced study session revealed several important aspects of QuTiP’s design philosophy:\n\nConsistent Return Types\nQuTiP functions consistently return well-defined object types (Qobj, Result, etc.) rather than tuples or dictionaries. This provides predictable interfaces and enables method chaining.\n\n\nProperties vs Methods\nQuTiP objects use properties for data access (qobj.shape, result.states) and methods for operations (qobj.dag(), qobj.norm()). This distinction guides how we should structure our QuantumSystem interface.\n\n\nLaTeX Integration\nThe meeting notes mention that Qobj has specific methods for LaTeX printing in different environments. Understanding how QuTiP handles LaTeX representation will be crucial for our latex_representation() functionality."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#recovery-and-momentum",
+    "href": "posts/Week-6/week6.html#recovery-and-momentum",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "Recovery and Momentum",
+    "text": "Recovery and Momentum\nWhile this week was challenging health-wise, the conceptual breakthrough feels significant. Sometimes stepping back from the code and focusing on understanding the broader ecosystem provides insights that pure coding might miss.\nThe forced pause allowed me to see our project in the context of QuTiP’s overall architecture rather than as an isolated development effort."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#week-7-preparation",
+    "href": "posts/Week-6/week6.html#week-7-preparation",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "Week 7 Preparation",
+    "text": "Week 7 Preparation\nAs I recover and regain full development capacity, Week 7 will focus on implementing this new architectural understanding:\n\nConverting our abstract class approach to the general class + factory functions pattern\nImplementing the enhanced c_ops dictionary structure\nCreating a second quantum system type (coupled spins) to validate the interface design\nTesting time-dependent functionality and coefficient objects\n\nThe conceptual foundation is now solid, and I’m eager to translate these insights into working code that seamlessly integrates with QuTiP’s ecosystem."
+  },
+  {
+    "objectID": "posts/Week-6/week6.html#reflections-on-process",
+    "href": "posts/Week-6/week6.html#reflections-on-process",
+    "title": "Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions",
+    "section": "Reflections on Process",
+    "text": "Reflections on Process\nThis week reinforced an important lesson about software development: sometimes the most valuable progress happens away from the keyboard. Understanding the philosophical and architectural principles underlying a codebase can be more important than rushing into implementation.\nThe illness was frustrating, but the enforced study time led to insights that will fundamentally improve our final product. Our quantum systems library will be better integrated, more familiar to users, and more aligned with QuTiP’s design philosophy because of this week’s conceptual work.\nLooking forward to implementing these ideas and seeing how the factory function approach transforms our user interface and development workflow."
   },
   {
     "objectID": "posts/Community Bonding/community-bonding.html",
