@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vanshaj Bindal">
+<meta name="dcterms.date" content="2025-07-29">
 
-<title>blog – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
+<title>Week 8: Unit Testing and New Models – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -143,17 +114,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Google Summer of Code 2025 | QuTiP | NumFOCUS</span>
     </a>
   </div>
@@ -164,15 +135,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -200,7 +171,7 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -208,315 +179,205 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#blogs" id="toc-blogs" class="nav-link active" data-scroll-target="#blogs">Blogs</a></li>
+  <li><a href="#building-a-testing-foundation" id="toc-building-a-testing-foundation" class="nav-link active" data-scroll-target="#building-a-testing-foundation">Building a Testing Foundation</a>
+  <ul class="collapse">
+  <li><a href="#comprehensive-test-coverage" id="toc-comprehensive-test-coverage" class="nav-link" data-scroll-target="#comprehensive-test-coverage">Comprehensive Test Coverage</a></li>
+  <li><a href="#testing-philosophy" id="toc-testing-philosophy" class="nav-link" data-scroll-target="#testing-philosophy">Testing Philosophy</a></li>
+  </ul></li>
+  <li><a href="#adding-the-qubit-model" id="toc-adding-the-qubit-model" class="nav-link" data-scroll-target="#adding-the-qubit-model">Adding the Qubit Model</a>
+  <ul class="collapse">
+  <li><a href="#the-complete-qubit-system" id="toc-the-complete-qubit-system" class="nav-link" data-scroll-target="#the-complete-qubit-system">The Complete Qubit System</a></li>
+  <li><a href="#key-parameters" id="toc-key-parameters" class="nav-link" data-scroll-target="#key-parameters">Key Parameters</a></li>
+  </ul></li>
+  <li><a href="#architecture-discussions-and-refinements" id="toc-architecture-discussions-and-refinements" class="nav-link" data-scroll-target="#architecture-discussions-and-refinements">Architecture Discussions and Refinements</a>
+  <ul class="collapse">
+  <li><a href="#access-pattern-clarification" id="toc-access-pattern-clarification" class="nav-link" data-scroll-target="#access-pattern-clarification">Access Pattern Clarification</a></li>
+  <li><a href="#spin-model-parameter-standardization" id="toc-spin-model-parameter-standardization" class="nav-link" data-scroll-target="#spin-model-parameter-standardization">Spin Model Parameter Standardization</a></li>
+  </ul></li>
+  <li><a href="#preparing-for-integration" id="toc-preparing-for-integration" class="nav-link" data-scroll-target="#preparing-for-integration">Preparing for Integration</a>
+  <ul class="collapse">
+  <li><a href="#action-items-progress" id="toc-action-items-progress" class="nav-link" data-scroll-target="#action-items-progress">Action Items Progress</a></li>
+  <li><a href="#quality-assurance-benefits" id="toc-quality-assurance-benefits" class="nav-link" data-scroll-target="#quality-assurance-benefits">Quality Assurance Benefits</a></li>
+  </ul></li>
+  <li><a href="#technical-insights-from-testing" id="toc-technical-insights-from-testing" class="nav-link" data-scroll-target="#technical-insights-from-testing">Technical Insights from Testing</a>
+  <ul class="collapse">
+  <li><a href="#operator-relationship-verification" id="toc-operator-relationship-verification" class="nav-link" data-scroll-target="#operator-relationship-verification">Operator Relationship Verification</a></li>
+  <li><a href="#parameter-edge-cases" id="toc-parameter-edge-cases" class="nav-link" data-scroll-target="#parameter-edge-cases">Parameter Edge Cases</a></li>
+  <li><a href="#thermal-physics-correctness" id="toc-thermal-physics-correctness" class="nav-link" data-scroll-target="#thermal-physics-correctness">Thermal Physics Correctness</a></li>
+  </ul></li>
+  <li><a href="#looking-toward-integration" id="toc-looking-toward-integration" class="nav-link" data-scroll-target="#looking-toward-integration">Looking Toward Integration</a></li>
+  <li><a href="#reflections" id="toc-reflections" class="nav-link" data-scroll-target="#reflections">Reflections</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 8: Unit Testing and New Models</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">GSoC</div>
+    <div class="quarto-category">QuTiP</div>
+    <div class="quarto-category">Testing</div>
+    <div class="quarto-category">Quantum Systems</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="blogs" class="level2">
-<h2 class="anchored" data-anchor-id="blogs">Blogs</h2>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vanshaj Bindal </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 29, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
+
+</header>
+
+
+<p>In Week 8 we added a new model a two level system and created some tests. With our factory function architecture proven across cavity QED model, this week focused on comprehensive testing, adding a simple model for completeness, and refining our design based on team feedback.</p>
+<section id="building-a-testing-foundation" class="level2">
+<h2 class="anchored" data-anchor-id="building-a-testing-foundation">Building a Testing Foundation</h2>
+<p>The primary focus this week was developing comprehensive test suites for our quantum systems library. Rather than rushing to add more physics models, I invested time in ensuring the existing code is robust, well-tested, and maintainable.</p>
+<section id="comprehensive-test-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="comprehensive-test-coverage">Comprehensive Test Coverage</h3>
+<p>I implemented three major test suites covering different aspects of the architecture:</p>
+<p><strong><code>test_quantum_system.py</code></strong> - Test methods covering initialization, property access, mathematical operations, and edge cases. This ensures our base <code>QuantumSystem</code> class handles everything from empty systems to large tensor product spaces correctly.</p>
+<p><strong><code>test_jaynes_cummings.py</code></strong> - JC implementation including parameter variations, operator relationships, Hamiltonian structure verification, dissipation mechanisms, and physics correctness. Each test targets specific aspects like commutation relations, thermal effects, and rotating wave approximation differences.</p>
+<p><strong><code>test_qubit.py</code></strong> - A test suite for the simple qubit system, covering Pauli operator properties, anticommutation relations, and basic quantum mechanics verification.</p>
+</section>
+<section id="testing-philosophy" class="level3">
+<h3 class="anchored" data-anchor-id="testing-philosophy">Testing Philosophy</h3>
+<p>The test suites follow scientific software best practices:</p>
+<ul>
+<li><strong>Physics Verification</strong>: Tests confirm operators satisfy expected quantum mechanical relationships (commutation relations, Hermiticity, normalization)</li>
+<li><strong>Parameter Robustness</strong>: Parametrized tests check behavior across different parameter regimes<br>
+</li>
+<li><strong>Edge Case Coverage</strong>: Tests handle zero parameters, large systems, and boundary conditions</li>
+<li><strong>Integration Testing</strong>: Verification that components work together correctly (Hamiltonians with their operators, collapse operators with proper rates)</li>
+</ul>
+<p>Though this is the forst time I was writing such extensive tests for complex code and models. For this part I had to use exisisting tests from qutip codebase and chatgpt for help. Though I feel there are still some discrepancies.</p>
+</section>
+</section>
+<section id="adding-the-qubit-model" class="level2">
+<h2 class="anchored" data-anchor-id="adding-the-qubit-model">Adding the Qubit Model</h2>
+<p>To round out our quantum systems collection with a fundamental building block, I implemented a simple two-level system (qubit) factory function:</p>
+<section id="the-complete-qubit-system" class="level3">
+<h3 class="anchored" data-anchor-id="the-complete-qubit-system">The Complete Qubit System</h3>
+<p>The qubit represents the simplest non-trivial quantum system and serves as an excellent validation of our architecture:</p>
+<p><strong>Hamiltonian (Coherent Dynamics):</strong></p>
+<p><span class="math display">H = \frac{\omega}{2}\sigma_z</span></p>
+<p><strong>Collapse Operators (Incoherent Dynamics):</strong></p>
+<ul>
+<li>Spontaneous emission: <span class="math inline">C_1 = \sqrt{\gamma_{decay}} \sigma_-</span> (relaxation from excited to ground state)</li>
+<li>Pure dephasing: <span class="math inline">C_2 = \sqrt{\gamma_{dephase}} \sigma_z</span> (phase decoherence without energy loss)</li>
+</ul>
+</section>
+<section id="key-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="key-parameters">Key Parameters</h3>
+<p><strong>Coherent Parameters:</strong></p>
+<ul>
+<li><span class="math inline">\omega</span> (omega): Transition frequency (energy splitting between levels)</li>
+</ul>
+<p><strong>Incoherent Parameters:</strong></p>
+<ul>
+<li>decay_rate: Spontaneous emission rate (T1 process)</li>
+<li>dephasing_rate: Pure dephasing rate (T2* process)</li>
+</ul>
+<p>The qubit implementation demonstrates how our factory function pattern scales down to the simplest quantum systems while maintaining the same interface consistency as complex many-body models.</p>
+</section>
+</section>
+<section id="architecture-discussions-and-refinements" class="level2">
+<h2 class="anchored" data-anchor-id="architecture-discussions-and-refinements">Architecture Discussions and Refinements</h2>
+<p>The July 22nd meeting with Eric, Neill, and myself provided valuable feedback on our design choices and highlighted areas for refinement.</p>
+<section id="access-pattern-clarification" class="level3">
+<h3 class="anchored" data-anchor-id="access-pattern-clarification">Access Pattern Clarification</h3>
+<p>A key discussion centered on our dual access pattern, supporting both direct attribute access (<code>system.hamiltonian</code>) and method calls (<code>system.get_hamiltonian()</code>). Eric’s question about “why use get_x functions, just access properties directly” led to clarifying our approach.</p>
+<p>The decision was to maintain both patterns:</p>
+<ul>
+<li><strong>Direct access</strong> for Python, natural usage</li>
+<li><strong>Method access</strong> for QuTiP-style consistency and potential future extensions</li>
+</ul>
+<p>This flexibility lets users choose their preferred interaction style while maintaining compatibility with QuTiP conventions.</p>
+</section>
+<section id="spin-model-parameter-standardization" class="level3">
+<h3 class="anchored" data-anchor-id="spin-model-parameter-standardization">Spin Model Parameter Standardization</h3>
+<p>The meeting highlighted the need for more standardized approaches to spin chain parameters. The feedback was to define comprehensive default dissipation channels for each spin while allowing users flexibility to customize as needed. This ensures the models are immediately useful while remaining extensible.</p>
+</section>
+</section>
+<section id="preparing-for-integration" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-for-integration">Preparing for Integration</h2>
+<p>Week 8 also focused on preparing our code for integration with the main QuTiP codebase:</p>
+<section id="action-items-progress" class="level3">
+<h3 class="anchored" data-anchor-id="action-items-progress">Action Items Progress</h3>
+<ul>
+<li><strong>Testing Infrastructure</strong>: Comprehensive test suites now provide confidence in code reliability</li>
+<li><strong>Simple Model Examples</strong>: The qubit addition gives users a basic starting point</li>
+<li><strong>Architecture Validation</strong>: Testing confirmed our factory function approach works across complexity scales</li>
+</ul>
+</section>
+<section id="quality-assurance-benefits" class="level3">
+<h3 class="anchored" data-anchor-id="quality-assurance-benefits">Quality Assurance Benefits</h3>
+<p>Having robust tests provides several immediate benefits:</p>
+<ul>
+<li><strong>Regression Prevention</strong>: Changes won’t silently break existing functionality</li>
+<li><strong>Documentation</strong>: Tests serve as executable examples of intended usage</li>
+<li><strong>Confidence</strong>: Team members can modify code knowing tests will catch issues</li>
+<li><strong>API Stability</strong>: Tests lock in the expected interface behavior</li>
+</ul>
+</section>
+</section>
+<section id="technical-insights-from-testing" class="level2">
+<h2 class="anchored" data-anchor-id="technical-insights-from-testing">Technical Insights from Testing</h2>
+<p>Writing comprehensive tests revealed several important technical insights:</p>
+<section id="operator-relationship-verification" class="level3">
+<h3 class="anchored" data-anchor-id="operator-relationship-verification">Operator Relationship Verification</h3>
+<p>Testing quantum mechanical relationships (like commutation relations and operator properties) ensures our implementations respect fundamental physics. For example, verifying that <code>[n_c, a] = -a</code> in the JC model confirms the correct tensor product structure.</p>
+</section>
+<section id="parameter-edge-cases" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-edge-cases">Parameter Edge Cases</h3>
+<p>Tests revealed the importance of handling edge cases like zero coupling strengths, very large systems, and extreme parameter ratios. These scenarios often expose implementation assumptions.</p>
+</section>
+<section id="thermal-physics-correctness" class="level3">
+<h3 class="anchored" data-anchor-id="thermal-physics-correctness">Thermal Physics Correctness</h3>
+<p>Testing thermal collapse operators required careful verification of detailed balance and rate relationships, ensuring our open system implementations represent realistic physics.</p>
+</section>
+</section>
+<section id="looking-toward-integration" class="level2">
+<h2 class="anchored" data-anchor-id="looking-toward-integration">Looking Toward Integration</h2>
+<p>Week 8 established the quality infrastructure needed for serious library development. With comprehensive tests covering our existing models and a simple qubit example demonstrating pattern consistency, we’re ready to focus on:</p>
+<ul>
+<li><strong>PR Preparation</strong>: Clean, tested code ready for QuTiP integration</li>
+<li><strong>Additional Models</strong>: JC-chain, Dicke model, and other common systems</li>
+<li><strong>User Interface</strong>: Pretty printing and documentation improvements</li>
+<li><strong>Time-Dependent Extensions</strong>: Exploring coefficient objects for driven systems</li>
+</ul>
+</section>
+<section id="reflections" class="level2">
+<h2 class="anchored" data-anchor-id="reflections">Reflections</h2>
+<p>Week 8 reinforced that sustainable software development requires balancing feature addition with quality assurance. While it might seem less exciting than implementing new physics, comprehensive testing is essential for building reliable scientific software.</p>
+<p>The testing process also validated our architectural choices. When tests for three very different quantum systems (base class, cavity QED, many-body spins, and two-level atoms) all follow similar patterns and pass consistently, it confirms we’ve found a robust abstraction.</p>
+<p>Most importantly, having comprehensive tests now enables faster, more confident development in future weeks. We can add new models knowing that any breaking changes will be immediately detected, and we can refactor implementations knowing the physics behavior remains correct.</p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R1NvQyUyQ1F1VGlQJTJDVGVzdGluZyUyQ1F1YW50dW0lMjBTeXN0ZW1z" data-listing-date-sort="1753727400000" data-listing-file-modified-sort="1753786652038" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="917">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-8/week8.html" class="no-external">Week 8: Unit Testing and New Models</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQw=='); return false;">GSoC</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('VGVzdGluZw=='); return false;">Testing</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVhbnR1bSUyMFN5c3RlbXM='); return false;">Quantum Systems</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-8/week8.html" class="no-external">
-In Week 8 we added a new model a two level system and created some tests. With our factory function architecture proven across cavity QED model, this week focused on…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-8/week8.html" class="no-external">
-<div class="listing-date">
-Jul 29, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="R1NvQyUyQ1F1VGlQJTJDUXVhbnR1bSUyMFN5c3RlbXMlMkNGYWN0b3J5JTIwUGF0dGVybiUyQ1NwaW4lMjBDaGFpbnM=" data-listing-date-sort="1753122600000" data-listing-file-modified-sort="1753179467171" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2300">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-7/week7.html" class="no-external">Week 7: QuantumSystem Implementation and Spin Chain Physics</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQw=='); return false;">GSoC</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVhbnR1bSUyMFN5c3RlbXM='); return false;">Quantum Systems</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RmFjdG9yeSUyMFBhdHRlcm4='); return false;">Factory Pattern</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3BpbiUyMENoYWlucw=='); return false;">Spin Chains</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-7/week7.html" class="no-external">
-Week 7 marked the implementation of our refined architecture - transforming the conceptual insights from Week 6 into working code. The shift from abstract classes to factory…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-7/week7.html" class="no-external">
-<div class="listing-date">
-Jul 22, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="R1NvQyUyQ1F1VGlQJTJDUXVhbnR1bSUyMFN5c3RlbXMlMkNGYWN0b3J5JTIwUGF0dGVybiUyQ0Rlc2lnbiUyMFBhdHRlcm5z" data-listing-date-sort="1752777000000" data-listing-file-modified-sort="1753172756499" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="765">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-6/week6.html" class="no-external">Week 6: Design Pivot and Recovery - From Abstract Classes to Factory Functions</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQw=='); return false;">GSoC</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVhbnR1bSUyMFN5c3RlbXM='); return false;">Quantum Systems</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RmFjdG9yeSUyMFBhdHRlcm4='); return false;">Factory Pattern</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGVzaWduJTIwUGF0dGVybnM='); return false;">Design Patterns</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-6/week6.html" class="no-external">
-Week 6 has been a challenging week personally due to illness, but it’s also been a week of important conceptual breakthrough and understanding what the mentors exactly want…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-6/week6.html" class="no-external">
-<div class="listing-date">
-Jul 18, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="R1NvQyUyQ1F1VGlQJTJDUXVhbnR1bSUyMFN5c3RlbXMlMkNPT1AlMkNQeXRob24=" data-listing-date-sort="1751913000000" data-listing-file-modified-sort="1751967536060" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1237">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-5/week5.html" class="no-external">Week 5: Object-Oriented Architecture - Building the QuantumSystem Class</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQw=='); return false;">GSoC</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVhbnR1bSUyMFN5c3RlbXM='); return false;">Quantum Systems</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T09Q'); return false;">OOP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-5/week5.html" class="no-external">
-Week 5 has been an important week in transforming our quantum systems library from functional code into a robust, object-oriented architecture. Following the team meeting on…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-5/week5.html" class="no-external">
-<div class="listing-date">
-Jul 8, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwNCUyQ1F1VGlQJTJDSW1wbGVtZW50YXRpb24lMkNKQyUyME1vZGVs" data-listing-date-sort="1750703400000" data-listing-file-modified-sort="1751542946271" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-4/week4.html" class="no-external">Week 4: First Code Implementation - Code Structure and Development</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDQ='); return false;">Week 4</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SW1wbGVtZW50YXRpb24='); return false;">Implementation</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SkMlMjBNb2RlbA=='); return false;">JC Model</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-4/week4.html" class="no-external">
-After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-4/week4.html" class="no-external">
-<div class="listing-date">
-Jun 24, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwMiUyQ1F1VGlQJTJDUmFiaSUyME1vZGVsJTJDUHJvamVjdCUyME1hbmFnZW1lbnQ=" data-listing-date-sort="1750098600000" data-listing-file-modified-sort="1751211309678" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="961">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-2/week2.html" class="no-external">Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDI='); return false;">Week 2</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UmFiaSUyME1vZGVs'); return false;">Rabi Model</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvamVjdCUyME1hbmFnZW1lbnQ='); return false;">Project Management</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-2/week2.html" class="no-external">
-Week 2 has been all about making crucial project decisions and expanding our understanding of quantum models. From timeline adjustments to repository strategies, plus a deep…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-2/week2.html" class="no-external">
-<div class="listing-date">
-Jun 17, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="R1NvQyUyMDIwMjUlMkNXZWVrJTIwMSUyQ1F1VGlQJTJDSmF5bmVzLUN1bW1pbmdz" data-listing-date-sort="1749493800000" data-listing-file-modified-sort="1751211197286" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1095">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Week-1/week1.html" class="no-external">Week 1: Diving Deep into Library Design and the Jaynes-Cummings Model</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDE='); return false;">Week 1</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SmF5bmVzLUN1bW1pbmdz'); return false;">Jaynes-Cummings</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Week-1/week1.html" class="no-external">
-The coding phase has officially begun! Week 1 has been a fascinating deep dive into thinking about the design of the Hamiltonian Library and understanding that we’re…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Week-1/week1.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="R1NvQyUyMDIwMjUlMkNDb21tdW5pdHklMjBCb25kaW5nJTJDUXVUaVA=" data-listing-date-sort="1748629800000" data-listing-file-modified-sort="1749512941954" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Community Bonding/community-bonding.html" class="no-external">Community Bonding Period: Setting the Foundation for Success</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q29tbXVuaXR5JTIwQm9uZGluZw=='); return false;">Community Bonding</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVUaVA='); return false;">QuTiP</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Community Bonding/community-bonding.html" class="no-external">
-The community bonding period (May 10 - June 1) has almost officially wrapped up! This three-week phase was all about getting acquainted with the QuTiP community…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Community Bonding/community-bonding.html" class="no-external">
-<div class="listing-date">
-May 31, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="R1NvQyUyMDIwMjUlMkNPcGVuU291cmNlJTJDUHl0aG9uJTJDcXVhbnR1bQ==" data-listing-date-sort="1747765800000" data-listing-file-modified-sort="1749513239686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro/gsoc-2025-selection.html" class="no-external">Exciting News: I’m Joining Google Summer of Code 2025!</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('R1NvQyUyMDIwMjU='); return false;">GSoC 2025</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T3BlblNvdXJjZQ=='); return false;">OpenSource</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVhbnR1bQ=='); return false;">quantum</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/intro/gsoc-2025-selection.html" class="no-external">
-A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro/gsoc-2025-selection.html" class="no-external">
-<div class="listing-date">
-May 21, 2025
-</div>
-<div class="listing-author">
-Vanshaj Bindal
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
