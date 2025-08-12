@@ -10,7 +10,7 @@ In Week 8 we added a new model a two level system and created some tests. With o
 
 ## Building a Testing Foundation
 
-The primary focus this week was developing comprehensive test suites for our quantum systems library. Rather than rushing to add more physics models, I invested time in ensuring the existing code is robust, well-tested, and maintainable.
+The primary focus this week was developing comprehensive test suites for our quantum systems library. Rather than rushing to add more physics models, I invested time in ensuring the existing code is robust, well tested, and maintainable.
 
 ### Comprehensive Test Coverage
 
@@ -39,7 +39,7 @@ To round out our quantum systems collection with a fundamental building block, I
 
 ### The Complete Qubit System
 
-The qubit represents the simplest non-trivial quantum system and serves as an excellent validation of our architecture:
+The qubit represents the simplest non trivial quantum system and serves as an excellent validation of our architecture:
 
 **Hamiltonian (Coherent Dynamics):**
 
@@ -74,7 +74,7 @@ A key discussion centered on our dual access pattern, supporting both direct att
 The decision was to maintain both patterns:
 
 - **Direct access** for Python, natural usage
-- **Method access** for QuTiP-style consistency and potential future extensions
+- **Method access** for QuTiP style consistency and potential future extensions
 
 This flexibility lets users choose their preferred interaction style while maintaining compatibility with QuTiP conventions.
 
