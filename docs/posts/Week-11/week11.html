@@ -9,7 +9,7 @@
 <meta name="author" content="Vanshaj Bindal">
 <meta name="dcterms.date" content="2025-08-19">
 
-<title>Week 11: PR Integration and Documentation Pipeline – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
+<title>Week 11: PR Integration and Documentation – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -157,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 11: PR Integration and Documentation Pipeline</h1>
+<h1 class="title">Week 11: PR Integration and Documentation</h1>
   <div class="quarto-categories">
     <div class="quarto-category">GSoC</div>
     <div class="quarto-category">QuTiP</div>
@@ -200,9 +200,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="test-refinements-based-on-review" class="level3">
 <h3 class="anchored" data-anchor-id="test-refinements-based-on-review">Test Refinements Based on Review</h3>
 <p>Following the detailed code review feedback, I completed comprehensive updates to the tests:</p>
-<p><strong><code>test_quantum_system.py</code></strong> - Refined base class tests to focus on framework-specific functionality rather than duplicating existing QuTiP operator tests.</p>
+<p><strong><code>test_quantum_system.py</code></strong> - Refined base class tests to focus on framework specific functionality rather than duplicating existing QuTiP operator tests.</p>
 <p><strong><code>test_qubit.py</code></strong> - Streamlined qubit tests to emphasize factory function interface correctness and parameter handling.</p>
-<p><strong><code>test_jaynes_cummings.py</code></strong> - Enhanced JC model tests to validate physics-specific relationships while avoiding redundancy with QuTiP’s core testing.</p>
+<p><strong><code>test_jaynes_cummings.py</code></strong> - Enhanced JC model tests to validate physics specific relationships while avoiding redundancy with QuTiP’s core testing.</p>
 <p>These refinements addressed the team’s guidance about “avoiding over-testing” and ensuring our tests complement rather than duplicate QuTiP’s existing test coverage.</p>
 </section>
 <section id="branch-management-and-pr-pipeline" class="level3">
@@ -216,12 +216,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="documentation-learning-curve" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-learning-curve">Documentation Learning Curve</h2>
-<p>A key realization this week was the need to master QuTiP’s documentation ecosystem. The meeting notes emphasized learning “how documentation works: notebook, sphinxdoc, API” - pointing to the comprehensive documentation requirements for a production library.</p>
+<p>A key realization this week was the need to master QuTiP’s documentation ecosystem. The meeting notes emphasized learning “how documentation works: notebook, sphinxdoc, API”, pointing to the comprehensive documentation requirements for a production library.</p>
 <section id="multi-format-documentation-strategy" class="level3">
 <h3 class="anchored" data-anchor-id="multi-format-documentation-strategy">Multi-Format Documentation Strategy</h3>
 <p>QuTiP’s documentation approach involves several interconnected components:</p>
-<p><strong>API Documentation</strong>: Auto-generated from docstrings using Sphinx, requiring careful attention to parameter descriptions, examples, and cross-references.</p>
-<p><strong>Tutorial Notebooks</strong>: Interactive Jupyter notebooks that demonstrate real-world usage patterns and physics applications.</p>
+<p><strong>API Documentation</strong>: Auto generated from docstrings using Sphinx, requiring careful attention to parameter descriptions, examples, and cross references.</p>
+<p><strong>Tutorial Notebooks</strong>: Interactive Jupyter notebooks that demonstrate real world usage patterns and physics applications.</p>
 <p><strong>Sphinx Integration</strong>: Ensuring documentation builds correctly within QuTiP’s existing documentation framework and maintains consistent styling.</p>
 </section>
 <section id="jaynes-cummings-tutorial-development" class="level3">
@@ -230,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Demonstrate basic factory function usage</li>
 <li>Show realistic physics applications (Rabi oscillations, cavity decay, thermal effects)</li>
-<li>Provide side-by-side comparisons with traditional QuTiP approaches</li>
+<li>Provide side by side comparisons with traditional QuTiP approaches</li>
 <li>Include visualization examples using the enhanced <code>pretty_print()</code> functionality</li>
 </ul>
 <p>The goal is to submit this as a PR to the qutip-tutorials repository within the next few days, establishing the documentation pattern for our quantum systems library.</p>
@@ -245,9 +245,9 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="transition-to-production-phase" class="level2">
 <h2 class="anchored" data-anchor-id="transition-to-production-phase">Transition to Production Phase</h2>
-<p>Week 11 represents a crucial transition from pure development to production integration. The focus has shifted from “building new features” to “making features production-ready.” This involves:</p>
+<p>Week 11 represents a crucial transition from pure development to production integration. The focus has shifted from “building new features” to “making features production ready.” This involves:</p>
 <ul>
-<li><strong>Code Quality</strong>: Addressing all review feedback and ensuring professional-grade implementation</li>
+<li><strong>Code Quality</strong>: Addressing all review feedback and ensuring professional implementation</li>
 <li><strong>Documentation</strong>: Creating tutorials and API docs that enable other researchers to use the library effectively</li>
 <li><strong>Integration Testing</strong>: Ensuring seamless operation within QuTiP’s existing ecosystem</li>
 </ul>
@@ -255,8 +255,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="looking-ahead" class="level2">
 <h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
 <p>The core infrastructure and first few models are approaching merge readiness and documentation work is underway. The combination of working code, tests, and thorough documentation will provide a solid foundation for QuTiP’s quantum systems library.</p>
-<p>The next few weeks will focus on completing the documentation pipeline, finalizing the spin chain integration, and potentially exploring time-dependent systems - all building on the robust architecture established over the past months.</p>
-<p>Week 11 proved that transitioning from research code to production software requires just as much attention to process and documentation as to the underlying implementation. The careful approach to PR management, testing refinement, and documentation planning sets up the project for successful long-term integration into QuTiP’s ecosystem.</p>
+<p>The next few weeks will focus on completing the documentation pipeline, finalizing the spin chain integration, and potentially exploring time-dependent systems, all building on the architecture established over the past months.</p>
+<p>Week 11 proved that transitioning from research code to production software requires just as much attention to process and documentation as to the underlying implementation. The careful approach to PR management, testing refinement, and documentation planning sets up the project for successful long term integration into QuTiP’s ecosystem.</p>
 
 
 </section>
