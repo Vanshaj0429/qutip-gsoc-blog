@@ -1,0 +1,69 @@
+---
+title: "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline"
+author: "Vanshaj Bindal"
+date: "2025-09-13"
+categories: [GSoC, QuTiP, Milestone, Documentation, Integration]
+---
+
+Weeks 14 and 15 marked a significant milestone in the GSoC project with the successful merge of our core quantum systems infrastructure and the establishment of comprehensive documentation and tutorial pipelines.
+
+## Major Milestone: Core Infrastructure Merged
+
+The biggest achievement was getting [PR #2708](https://github.com/qutip/qutip/pull/2708) merged into the `dev.qsystem` branch. This represents the culmination of months of development, testing, and code review, bringing the foundational `QuantumSystem` architecture into QuTiP's codebase.
+
+The merged infrastructure includes:
+
+- **QuantumSystem base class** with various methods
+- **Factory functions** for Jaynes-Cummings and qubit models  
+- **Time-dependent parameter support** via coefficient integration
+- **Enhanced LaTeX rendering** for Jupyter environments
+- **Comprehensive test suites** ensuring code reliability
+
+This merge validates our architectural decisions and provides the foundation for all future quantum system implementations.
+
+## Documentation and Tutorial Development
+
+### Jaynes-Cummings Tutorial
+
+Following the successful merge, I developed a detailed tutorial demonstrating the quantum systems library in action. [PR #139](https://github.com/qutip/qutip-tutorials/pull/139) in qutip-tutorials provides:
+
+- **Practical usage examples** showing both basic and advanced features
+- **Physics demonstrations** including Rabi oscillations and thermal effects
+- **Comparison with traditional QuTiP approaches** highlighting the library's advantages
+
+The tutorial currently has review feedback that needs addressing, focusing on presentation clarity and physics explanations.
+
+### API & User Guide Documentation
+
+Parallel to the tutorial work, I created API & User documentation via [PR #2746](https://github.com/qutip/qutip/pull/2746). This documentation ensures that the quantum systems library integrates seamlessly with QuTiP's existing documentation framework, providing:
+
+- **API documentation page** with detailed parameter descriptions
+- **User guide page** for example code snippets for common use cases  
+- **Integration with Sphinx** maintaining QuTiP's documentation standards
+
+## Project Status and Final Push
+
+With the core infrastructure merged and documentation pipeline established, the project enters its final phase focused on:
+
+### Immediate Tasks
+- **Address tutorial feedback** to improve clarity and physics explanations
+- **Refine API documentation** based on review comments
+- **Complete spin chain tutorial** following the established pattern
+
+### Nice to have  
+- **Solver integration** enabling direct `QuantumSystem` support in `mesolve`, `sesolve`, and `mcsolve`
+- **Final work product page** summarizing the complete project deliverables
+
+## Reflecting on Progress
+
+The successful merge of PR #2708 represents a transition from development to integration. The quantum systems library is no longer experimental code but part of QuTiP's official development branch, ready for community use and further development.
+
+The documentation and tutorial work ensures that this new functionality is accessible to researchers. The tutorial provides practical guidance for real-world usage, while the API documentation serves as a comprehensive reference.
+
+## Looking Ahead
+
+The final weeks will focus on refinement and completing the integration story. With the core architecture proven and merged, the remaining work involves polishing the user experience and ensuring seamless integration with QuTiP's existing solver ecosystem.
+
+The combination of working code, comprehensive tests, clear documentation, and practical tutorials provides everything needed for a successful project conclusion. The quantum systems library is positioned to serve the QuTiP community as a powerful tool for modeling realistic open quantum systems across diverse physics domains.
+
+Weeks 14 and 15 prove that careful development, thorough testing, and collaborative code review lead to successful software integration. The quantum systems library has evolved from concept to production-ready code integrated into one of quantum physics' most important software libraries.

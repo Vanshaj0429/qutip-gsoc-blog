@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vanshaj Bindal">
+<meta name="dcterms.date" content="2025-09-13">
 
-<title>about – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
+<title>Week 14 &amp; 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline – Google Summer of Code 2025 | QuTiP | NumFOCUS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-27ce6193bbbcbee7b7a723ecaba8e1c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -79,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Google Summer of Code 2025 | QuTiP | NumFOCUS</span>
     </a>
   </div>
@@ -90,15 +92,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -134,62 +136,130 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello">Hello!</a></li>
-  <li><a href="#current-work" id="toc-current-work" class="nav-link" data-scroll-target="#current-work">Current Work</a></li>
-  <li><a href="#interests" id="toc-interests" class="nav-link" data-scroll-target="#interests">Interests</a></li>
-  <li><a href="#technical-skills" id="toc-technical-skills" class="nav-link" data-scroll-target="#technical-skills">Technical Skills</a></li>
-  <li><a href="#education" id="toc-education" class="nav-link" data-scroll-target="#education">Education</a></li>
-  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  <li><a href="#major-milestone-core-infrastructure-merged" id="toc-major-milestone-core-infrastructure-merged" class="nav-link active" data-scroll-target="#major-milestone-core-infrastructure-merged">Major Milestone: Core Infrastructure Merged</a></li>
+  <li><a href="#documentation-and-tutorial-development" id="toc-documentation-and-tutorial-development" class="nav-link" data-scroll-target="#documentation-and-tutorial-development">Documentation and Tutorial Development</a>
+  <ul class="collapse">
+  <li><a href="#jaynes-cummings-tutorial" id="toc-jaynes-cummings-tutorial" class="nav-link" data-scroll-target="#jaynes-cummings-tutorial">Jaynes-Cummings Tutorial</a></li>
+  <li><a href="#api-user-guide-documentation" id="toc-api-user-guide-documentation" class="nav-link" data-scroll-target="#api-user-guide-documentation">API &amp; User Guide Documentation</a></li>
+  </ul></li>
+  <li><a href="#project-status-and-final-push" id="toc-project-status-and-final-push" class="nav-link" data-scroll-target="#project-status-and-final-push">Project Status and Final Push</a>
+  <ul class="collapse">
+  <li><a href="#immediate-tasks" id="toc-immediate-tasks" class="nav-link" data-scroll-target="#immediate-tasks">Immediate Tasks</a></li>
+  <li><a href="#nice-to-have" id="toc-nice-to-have" class="nav-link" data-scroll-target="#nice-to-have">Nice to have</a></li>
+  </ul></li>
+  <li><a href="#reflecting-on-progress" id="toc-reflecting-on-progress" class="nav-link" data-scroll-target="#reflecting-on-progress">Reflecting on Progress</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 14 &amp; 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">GSoC</div>
+    <div class="quarto-category">QuTiP</div>
+    <div class="quarto-category">Milestone</div>
+    <div class="quarto-category">Documentation</div>
+    <div class="quarto-category">Integration</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="hello" class="level2">
-<h2 class="anchored" data-anchor-id="hello">Hello!</h2>
-<p>I’m a physicst with a passion for theoretical physics, quantum information, quantum foundations and recent newfound interest in open source development and the idea of open science. Currently, I’m participating in <strong>Google Summer of Code 2025</strong>, working on developing a comprehensive Hamiltonian Library for QuTiP.</p>
-</section>
-<section id="current-work" class="level2">
-<h2 class="anchored" data-anchor-id="current-work">Current Work</h2>
-<p><strong>Google Summer of Code 2025 Contributor</strong><br>
-<em>May 2025 - Present</em></p>
-<p>Working with NumFOCUS on developing a Hamiltonian Library for QuTiP (Quantum Toolbox in Python). The project aims to create a standardized, comprehensive library of quantum system Hamiltonians to reduce redundant work in the quantum computing research community.</p>
-<p><strong>Key contributions:</strong> - Developing ready-to-use implementations of common quantum systems - Creating standardized APIs for consistency across different models - Implementing JSON serialization for cross-platform compatibility - Adding LaTeX representation capabilities for clear documentation</p>
-</section>
-<section id="interests" class="level2">
-<h2 class="anchored" data-anchor-id="interests">Interests</h2>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vanshaj Bindal </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 13, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Weeks 14 and 15 marked a significant milestone in the GSoC project with the successful merge of our core quantum systems infrastructure and the establishment of comprehensive documentation and tutorial pipelines.</p>
+<section id="major-milestone-core-infrastructure-merged" class="level2">
+<h2 class="anchored" data-anchor-id="major-milestone-core-infrastructure-merged">Major Milestone: Core Infrastructure Merged</h2>
+<p>The biggest achievement was getting <a href="https://github.com/qutip/qutip/pull/2708">PR #2708</a> merged into the <code>dev.qsystem</code> branch. This represents the culmination of months of development, testing, and code review, bringing the foundational <code>QuantumSystem</code> architecture into QuTiP’s codebase.</p>
+<p>The merged infrastructure includes:</p>
 <ul>
-<li><strong>Quantum Computing:</strong> Simulation, algorithms, and practical applications</li>
-<li><strong>Open Source:</strong> Contributing to scientific computing libraries</li>
-<li><strong>Python Development:</strong> Scientific computing, data analysis, and automation</li>
-<li><strong>Research:</strong> Quantum mechanics, numerical methods, and computational physics</li>
+<li><strong>QuantumSystem base class</strong> with various methods</li>
+<li><strong>Factory functions</strong> for Jaynes-Cummings and qubit models<br>
+</li>
+<li><strong>Time-dependent parameter support</strong> via coefficient integration</li>
+<li><strong>Enhanced LaTeX rendering</strong> for Jupyter environments</li>
+<li><strong>Comprehensive test suites</strong> ensuring code reliability</li>
+</ul>
+<p>This merge validates our architectural decisions and provides the foundation for all future quantum system implementations.</p>
+</section>
+<section id="documentation-and-tutorial-development" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-and-tutorial-development">Documentation and Tutorial Development</h2>
+<section id="jaynes-cummings-tutorial" class="level3">
+<h3 class="anchored" data-anchor-id="jaynes-cummings-tutorial">Jaynes-Cummings Tutorial</h3>
+<p>Following the successful merge, I developed a detailed tutorial demonstrating the quantum systems library in action. <a href="https://github.com/qutip/qutip-tutorials/pull/139">PR #139</a> in qutip-tutorials provides:</p>
+<ul>
+<li><strong>Practical usage examples</strong> showing both basic and advanced features</li>
+<li><strong>Physics demonstrations</strong> including Rabi oscillations and thermal effects</li>
+<li><strong>Comparison with traditional QuTiP approaches</strong> highlighting the library’s advantages</li>
+</ul>
+<p>The tutorial currently has review feedback that needs addressing, focusing on presentation clarity and physics explanations.</p>
+</section>
+<section id="api-user-guide-documentation" class="level3">
+<h3 class="anchored" data-anchor-id="api-user-guide-documentation">API &amp; User Guide Documentation</h3>
+<p>Parallel to the tutorial work, I created API &amp; User documentation via <a href="https://github.com/qutip/qutip/pull/2746">PR #2746</a>. This documentation ensures that the quantum systems library integrates seamlessly with QuTiP’s existing documentation framework, providing:</p>
+<ul>
+<li><strong>API documentation page</strong> with detailed parameter descriptions</li>
+<li><strong>User guide page</strong> for example code snippets for common use cases<br>
+</li>
+<li><strong>Integration with Sphinx</strong> maintaining QuTiP’s documentation standards</li>
 </ul>
 </section>
-<section id="technical-skills" class="level2">
-<h2 class="anchored" data-anchor-id="technical-skills">Technical Skills</h2>
+</section>
+<section id="project-status-and-final-push" class="level2">
+<h2 class="anchored" data-anchor-id="project-status-and-final-push">Project Status and Final Push</h2>
+<p>With the core infrastructure merged and documentation pipeline established, the project enters its final phase focused on:</p>
+<section id="immediate-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="immediate-tasks">Immediate Tasks</h3>
 <ul>
-<li><strong>Languages:</strong> Python, Julia</li>
-<li><strong>Quantum Computing:</strong> QuTiP, Qiskit, PennyLane quantum algorithms</li>
-<li><strong>Tools:</strong> Git, GitHub, Jupyter, LaTeX,</li>
-<li><strong>Web Development:</strong> Quarto, GitHub pages</li>
+<li><strong>Address tutorial feedback</strong> to improve clarity and physics explanations</li>
+<li><strong>Refine API documentation</strong> based on review comments</li>
+<li><strong>Complete spin chain tutorial</strong> following the established pattern</li>
 </ul>
 </section>
-<section id="education" class="level2">
-<h2 class="anchored" data-anchor-id="education">Education</h2>
-</section>
-<section id="contact" class="level2">
-<h2 class="anchored" data-anchor-id="contact">Contact</h2>
-<p>Feel free to reach out if you’d like to discuss quantum computing, open source projects, or potential collaborations.</p>
+<section id="nice-to-have" class="level3">
+<h3 class="anchored" data-anchor-id="nice-to-have">Nice to have</h3>
 <ul>
-<li><strong>Email:</strong> vanshajbindal98@gmail.com</li>
-<li><strong>GitHub:</strong> <a href="https://github.com/Vanshaj0429">github.com/Vanshaj0429</a></li>
-<li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vanshaj-bindal-487953244/">linkedin.com/in/vanshaj-bindal</a></li>
+<li><strong>Solver integration</strong> enabling direct <code>QuantumSystem</code> support in <code>mesolve</code>, <code>sesolve</code>, and <code>mcsolve</code></li>
+<li><strong>Final work product page</strong> summarizing the complete project deliverables</li>
 </ul>
-<hr>
+</section>
+</section>
+<section id="reflecting-on-progress" class="level2">
+<h2 class="anchored" data-anchor-id="reflecting-on-progress">Reflecting on Progress</h2>
+<p>The successful merge of PR #2708 represents a transition from development to integration. The quantum systems library is no longer experimental code but part of QuTiP’s official development branch, ready for community use and further development.</p>
+<p>The documentation and tutorial work ensures that this new functionality is accessible to researchers. The tutorial provides practical guidance for real-world usage, while the API documentation serves as a comprehensive reference.</p>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
+<p>The final weeks will focus on refinement and completing the integration story. With the core architecture proven and merged, the remaining work involves polishing the user experience and ensuring seamless integration with QuTiP’s existing solver ecosystem.</p>
+<p>The combination of working code, comprehensive tests, clear documentation, and practical tutorials provides everything needed for a successful project conclusion. The quantum systems library is positioned to serve the QuTiP community as a powerful tool for modeling realistic open quantum systems across diverse physics domains.</p>
+<p>Weeks 14 and 15 prove that careful development, thorough testing, and collaborative code review lead to successful software integration. The quantum systems library has evolved from concept to production-ready code integrated into one of quantum physics’ most important software libraries.</p>
 
 
 </section>

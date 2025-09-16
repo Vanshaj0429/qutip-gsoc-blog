@@ -245,6 +245,104 @@
     "text": "Project Maturation\nThe addition of time-dependent parameters significantly expands the library’s capabilities, while the enhanced LaTeX integration improves the user experience for interactive research.\nThe comprehensive test coverage and ongoing code review process ensure that our quantum systems library meets the quality standards expected of a production scientific library. With the core architecture proven, time dependence implemented, and documentation nearly complete, the project is well positioned for successful integration into QuTiP’s ecosystem.\nThe combination of working code, extensive tests, and comprehensive documentation provides a solid foundation for the quantum systems library that will serve the QuTiP community for years to come."
   },
   {
+    "objectID": "posts/intro/gsoc-2025-selection.html",
+    "href": "posts/intro/gsoc-2025-selection.html",
+    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
+    "section": "",
+    "text": "A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of anticipation…\nI’m thrilled to announce that I’ve been selected as a Google Summer of Code 2025 contributor! 🚀"
+  },
+  {
+    "objectID": "posts/intro/gsoc-2025-selection.html#what-ill-be-working-on",
+    "href": "posts/intro/gsoc-2025-selection.html#what-ill-be-working-on",
+    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
+    "section": "What I’ll Be Working On",
+    "text": "What I’ll Be Working On\nHere’s the problem I’m helping to solve: currently, QuTiP users often need to recreate common quantum system Hamiltonians from scratch, leading to duplicated effort and potential inconsistencies. My project aims to change that by creating a comprehensive library of ready-to-use implementations.\nThe project will include:\n\nReady-to-use quantum system models (Jaynes-Cummings, Rabi, Dicke, and various spin-chain models)\nStandardized APIs for consistency across different quantum models\nJSON serialization for cross-platform compatibility\nTime-dependent parameter support for dynamic quantum systems\nLaTeX representation for clear mathematical documentation\n\nThis will essentially provide researchers with a well-tested, standardized toolkit for quantum simulations, reducing redundant work and improving consistency across the field."
+  },
+  {
+    "objectID": "posts/intro/gsoc-2025-selection.html#looking-forward",
+    "href": "posts/intro/gsoc-2025-selection.html#looking-forward",
+    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
+    "section": "Looking Forward",
+    "text": "Looking Forward\nI’m genuinely excited about this opportunity. The selection process was competitive, and I’m grateful to have been chosen to work on something that will directly benefit the quantum computing and physics research community.\nWhen I first submitted my application, I knew it was a long shot – but I’m glad I took the chance. Now I get to spend the summer contributing to open-source software that actual researchers will use in their work.\nOver the next few months, I’ll be:\n\nDeveloping and testing the core Hamiltonian library components\nLearning deeper aspects of quantum mechanics and numerical methods\nContributing to a project that will be used by researchers worldwide\nDocumenting the entire development process right here on this blog\n\nYou can expect regular updates including technical insights about quantum computing and library development, challenges and solutions encountered during the project, code examples and implementation details, and reflections on contributing to open-source scientific software.\nThis summer promises to be an exciting blend of learning, coding, and contributing to the quantum computing community. Stay tuned!"
+  },
+  {
+    "objectID": "posts/intro/gsoc-2025-selection.html#acknowledgments",
+    "href": "posts/intro/gsoc-2025-selection.html#acknowledgments",
+    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nI want to thank the QuTiP team for this incredible opportunity. The mentorship and support they’ve already provided has been exceptional, and I’m looking forward to working closely with them throughout the summer.\n\nIf you’re interested in quantum computing, open-source development, or just want to follow along with my GSoC journey, feel free to connect. And if you’re a fellow GSoC participant this year, I’d love to hear about your projects too!\n\n\n\n\n\n\nInterested in QuTiP?\n\n\n\nCheck out the QuTiP documentation to learn more about quantum simulations in Python!\n\n\nTags: GSoC2025, QuantumComputing, OpenSource, Python, QuTiP, NumFOCUS,"
+  },
+  {
+    "objectID": "posts/Week-2/week2.html",
+    "href": "posts/Week-2/week2.html",
+    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
+    "section": "",
+    "text": "Week 2 has been all about making crucial project decisions and expanding our understanding of quantum models. From timeline adjustments to repository strategies, plus a deep dive into the Rabi model and its relationship to the Jaynes-Cummings model, this week laid important groundwork for the path ahead."
+  },
+  {
+    "objectID": "posts/Week-2/week2.html#key-project-decisions-june-12th-meeting",
+    "href": "posts/Week-2/week2.html#key-project-decisions-june-12th-meeting",
+    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
+    "section": "Key Project Decisions (June 12th Meeting)",
+    "text": "Key Project Decisions (June 12th Meeting)\nOur Thursday meeting with Eric, Alex, Neill, and myself covered several pivotal decisions that will shape the project’s trajectory:\n\nTimeline Extension Request\nOne of the most significant developments was the decision to request a timeline extension from 12 to 16 weeks. Alex will be reaching out to NumFOCUS to make this request official. This extension is particularly valuable given that I have summer schools scheduled for June 15-20 and August 18-September 5, which will impact my availability during those periods.\nThe extra 4 weeks will allow for:\n\nMore thorough development and testing of the quantum systems library\nBetter integration with QuTiP core\nComprehensive documentation and examples\nBuffer time for unexpected challenges (like the JSON serialization complexities we discussed)\n\n\n\nJSON Format: Parking the Complexity\nAfter extensive discussion, the team decided to park the agnostic format (JSON) requirement for now. As noted in the meeting, “not everyone is convinced of the value for this” and “it is not necessary to get started.” This is actually a relief, it allows us to focus on building solid, functional quantum systems first, and we can always add serialization capabilities later if there’s demand.\nThis decision simplifies the immediate development path significantly and lets us concentrate on the core physics and software architecture.\n\n\nRepository Strategy: Staying in QuTiP Core\nEric raised an important concern about separate repositories potentially not being maintained long term. The solution? We’ll develop directly in QuTiP core, within a new quantum_systems folder. Eric will create a development branch called dev.qsystem, and I’ll be pushing commits and PRs to this branch for testing and review.\nThis approach has several advantages:\n\nEnsures long term maintenance and integration\nMakes collaboration with the QuTiP team seamless\nProvides immediate access to QuTiP’s existing infrastructure\nFacilitates testing with the broader QuTiP ecosystem\n\n\n\nDesign Philosophy: Functions Creating Objects\nThe architectural direction became clearer this week. The main module will contain functions that create structured objects for quantum systems. I’ll be sharing a Jaynes-Cummings example for team review, which will serve as the template for other quantum models.\nThis function based approach strikes a nice balance between usability and structure, users get simple function calls, but the underlying system maintains proper object-oriented design for extensibility."
+  },
+  {
+    "objectID": "posts/Week-2/week2.html#exploring-the-rabi-model-beyond-the-rotating-wave-approximation",
+    "href": "posts/Week-2/week2.html#exploring-the-rabi-model-beyond-the-rotating-wave-approximation",
+    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
+    "section": "Exploring the Rabi Model: Beyond the Rotating Wave Approximation",
+    "text": "Exploring the Rabi Model: Beyond the Rotating Wave Approximation\nWhile working on the Jaynes-Cummings implementation, I’ve been diving deep into the Rabi model, which provides fascinating insights into the fundamental atom-field interaction without approximations.\n\nThe Physics Connection\nThe Rabi model is essentially the “parent” of the Jaynes-Cummings model. Where JCM uses the rotating wave approximation to simplify the math, the Rabi model keeps all terms in the interaction:\nRabi Model Hamiltonian: H_{Rabi} = \\omega_c a^\\dagger a + \\frac{\\omega_a}{2} \\sigma_z + g(a^\\dagger + a)(\\sigma_+ + \\sigma_-)\nJaynes-Cummings Model (with RWA): H_{JC} = \\omega_c a^\\dagger a + \\frac{\\omega_a}{2} \\sigma_z + g(a^\\dagger \\sigma_- + a \\sigma_+)\nThe key difference is that the Rabi model includes the “counter-rotating” terms a^\\dagger \\sigma_+ and a \\sigma_-, which represent processes that don’t conserve energy (creating a photon while exciting the atom, or destroying a photon while de-exciting the atom).\n\n\nWhen Does the Difference Matter?\nThe rotating wave approximation is valid when g \\ll \\omega_c, \\omega_a, meaning the coupling is much weaker than the characteristic frequencies. But in several important scenarios, the Rabi model becomes essential:\n\nStrong Coupling Regime: When g approaches \\omega_c or \\omega_a\nCircuit QED: Superconducting qubits in microwave cavities often reach strong coupling\nUltrastrong Coupling: Some systems achieve g/\\omega &gt; 0.1, where the RWA completely breaks down\n\n\n\nCollapse Operators for the Rabi Model\nFor the complete open system description, the Rabi model uses the same dissipation mechanisms as JCM:\n\nCavity decay: C_1 = \\sqrt{\\kappa (1 + n)} a\nAtomic decay: C_2 = \\sqrt{\\gamma} \\sigma_-\nAtomic dephasing: C_3 = \\sqrt{\\gamma_\\phi} \\sigma_z\n\nThe master equation structure remains the same, but the Hamiltonian evolution includes the additional oscillating terms that can lead to richer dynamics.\n\n\nImplementation Considerations\nIncluding both Rabi and Jaynes-Cummings models in our library provides users with:\n\nJCM: Fast, well understood dynamics for weak coupling\nRabi: Accurate physics for strong coupling regimes\nEducational value: Direct comparison of approximations vs exact models\nResearch flexibility: Users can easily switch between models\n\nThe parameter sets are nearly identical, making it easy to implement both and let users choose based on their specific regime of interest."
+  },
+  {
+    "objectID": "posts/Week-2/week2.html#development-progress-and-next-steps",
+    "href": "posts/Week-2/week2.html#development-progress-and-next-steps",
+    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
+    "section": "Development Progress and Next Steps",
+    "text": "Development Progress and Next Steps\nThis week’s practical work included:\n\nSetting up the development environment for working with QuTiP core\nBeginning the Jaynes-Cummings implementation that will serve as our template\nResearching the Rabi model as our second quantum system\n\nWeek 3: I am in Paris for a summer school so will not be working actively on the project.\n\nWeek 4 Goals\nThe coming week will focus on:\n\nGetting the development branch set up and testing the workflow\nFinalizing the Jaynes-Cummings implementation\nStarting the Rabi model implementation\nCreating clear documentation and examples\nTesting integration with QuTiP’s existing functionality"
+  },
+  {
+    "objectID": "posts/Week-2/week2.html#reflections",
+    "href": "posts/Week-2/week2.html#reflections",
+    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
+    "section": "Reflections",
+    "text": "Reflections\nThis week felt like a turning point where the project crystallized from abstract planning into concrete development. The decision to park JSON serialization removes a major complexity, while the timeline extension provides breathing room for quality implementation.\nThe repository decision to stay within QuTiP core is particularly exciting, it means our work will have immediate access to the full QuTiP ecosystem and a clear path to long term maintenance.\nDiving into the Rabi model has also been intellectually rewarding. Understanding how it relates to the Jaynes-Cummings model provides a perfect example of why having a comprehensive quantum systems library matters, researchers need easy access to both approximate and exact models depending on their specific use case.\n\nNext week: Branch setup, first PR submissions, and implementing the Rabi model alongside our JCM template."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html",
+    "href": "posts/Week-4/week4.html",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "",
+    "text": "After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#design-template-dilemma",
+    "href": "posts/Week-4/week4.html#design-template-dilemma",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Design Template Dilemma",
+    "text": "Design Template Dilemma\nOne of the main challenges this week was settling on how to structure the code. I found myself wrestling with a fundamental question: should we use a modular approach with separate functions for different components, or a unified function that returns everything at once?\nThis led me to develop two different iterations of the JC model implementation, each representing a different philosophy:\n\nIteration 1: Modular Design Pattern\nThe first approach breaks down the quantum system into distinct, reusable components:\ndef build_jc_operators(n_cavity: int)\ndef build_jc_hamiltonian(n_cavity, omega_c, omega_a, g, rotating_wave, operators)\ndef build_jc_collapse_operators(operators, cavity_decay, atomic_decay, atomic_dephasing, thermal_noise)\ndef jc_latex_representation(rotating_wave)\nThis modular approach offers several advantages:\n\nFlexibility: Users can call individual functions if they only need specific components\nClarity: Each function has a single, well defined responsibility\nDebugging: Easier to test and debug individual components\n\n\n\nIteration 2: Unified Function Design\nThe second approach consolidates everything into a single function:\ndef jaynes_cummings_model(n_cavity, omega_c, omega_a, g, rotating_wave,\n                        cavity_decay, atomic_decay, atomic_dephasing, thermal_noise):\n   # Returns: operators, hamiltonian, c_ops, latex\nThis unified approach provides:\n\nSimplicity: One function call gets you everything\nConsistency: All components are guaranteed to be compatible\nConvenience: Perfect for users who want the complete system\nLess overhead: No need to pass operators between functions"
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#implementation-details-and-design-choices",
+    "href": "posts/Week-4/week4.html#implementation-details-and-design-choices",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Implementation Details and Design Choices",
+    "text": "Implementation Details and Design Choices\nMost of my time this week was spent ensuring the correctness of the quantum mechanical implementations across both design patterns. Here are the key aspects I focused on:\n\nOperator Construction\nThe fundamental operators form the building blocks of any quantum system. For the JC model, I implemented:\n\nCavity operators: Photon creation/annihilation (a, a_dag) and number operator (n_c)\nAtomic operators: Pauli matrices and raising/lowering operators (sigma_plus, sigma_minus, sigma_z, sigma_x, sigma_y)\n\nEach operator is properly tensorized to work in the combined cavity-atom Hilbert space, which was crucial to get right.\n\n\nParameter Choices and Flexibility\nAfter considerable thought, I settled on the following parameter set for the JC model:\nSystem Parameters:\n\nn_cavity: Hilbert space truncation (default: 10)\nomega_c: Cavity frequency (default: 1.0)\nomega_a: Atomic frequency (default: 1.0)\ng: Coupling strength (default: 0.1)\nrotating_wave: Boolean flag for RWA vs full Rabi model (default: True)\n\nDissipation Parameters:\n\ncavity_decay: Photon leakage rate κ (default: 0.0)\natomic_decay: Spontaneous emission rate γ (default: 0.0)\natomic_dephasing: Pure dephasing rate γ_φ (default: 0.0)\nthermal_noise: Tuple (n_th, kappa) for thermal effects (default: None)\n\nThese defaults provide sensible starting points while allowing full customization for specific research needs.\n\n\nThermal Noise Implementation\nOne interesting aspect was implementing thermal noise correctly. When the cavity is coupled to a thermal bath at finite temperature, we need both absorption and emission processes:\n\nThermal absorption: Rate ∝ κ × n_th (creating photons)\nStimulated emission: Rate ∝ κ × (n_th + 1) (destroying photons)\n\nThis required careful handling of the thermal photon number n_th and the cavity decay rate.\n\n\nThe Driving Term Decision\nAn important design choice was how to handle external driving fields. Rather than building driving terms directly into our functions, I decided to keep them external. This means users can add driving terms right before when setting up their time evolution:\n# Our function provides the base system\nops, H0, c_ops, latex = jaynes_cummings_model(...)\n\n# Users add driving externally  \nH_drive = lambda t, args: driving_amplitude * (ops['a'] * np.exp(-1j * drive_freq * t) + ops['a_dag'] * np.exp(1j * drive_freq * t))\nH_total = H0 + H_drive\nThis approach maintains simplicity in our core functions while providing maximum flexibility for time-dependent problems."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#reflections-on-design-philosophy",
+    "href": "posts/Week-4/week4.html#reflections-on-design-philosophy",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Reflections on Design Philosophy",
+    "text": "Reflections on Design Philosophy\nWorking through both implementation approaches this week has been enlightening. The modular design feels more “software engineering appropriate”, it’s extensible, testable, and follows good separation of concerns. However, the unified approach might be more user friendly for researchers who just want to get a complete quantum system quickly.\nThis tension between software engineering best practices and user convenience is something we’ll likely revisit as we implement more quantum models. The good news is that both approaches are viable, and we can potentially support both patterns depending on user needs."
+  },
+  {
+    "objectID": "posts/Week-4/week4.html#looking-ahead",
+    "href": "posts/Week-4/week4.html#looking-ahead",
+    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWeek 5 will focus on:\n\nGetting team feedback on both implementation approaches\nRefining the chosen design pattern based on mentor input\nBeginning implementation of the Rabi model (non-RWA version)\nAdding comprehensive documentation and examples\nTesting integration with QuTiP’s master equation solvers\n\nThe foundation is now in place, and having working code makes everything feel much more concrete. The next phase will be about refinement, expansion, and ensuring our design choices scale well to other quantum systems."
+  },
+  {
     "objectID": "posts/Week-5/week5.html",
     "href": "posts/Week-5/week5.html",
     "title": "Week 5: Object-Oriented Architecture - Building the QuantumSystem Class",
@@ -322,102 +420,46 @@
     "text": "Reflections on Architecture Evolution\nThis week has been fascinating from a software design perspective. We’ve moved from “functions that build quantum systems” to “quantum systems that are objects.” This shift brings several benefits:\n\nConsistency: Every quantum model follows the same interface\nExtensibility: Adding new models becomes straightforward\nIntegration: QuTiP solvers can work seamlessly with any quantum system\nMaintainability: Clear separation of concerns and responsibilities\n\nThe object-oriented approach also aligns perfectly with how physicists think about quantum systems, as entities with specific properties and behaviors rather than just collections of mathematical operators."
   },
   {
-    "objectID": "posts/Week-4/week4.html",
-    "href": "posts/Week-4/week4.html",
-    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "objectID": "posts/Week-13/week13.html",
+    "href": "posts/Week-13/week13.html",
+    "title": "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline",
     "section": "",
-    "text": "After a brief pause for the summer school in Paris during Week 3, Week 4 has been all about getting hands dirty with actual code implementation. This week marked the transition from theoretical planning to concrete software development, with the first working implementation of the Jaynes-Cummings model taking shape."
+    "text": "Weeks 14 and 15 marked a significant milestone in the GSoC project with the successful merge of our core quantum systems infrastructure and the establishment of comprehensive documentation and tutorial pipelines."
   },
   {
-    "objectID": "posts/Week-4/week4.html#design-template-dilemma",
-    "href": "posts/Week-4/week4.html#design-template-dilemma",
-    "title": "Week 4: First Code Implementation - Code Structure and Development",
-    "section": "Design Template Dilemma",
-    "text": "Design Template Dilemma\nOne of the main challenges this week was settling on how to structure the code. I found myself wrestling with a fundamental question: should we use a modular approach with separate functions for different components, or a unified function that returns everything at once?\nThis led me to develop two different iterations of the JC model implementation, each representing a different philosophy:\n\nIteration 1: Modular Design Pattern\nThe first approach breaks down the quantum system into distinct, reusable components:\ndef build_jc_operators(n_cavity: int)\ndef build_jc_hamiltonian(n_cavity, omega_c, omega_a, g, rotating_wave, operators)\ndef build_jc_collapse_operators(operators, cavity_decay, atomic_decay, atomic_dephasing, thermal_noise)\ndef jc_latex_representation(rotating_wave)\nThis modular approach offers several advantages:\n\nFlexibility: Users can call individual functions if they only need specific components\nClarity: Each function has a single, well defined responsibility\nDebugging: Easier to test and debug individual components\n\n\n\nIteration 2: Unified Function Design\nThe second approach consolidates everything into a single function:\ndef jaynes_cummings_model(n_cavity, omega_c, omega_a, g, rotating_wave,\n                        cavity_decay, atomic_decay, atomic_dephasing, thermal_noise):\n   # Returns: operators, hamiltonian, c_ops, latex\nThis unified approach provides:\n\nSimplicity: One function call gets you everything\nConsistency: All components are guaranteed to be compatible\nConvenience: Perfect for users who want the complete system\nLess overhead: No need to pass operators between functions"
+    "objectID": "posts/Week-13/week13.html#major-milestone-core-infrastructure-merged",
+    "href": "posts/Week-13/week13.html#major-milestone-core-infrastructure-merged",
+    "title": "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline",
+    "section": "Major Milestone: Core Infrastructure Merged",
+    "text": "Major Milestone: Core Infrastructure Merged\nThe biggest achievement was getting PR #2708 merged into the dev.qsystem branch. This represents the culmination of months of development, testing, and code review, bringing the foundational QuantumSystem architecture into QuTiP’s codebase.\nThe merged infrastructure includes:\n\nQuantumSystem base class with various methods\nFactory functions for Jaynes-Cummings and qubit models\n\nTime-dependent parameter support via coefficient integration\nEnhanced LaTeX rendering for Jupyter environments\nComprehensive test suites ensuring code reliability\n\nThis merge validates our architectural decisions and provides the foundation for all future quantum system implementations."
   },
   {
-    "objectID": "posts/Week-4/week4.html#implementation-details-and-design-choices",
-    "href": "posts/Week-4/week4.html#implementation-details-and-design-choices",
-    "title": "Week 4: First Code Implementation - Code Structure and Development",
-    "section": "Implementation Details and Design Choices",
-    "text": "Implementation Details and Design Choices\nMost of my time this week was spent ensuring the correctness of the quantum mechanical implementations across both design patterns. Here are the key aspects I focused on:\n\nOperator Construction\nThe fundamental operators form the building blocks of any quantum system. For the JC model, I implemented:\n\nCavity operators: Photon creation/annihilation (a, a_dag) and number operator (n_c)\nAtomic operators: Pauli matrices and raising/lowering operators (sigma_plus, sigma_minus, sigma_z, sigma_x, sigma_y)\n\nEach operator is properly tensorized to work in the combined cavity-atom Hilbert space, which was crucial to get right.\n\n\nParameter Choices and Flexibility\nAfter considerable thought, I settled on the following parameter set for the JC model:\nSystem Parameters:\n\nn_cavity: Hilbert space truncation (default: 10)\nomega_c: Cavity frequency (default: 1.0)\nomega_a: Atomic frequency (default: 1.0)\ng: Coupling strength (default: 0.1)\nrotating_wave: Boolean flag for RWA vs full Rabi model (default: True)\n\nDissipation Parameters:\n\ncavity_decay: Photon leakage rate κ (default: 0.0)\natomic_decay: Spontaneous emission rate γ (default: 0.0)\natomic_dephasing: Pure dephasing rate γ_φ (default: 0.0)\nthermal_noise: Tuple (n_th, kappa) for thermal effects (default: None)\n\nThese defaults provide sensible starting points while allowing full customization for specific research needs.\n\n\nThermal Noise Implementation\nOne interesting aspect was implementing thermal noise correctly. When the cavity is coupled to a thermal bath at finite temperature, we need both absorption and emission processes:\n\nThermal absorption: Rate ∝ κ × n_th (creating photons)\nStimulated emission: Rate ∝ κ × (n_th + 1) (destroying photons)\n\nThis required careful handling of the thermal photon number n_th and the cavity decay rate.\n\n\nThe Driving Term Decision\nAn important design choice was how to handle external driving fields. Rather than building driving terms directly into our functions, I decided to keep them external. This means users can add driving terms right before when setting up their time evolution:\n# Our function provides the base system\nops, H0, c_ops, latex = jaynes_cummings_model(...)\n\n# Users add driving externally  \nH_drive = lambda t, args: driving_amplitude * (ops['a'] * np.exp(-1j * drive_freq * t) + ops['a_dag'] * np.exp(1j * drive_freq * t))\nH_total = H0 + H_drive\nThis approach maintains simplicity in our core functions while providing maximum flexibility for time-dependent problems."
+    "objectID": "posts/Week-13/week13.html#documentation-and-tutorial-development",
+    "href": "posts/Week-13/week13.html#documentation-and-tutorial-development",
+    "title": "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline",
+    "section": "Documentation and Tutorial Development",
+    "text": "Documentation and Tutorial Development\n\nJaynes-Cummings Tutorial\nFollowing the successful merge, I developed a detailed tutorial demonstrating the quantum systems library in action. PR #139 in qutip-tutorials provides:\n\nPractical usage examples showing both basic and advanced features\nPhysics demonstrations including Rabi oscillations and thermal effects\nComparison with traditional QuTiP approaches highlighting the library’s advantages\n\nThe tutorial currently has review feedback that needs addressing, focusing on presentation clarity and physics explanations.\n\n\nAPI & User Guide Documentation\nParallel to the tutorial work, I created API & User documentation via PR #2746. This documentation ensures that the quantum systems library integrates seamlessly with QuTiP’s existing documentation framework, providing:\n\nAPI documentation page with detailed parameter descriptions\nUser guide page for example code snippets for common use cases\n\nIntegration with Sphinx maintaining QuTiP’s documentation standards"
   },
   {
-    "objectID": "posts/Week-4/week4.html#reflections-on-design-philosophy",
-    "href": "posts/Week-4/week4.html#reflections-on-design-philosophy",
-    "title": "Week 4: First Code Implementation - Code Structure and Development",
-    "section": "Reflections on Design Philosophy",
-    "text": "Reflections on Design Philosophy\nWorking through both implementation approaches this week has been enlightening. The modular design feels more “software engineering appropriate”, it’s extensible, testable, and follows good separation of concerns. However, the unified approach might be more user friendly for researchers who just want to get a complete quantum system quickly.\nThis tension between software engineering best practices and user convenience is something we’ll likely revisit as we implement more quantum models. The good news is that both approaches are viable, and we can potentially support both patterns depending on user needs."
+    "objectID": "posts/Week-13/week13.html#project-status-and-final-push",
+    "href": "posts/Week-13/week13.html#project-status-and-final-push",
+    "title": "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline",
+    "section": "Project Status and Final Push",
+    "text": "Project Status and Final Push\nWith the core infrastructure merged and documentation pipeline established, the project enters its final phase focused on:\n\nImmediate Tasks\n\nAddress tutorial feedback to improve clarity and physics explanations\nRefine API documentation based on review comments\nComplete spin chain tutorial following the established pattern\n\n\n\nNice to have\n\nSolver integration enabling direct QuantumSystem support in mesolve, sesolve, and mcsolve\nFinal work product page summarizing the complete project deliverables"
   },
   {
-    "objectID": "posts/Week-4/week4.html#looking-ahead",
-    "href": "posts/Week-4/week4.html#looking-ahead",
-    "title": "Week 4: First Code Implementation - Code Structure and Development",
+    "objectID": "posts/Week-13/week13.html#reflecting-on-progress",
+    "href": "posts/Week-13/week13.html#reflecting-on-progress",
+    "title": "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline",
+    "section": "Reflecting on Progress",
+    "text": "Reflecting on Progress\nThe successful merge of PR #2708 represents a transition from development to integration. The quantum systems library is no longer experimental code but part of QuTiP’s official development branch, ready for community use and further development.\nThe documentation and tutorial work ensures that this new functionality is accessible to researchers. The tutorial provides practical guidance for real-world usage, while the API documentation serves as a comprehensive reference."
+  },
+  {
+    "objectID": "posts/Week-13/week13.html#looking-ahead",
+    "href": "posts/Week-13/week13.html#looking-ahead",
+    "title": "Week 14 & 15: Major Milestone - Core Infrastructure Merged and Documentation Pipeline",
     "section": "Looking Ahead",
-    "text": "Looking Ahead\nWeek 5 will focus on:\n\nGetting team feedback on both implementation approaches\nRefining the chosen design pattern based on mentor input\nBeginning implementation of the Rabi model (non-RWA version)\nAdding comprehensive documentation and examples\nTesting integration with QuTiP’s master equation solvers\n\nThe foundation is now in place, and having working code makes everything feel much more concrete. The next phase will be about refinement, expansion, and ensuring our design choices scale well to other quantum systems."
-  },
-  {
-    "objectID": "posts/Week-2/week2.html",
-    "href": "posts/Week-2/week2.html",
-    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
-    "section": "",
-    "text": "Week 2 has been all about making crucial project decisions and expanding our understanding of quantum models. From timeline adjustments to repository strategies, plus a deep dive into the Rabi model and its relationship to the Jaynes-Cummings model, this week laid important groundwork for the path ahead."
-  },
-  {
-    "objectID": "posts/Week-2/week2.html#key-project-decisions-june-12th-meeting",
-    "href": "posts/Week-2/week2.html#key-project-decisions-june-12th-meeting",
-    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
-    "section": "Key Project Decisions (June 12th Meeting)",
-    "text": "Key Project Decisions (June 12th Meeting)\nOur Thursday meeting with Eric, Alex, Neill, and myself covered several pivotal decisions that will shape the project’s trajectory:\n\nTimeline Extension Request\nOne of the most significant developments was the decision to request a timeline extension from 12 to 16 weeks. Alex will be reaching out to NumFOCUS to make this request official. This extension is particularly valuable given that I have summer schools scheduled for June 15-20 and August 18-September 5, which will impact my availability during those periods.\nThe extra 4 weeks will allow for:\n\nMore thorough development and testing of the quantum systems library\nBetter integration with QuTiP core\nComprehensive documentation and examples\nBuffer time for unexpected challenges (like the JSON serialization complexities we discussed)\n\n\n\nJSON Format: Parking the Complexity\nAfter extensive discussion, the team decided to park the agnostic format (JSON) requirement for now. As noted in the meeting, “not everyone is convinced of the value for this” and “it is not necessary to get started.” This is actually a relief, it allows us to focus on building solid, functional quantum systems first, and we can always add serialization capabilities later if there’s demand.\nThis decision simplifies the immediate development path significantly and lets us concentrate on the core physics and software architecture.\n\n\nRepository Strategy: Staying in QuTiP Core\nEric raised an important concern about separate repositories potentially not being maintained long term. The solution? We’ll develop directly in QuTiP core, within a new quantum_systems folder. Eric will create a development branch called dev.qsystem, and I’ll be pushing commits and PRs to this branch for testing and review.\nThis approach has several advantages:\n\nEnsures long term maintenance and integration\nMakes collaboration with the QuTiP team seamless\nProvides immediate access to QuTiP’s existing infrastructure\nFacilitates testing with the broader QuTiP ecosystem\n\n\n\nDesign Philosophy: Functions Creating Objects\nThe architectural direction became clearer this week. The main module will contain functions that create structured objects for quantum systems. I’ll be sharing a Jaynes-Cummings example for team review, which will serve as the template for other quantum models.\nThis function based approach strikes a nice balance between usability and structure, users get simple function calls, but the underlying system maintains proper object-oriented design for extensibility."
-  },
-  {
-    "objectID": "posts/Week-2/week2.html#exploring-the-rabi-model-beyond-the-rotating-wave-approximation",
-    "href": "posts/Week-2/week2.html#exploring-the-rabi-model-beyond-the-rotating-wave-approximation",
-    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
-    "section": "Exploring the Rabi Model: Beyond the Rotating Wave Approximation",
-    "text": "Exploring the Rabi Model: Beyond the Rotating Wave Approximation\nWhile working on the Jaynes-Cummings implementation, I’ve been diving deep into the Rabi model, which provides fascinating insights into the fundamental atom-field interaction without approximations.\n\nThe Physics Connection\nThe Rabi model is essentially the “parent” of the Jaynes-Cummings model. Where JCM uses the rotating wave approximation to simplify the math, the Rabi model keeps all terms in the interaction:\nRabi Model Hamiltonian: H_{Rabi} = \\omega_c a^\\dagger a + \\frac{\\omega_a}{2} \\sigma_z + g(a^\\dagger + a)(\\sigma_+ + \\sigma_-)\nJaynes-Cummings Model (with RWA): H_{JC} = \\omega_c a^\\dagger a + \\frac{\\omega_a}{2} \\sigma_z + g(a^\\dagger \\sigma_- + a \\sigma_+)\nThe key difference is that the Rabi model includes the “counter-rotating” terms a^\\dagger \\sigma_+ and a \\sigma_-, which represent processes that don’t conserve energy (creating a photon while exciting the atom, or destroying a photon while de-exciting the atom).\n\n\nWhen Does the Difference Matter?\nThe rotating wave approximation is valid when g \\ll \\omega_c, \\omega_a, meaning the coupling is much weaker than the characteristic frequencies. But in several important scenarios, the Rabi model becomes essential:\n\nStrong Coupling Regime: When g approaches \\omega_c or \\omega_a\nCircuit QED: Superconducting qubits in microwave cavities often reach strong coupling\nUltrastrong Coupling: Some systems achieve g/\\omega &gt; 0.1, where the RWA completely breaks down\n\n\n\nCollapse Operators for the Rabi Model\nFor the complete open system description, the Rabi model uses the same dissipation mechanisms as JCM:\n\nCavity decay: C_1 = \\sqrt{\\kappa (1 + n)} a\nAtomic decay: C_2 = \\sqrt{\\gamma} \\sigma_-\nAtomic dephasing: C_3 = \\sqrt{\\gamma_\\phi} \\sigma_z\n\nThe master equation structure remains the same, but the Hamiltonian evolution includes the additional oscillating terms that can lead to richer dynamics.\n\n\nImplementation Considerations\nIncluding both Rabi and Jaynes-Cummings models in our library provides users with:\n\nJCM: Fast, well understood dynamics for weak coupling\nRabi: Accurate physics for strong coupling regimes\nEducational value: Direct comparison of approximations vs exact models\nResearch flexibility: Users can easily switch between models\n\nThe parameter sets are nearly identical, making it easy to implement both and let users choose based on their specific regime of interest."
-  },
-  {
-    "objectID": "posts/Week-2/week2.html#development-progress-and-next-steps",
-    "href": "posts/Week-2/week2.html#development-progress-and-next-steps",
-    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
-    "section": "Development Progress and Next Steps",
-    "text": "Development Progress and Next Steps\nThis week’s practical work included:\n\nSetting up the development environment for working with QuTiP core\nBeginning the Jaynes-Cummings implementation that will serve as our template\nResearching the Rabi model as our second quantum system\n\nWeek 3: I am in Paris for a summer school so will not be working actively on the project.\n\nWeek 4 Goals\nThe coming week will focus on:\n\nGetting the development branch set up and testing the workflow\nFinalizing the Jaynes-Cummings implementation\nStarting the Rabi model implementation\nCreating clear documentation and examples\nTesting integration with QuTiP’s existing functionality"
-  },
-  {
-    "objectID": "posts/Week-2/week2.html#reflections",
-    "href": "posts/Week-2/week2.html#reflections",
-    "title": "Week 2: Project Pivots, Repository Decisions, and Exploring the Rabi Model",
-    "section": "Reflections",
-    "text": "Reflections\nThis week felt like a turning point where the project crystallized from abstract planning into concrete development. The decision to park JSON serialization removes a major complexity, while the timeline extension provides breathing room for quality implementation.\nThe repository decision to stay within QuTiP core is particularly exciting, it means our work will have immediate access to the full QuTiP ecosystem and a clear path to long term maintenance.\nDiving into the Rabi model has also been intellectually rewarding. Understanding how it relates to the Jaynes-Cummings model provides a perfect example of why having a comprehensive quantum systems library matters, researchers need easy access to both approximate and exact models depending on their specific use case.\n\nNext week: Branch setup, first PR submissions, and implementing the Rabi model alongside our JCM template."
-  },
-  {
-    "objectID": "posts/intro/gsoc-2025-selection.html",
-    "href": "posts/intro/gsoc-2025-selection.html",
-    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
-    "section": "",
-    "text": "A few months ago, I decided to apply for Google Summer of Code, hoping to contribute to an open-source project that would challenge me and make a real impact. After weeks of anticipation…\nI’m thrilled to announce that I’ve been selected as a Google Summer of Code 2025 contributor! 🚀"
-  },
-  {
-    "objectID": "posts/intro/gsoc-2025-selection.html#what-ill-be-working-on",
-    "href": "posts/intro/gsoc-2025-selection.html#what-ill-be-working-on",
-    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
-    "section": "What I’ll Be Working On",
-    "text": "What I’ll Be Working On\nHere’s the problem I’m helping to solve: currently, QuTiP users often need to recreate common quantum system Hamiltonians from scratch, leading to duplicated effort and potential inconsistencies. My project aims to change that by creating a comprehensive library of ready-to-use implementations.\nThe project will include:\n\nReady-to-use quantum system models (Jaynes-Cummings, Rabi, Dicke, and various spin-chain models)\nStandardized APIs for consistency across different quantum models\nJSON serialization for cross-platform compatibility\nTime-dependent parameter support for dynamic quantum systems\nLaTeX representation for clear mathematical documentation\n\nThis will essentially provide researchers with a well-tested, standardized toolkit for quantum simulations, reducing redundant work and improving consistency across the field."
-  },
-  {
-    "objectID": "posts/intro/gsoc-2025-selection.html#looking-forward",
-    "href": "posts/intro/gsoc-2025-selection.html#looking-forward",
-    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
-    "section": "Looking Forward",
-    "text": "Looking Forward\nI’m genuinely excited about this opportunity. The selection process was competitive, and I’m grateful to have been chosen to work on something that will directly benefit the quantum computing and physics research community.\nWhen I first submitted my application, I knew it was a long shot – but I’m glad I took the chance. Now I get to spend the summer contributing to open-source software that actual researchers will use in their work.\nOver the next few months, I’ll be:\n\nDeveloping and testing the core Hamiltonian library components\nLearning deeper aspects of quantum mechanics and numerical methods\nContributing to a project that will be used by researchers worldwide\nDocumenting the entire development process right here on this blog\n\nYou can expect regular updates including technical insights about quantum computing and library development, challenges and solutions encountered during the project, code examples and implementation details, and reflections on contributing to open-source scientific software.\nThis summer promises to be an exciting blend of learning, coding, and contributing to the quantum computing community. Stay tuned!"
-  },
-  {
-    "objectID": "posts/intro/gsoc-2025-selection.html#acknowledgments",
-    "href": "posts/intro/gsoc-2025-selection.html#acknowledgments",
-    "title": "Exciting News: I’m Joining Google Summer of Code 2025!",
-    "section": "Acknowledgments",
-    "text": "Acknowledgments\nI want to thank the QuTiP team for this incredible opportunity. The mentorship and support they’ve already provided has been exceptional, and I’m looking forward to working closely with them throughout the summer.\n\nIf you’re interested in quantum computing, open-source development, or just want to follow along with my GSoC journey, feel free to connect. And if you’re a fellow GSoC participant this year, I’d love to hear about your projects too!\n\n\n\n\n\n\nInterested in QuTiP?\n\n\n\nCheck out the QuTiP documentation to learn more about quantum simulations in Python!\n\n\nTags: GSoC2025, QuantumComputing, OpenSource, Python, QuTiP, NumFOCUS,"
+    "text": "Looking Ahead\nThe final weeks will focus on refinement and completing the integration story. With the core architecture proven and merged, the remaining work involves polishing the user experience and ensuring seamless integration with QuTiP’s existing solver ecosystem.\nThe combination of working code, comprehensive tests, clear documentation, and practical tutorials provides everything needed for a successful project conclusion. The quantum systems library is positioned to serve the QuTiP community as a powerful tool for modeling realistic open quantum systems across diverse physics domains.\nWeeks 14 and 15 prove that careful development, thorough testing, and collaborative code review lead to successful software integration. The quantum systems library has evolved from concept to production-ready code integrated into one of quantum physics’ most important software libraries."
   },
   {
     "objectID": "posts/Week-9/week9.html",
@@ -627,14 +669,14 @@
     "href": "about.html",
     "title": "Google Summer of Code 2025 | QuTiP | NumFOCUS",
     "section": "",
-    "text": "I’m a physicst with a passion for quantum computing and open-source software. Currently, I’m participating in Google Summer of Code 2025, working on developing a comprehensive Hamiltonian Library for QuTiP."
+    "text": "I’m a physicst with a passion for theoretical physics, quantum information, quantum foundations and recent newfound interest in open source development and the idea of open science. Currently, I’m participating in Google Summer of Code 2025, working on developing a comprehensive Hamiltonian Library for QuTiP."
   },
   {
     "objectID": "about.html#hello",
     "href": "about.html#hello",
     "title": "Google Summer of Code 2025 | QuTiP | NumFOCUS",
     "section": "",
-    "text": "I’m a physicst with a passion for quantum computing and open-source software. Currently, I’m participating in Google Summer of Code 2025, working on developing a comprehensive Hamiltonian Library for QuTiP."
+    "text": "I’m a physicst with a passion for theoretical physics, quantum information, quantum foundations and recent newfound interest in open source development and the idea of open science. Currently, I’m participating in Google Summer of Code 2025, working on developing a comprehensive Hamiltonian Library for QuTiP."
   },
   {
     "objectID": "about.html#current-work",
@@ -655,7 +697,7 @@
     "href": "about.html#technical-skills",
     "title": "Google Summer of Code 2025 | QuTiP | NumFOCUS",
     "section": "Technical Skills",
-    "text": "Technical Skills\n\nLanguages: Python, Julia\nQuantum Computing: QuTiP, Qiskit, quantum algorithms\nTools: Git, GitHub, Jupyter, LaTeX,\nWeb Development: Quarto"
+    "text": "Technical Skills\n\nLanguages: Python, Julia\nQuantum Computing: QuTiP, Qiskit, PennyLane quantum algorithms\nTools: Git, GitHub, Jupyter, LaTeX,\nWeb Development: Quarto, GitHub pages"
   },
   {
     "objectID": "about.html#education",

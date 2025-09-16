@@ -6,7 +6,7 @@ page-layout: article
 
 ## Hello!
 
-I'm a physicst with a passion for quantum computing and open-source software. Currently, I'm participating in **Google Summer of Code 2025**, working on developing a comprehensive Hamiltonian Library for QuTiP.
+I'm a physicst with a passion for theoretical physics, quantum information, quantum foundations and recent newfound interest in open source development and the idea of open science. Currently, I'm participating in **Google Summer of Code 2025**, working on developing a comprehensive Hamiltonian Library for QuTiP.
 
 ## Current Work
 
@@ -31,9 +31,9 @@ Working with NumFOCUS on developing a Hamiltonian Library for QuTiP (Quantum Too
 ## Technical Skills
 
 - **Languages:** Python, Julia 
-- **Quantum Computing:** QuTiP, Qiskit, quantum algorithms
+- **Quantum Computing:** QuTiP, Qiskit, PennyLane quantum algorithms
 - **Tools:** Git, GitHub, Jupyter, LaTeX, 
-- **Web Development:** Quarto
+- **Web Development:** Quarto, GitHub pages
 
 ## Education
 
