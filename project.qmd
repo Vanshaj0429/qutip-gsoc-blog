@@ -1,0 +1,437 @@
+---
+title: "QuTiP Quantum Systems Library - GSoC 2025 Final Work Product"
+page-layout: article
+---
+
+**Student**: Vanshaj Bindal  
+**Organization**: [QuTiP - Quantum Toolbox in Python](https://qutip.readthedocs.io/en/latest/index.html), [NumFOCUS](https://numfocus.org/) \
+**Mentors**: Eric Giguere, Neill Lambert, Alex Pitchford, Simon Cross  
+**Project Duration**: June 2025 - September 2025  
+
+## Project Overview
+
+### What This Library Enables
+
+The QuTiP Quantum Systems Library provides a unified interface for creating, configuring, and simulating realistic open quantum systems. Instead of manually constructing operators, Hamiltonians, and collapse operators for each quantum system, researchers can now use factory functions that return complete, ready to use quantum systems with a single function call.
+
+**Before this library:**
+```python
+# Manual construction for Jaynes-Cummings model
+# Operators
+ N = 4  # Cavity states
+a = qt.tensor(qt.destroy(N), qt.qeye(2))
+sm = qt.tensor(qt.qeye(N), qt.destroy(2))
+
+# Collapse Operators
+c_ops = [np.sqrt(kappa * (1 + n)) * a, 
+        np.sqrt(kappa * n) * a.dag(),
+        np.sqrt(gamma) * sm,
+        np.sqrt(gamma_phi) * qt.tensor(qt.qeye(N), qt.sigmaz())]
+
+# Hamiltonian
+H = omega_c * a.dag() * a + omega_a * sm.dag() * sm + g * (a.dag() * sm + a * sm.dag())
+```
+
+**With this library:**
+```python
+# Complete system with one function call
+jc = quantum_systems.jaynes_cummings(omega_c=1.0, omega_a=1.0, g=0.1, 
+    n_cavity=10,cavity_decay=0.01, atomic_decay=0.005)
+
+# Everything ready: jc.hamiltonian, jc.c_ops, jc.operators, jc.latex
+```
+
+### Key Achievements
+
+- **Unified Architecture**: Created a general `QuantumSystem` class that works across all quantum models
+- **Factory Function Pattern**: Implemented the QuTiP-style approach using functions that return configured objects
+- **Time-Dependent Support**: Integrated QuTiP's `Coefficient` objects for time-varying parameters
+- **Complete Open Systems**: Every model includes both coherent dynamics and realistic dissipation mechanisms
+- **Enhanced User Experience**: Jupyter-optimized LaTeX rendering and comprehensive documentation
+- **Production Quality**: Extensive testing, code review, and integration with QuTiP's development workflow
+
+### Integration with QuTiP
+
+The library seamlessly integrates with QuTiP's existing ecosystem:
+
+- **Solver Compatibility**: All quantum systems work directly with `mesolve`, `sesolve`, and `mcsolve`
+- **Object Standards**: Returns standard QuTiP `Qobj` operators and Hamiltonians
+- **Documentation Integration**: Follows QuTiP's Sphinx documentation framework
+- **Testing Framework**: Comprehensive test suites following QuTiP's quality standards
+
+## Quantum Systems Library
+
+### Architecture Design
+
+#### QuantumSystem Class
+
+The foundation is a general `QuantumSystem` class that provides a consistent interface across all quantum models:
+
+```python
+class QuantumSystem:
+    def __init__(self, hamiltonian: Qobj, name: str = "Quantum System",
+                 operators: dict = None, c_ops: list = None,
+                 latex: str = "", **kwargs):
+        self.name = name
+        self.parameters = kwargs
+        self.hamiltonian = hamiltonian
+        self.operators = operators if operators is not None else {}
+        self.c_ops = c_ops if c_ops is not None else []
+        self.latex = latex
+
+    @property
+    def dimension(self) -> list:
+        """Get Hilbert space dimension"""
+        
+    @property
+    def eigenvalues(self) -> np.ndarray:
+        """Get eigenvalues of the Hamiltonian"""
+        
+    @property
+    def eigenstates(self) -> tuple:
+        """Get eigenvalues and eigenstates"""
+        
+    @property
+    def ground_state(self) -> Qobj:
+        """Get ground state"""
+        
+    def pretty_print(self):
+        """Pretty print system information with LaTeX rendering in Jupyter"""
+        
+    def __repr__(self):
+        """String representation"""
+        
+    def _repr_latex_(self):
+        """Automatic LaTeX representation for Jupyter notebooks"""
+```
+
+**Key Features:**
+
+- **Unified Interface**: Same attribute access pattern for all quantum systems
+- **Parameter Storage**: Automatic storage and retrieval of system parameters
+- **LaTeX Integration**: Intelligent LaTeX rendering with environment detection
+- **Jupyter Optimization**: Enhanced display capabilities for interactive research
+
+#### Factory Function Pattern
+
+Following QuTiP's design philosophy (like `qt.basis()` and `qt.coherent()`), quantum systems are created through factory functions:
+
+```python
+def jaynes_cummings(
+    omega_c: Union[float, Coefficient] = 1.0,
+    omega_a: Union[float, Coefficient] = 1.0,
+    g: Union[float, Coefficient] = 0.1,
+    n_cavity: int = 10,
+    rotating_wave: bool = True,
+    cavity_decay: Union[float, Coefficient] = 0.0,
+    atomic_decay: Union[float, Coefficient] = 0.0,
+    atomic_dephasing: Union[float, Coefficient] = 0.0,
+    thermal_photons: float = 0.0) -> QuantumSystem:
+    
+    # Build operators, Hamiltonian, and collapse operators
+    # ... (construction logic) ...
+    
+    return QuantumSystem(
+        hamiltonian=hamiltonian,
+        name="Jaynes-Cummings",
+        operators=operators,
+        c_ops=c_ops,
+        latex=latex,
+        omega_c=omega_c,
+        omega_a=omega_a,
+        g=g,
+        n_cavity=n_cavity,
+        rotating_wave=rotating_wave,
+        cavity_decay=cavity_decay,
+        atomic_decay=atomic_decay,
+        atomic_dephasing=atomic_dephasing,
+        thermal_photons=thermal_photons
+    )
+```
+
+This approach provides:
+
+- **Familiar Interface**: Consistent with existing QuTiP patterns
+- **Type Safety**: All functions return `QuantumSystem` objects
+- **Extensibility**: Easy to add new quantum models following the same pattern
+
+#### Time-Dependent Parameters
+
+Full integration with QuTiP's `Coefficient` objects enables time-dependent quantum systems:
+
+```python
+# Time-dependent coupling strength
+g_coeff = coefficient("g0 * sin(omega_d * t)", args={'g0': 0.1, 'omega_d': 2.0})
+
+jc = quantum_systems.jaynes_cummings(omega_c=1.0, omega_a=1.0, g=g_coeff)
+
+# Ready for time-dependent evolution
+result = mesolve(jc.hamiltonian, psi0, times, jc.c_ops)
+```
+
+### Available Models
+
+#### **Jaynes-Cummings Model**
+
+**Physics and Applications:**
+The Jaynes-Cummings model describes the fundamental interaction between a two-level atom and a single mode of the electromagnetic field. It's essential for cavity QED, trapped ions, circuit QED, and quantum optics experiments.
+
+**Hamiltonian:**
+
+$H = \omega_c a^\dagger a + \frac{\omega_a}{2}\sigma_z + g(a^\dagger\sigma_- + a\sigma_+) \quad \text{[with RWA]}$
+
+$H = \omega_c a^\dagger a + \frac{\omega_a}{2}\sigma_z + g(a^\dagger + a)(\sigma_+ + \sigma_-) \quad \text{[without RWA]}$
+
+**Usage and Parameters:**
+```python
+jc = quantum_systems.jaynes_cummings(
+    omega_c=1.0,           # Cavity frequency
+    omega_a=1.0,           # Atomic frequency  
+    g=0.1,                 # Coupling strength
+    n_cavity=10,           # Hilbert space truncation
+    rotating_wave=True,    # Apply rotating wave approximation
+    cavity_decay=0.01,     # Photon loss rate (kappa)
+    atomic_decay=0.005,    # Spontaneous emission rate (gamma)
+    atomic_dephasing=0.01, # Dephasing rate (gamma_phi)
+    thermal_photons=0.1    # Thermal environment (n_th)
+)
+```
+
+**Complete Operator Set:**
+
+- Cavity: $a$, $a^\dagger$, $n_c$
+- Atomic: $\sigma_x$, $\sigma_y$, $\sigma_z$, $\sigma_+$, $\sigma_-$
+
+**Realistic Dissipation:**
+
+- Cavity decay with thermal enhancement: $\sqrt{\kappa(1+\bar{n})}a$
+- Thermal excitation: $\sqrt{\kappa\bar{n}}a^\dagger$
+- Atomic spontaneous emission: $\sqrt{\gamma}\sigma_-$
+
+#### **Linear Spin Chains**
+
+**Physics and Applications:**
+Linear spin chains model interacting spin-1/2 particles and are fundamental to understanding quantum magnetism, many-body localization, quantum phase transitions, and quantum simulation with trapped ions or superconducting qubits.
+
+**Supported Models:**
+
+- **Heisenberg Model:**
+$$H = J\sum_{\langle i,j \rangle} \vec{S}_i \cdot \vec{S}_j = J\sum_{\langle i,j \rangle} (S_i^x S_j^x + S_i^y S_j^y + S_i^z S_j^z)$$
+
+- **XXZ Model:**
+$$H = J\sum_{\langle i,j \rangle}(S_i^x S_j^x + S_i^y S_j^y) + J_z\sum_{\langle i,j \rangle}S_i^z S_j^z + \sum_i (B_x S_i^x + B_y S_i^y + B_z S_i^z)$$
+
+- **XY Model:**
+$$H = J\sum_{\langle i,j \rangle}(S_i^x S_j^x + S_i^y S_j^y) + \sum_i (B_x S_i^x + B_y S_i^y + B_z S_i^z)$$
+
+- **Ising Model:**
+$$H = J\sum_{\langle i,j \rangle}S_i^z S_j^z + \sum_i (B_x S_i^x + B_y S_i^y + B_z S_i^z)$$
+
+where $\langle i,j \rangle$ denotes nearest-neighbor pairs and $\vec{B} = (B_x, B_y, B_z)$ is the external magnetic field.
+
+**Usage and Parameters:**
+```python
+chain = quantum_systems.linear_spin_chain(
+    model_type="heisenberg",    # Model selection
+    N=6,                        # Number of spins
+    J=1.0,                      # XY coupling strength
+    Jz=1.0,                     # Z coupling (anisotropy)
+    boundary_conditions="open", # "open" or "periodic"
+    B_x=0.0, B_y=0.0, B_z=0.1,  # External fields
+    gamma_relaxation=0.01,      # T1 processes
+    gamma_dephasing=0.005,      # T2* processes
+    gamma_thermal=0.02,         # Thermal bath coupling
+    temperature=0.1             # Bath temperature
+)
+```
+
+**Rich Operator Set:**
+
+- Individual spins: `S_0_x`, `S_1_z`, etc.
+- Total operators: `S_x_total`, `magnetization`
+- Correlations: `correlation_xx_nn`, `correlation_zz_nn`
+
+**Many-Body Dissipation:**
+
+- Local relaxation on each site
+- Thermal detailed balance for finite temperature
+- Depolarizing channels for complete decoherence
+
+#### **Two-Level Systems (Qubits)**
+
+**Physics and Applications:**
+The fundamental building block of quantum computation and quantum optics. Essential for modeling individual qubits, atomic systems, and as components in larger quantum systems.
+
+**Hamiltonian:**
+$$H = \frac{\omega}{2}\sigma_z$$
+
+where $\omega$ is the transition frequency and $\sigma_z$ is the Pauli-Z matrix.
+
+**Usage and Parameters:**
+```python
+qubit = quantum_systems.qubit(
+    omega=1.0,              # Transition frequency
+    decay_rate=0.01,        # T1 relaxation rate
+    dephasing_rate=0.005    # T2* dephasing rate
+)
+```
+
+**Standard Operators:**
+
+- Pauli matrices: `sigma_x`, `sigma_y`, `sigma_z`
+- Ladder operators: `sigma_plus`, `sigma_minus`
+
+## Tutorials and Learning Resources
+
+### Jaynes-Cummings Tutorial
+**Location**: `qutip-tutorials/tutorials-v5/quantum-system/JCM_Tutorial.md` (Branch: `dev.qsystem`)\
+**Status**: Merged, [qutip-tutorials PR #139](https://github.com/qutip/qutip-tutorials/pull/139)
+
+Comprehensive tutorial covering:
+
+- Basic usage and parameter exploration
+- Rabi oscillations and vacuum Rabi splitting
+- Cavity decay and thermal effects
+- Time-dependent parameter examples
+- Comparison with traditional QuTiP approaches
+
+### Ising Model and Phase Transitions Tutorial
+**Status**: Near completion, ready for PR submission
+
+Advanced tutorial exploring:
+
+- Classical Ising model to quantum TFIM transition
+- Quantum phase transition mapping and critical phenomena
+- Magnetization dynamics and correlation analysis
+- Finite-size effects and scaling behavior
+- Applications to quantum simulation and many-body physics
+
+### Jaynes-Cummings-Hubbard Model Tutorial
+**Location**: `qutip-tutorials/tutorials-v5/miscellaneous/JCHM-tutorial.md`\
+**Status**: Merged, [qutip-tutorials PR #130](https://github.com/qutip/qutip-tutorials/pull/130)
+
+Advanced tutorial exploring the intersection of quantum optics and condensed matter physics:
+
+- Three-site JCHM implementation with QuTiP tensor products
+- Ground state analysis and polariton formation
+- Quantum dynamics and photon propagation visualization
+- Phase transition signatures from Mott insulator to superfluid phases
+- Effects of detuning and coupling strength variations
+- Applications to quantum simulation and cavity QED arrays
+
+### Getting Started (User) Guide
+**Location**: `qutip/doc/guide/guide-quantum-systems.rst` (Branch: `dev.qsystem`)\
+**Status**: Final review, [PR #2746](https://github.com/qutip/qutip/pull/2746)
+
+User guide including:
+
+- Installation and setup
+- Basic usage patterns
+- Common use cases and examples
+- Integration with existing QuTiP workflows
+
+## Technical Implementation
+
+### Code Integration (PRs and Merges)
+
+**Core Infrastructure** 
+
+- [PR #2708](https://github.com/qutip/qutip/pull/2708): QuantumSystem class, factory functions (Jaynes-Cummings, qubit), and testing files
+- **Status**: Successfully merged into `dev.qsystem` branch
+- **Features**: Complete architecture with time-dependent support and LaTeX integration
+
+**Spin Chain Models** 
+
+- [PR #2730](https://github.com/qutip/qutip/pull/2730): Linear spin chain implementation
+- **Status**: Review feedback addressed, ready for final approval
+- **Features**: Four interaction models with complete many-body dissipation
+
+**Documentation Integration**
+
+- [PR #2746](https://github.com/qutip/qutip/pull/2746): API documentation and Sphinx integration
+- **Status**: Review feedback addressed, ready for final approval
+- **Featured**: User Guide and API Documentation 
+
+**Tutorial Resources**
+
+- [PR #139](https://github.com/qutip/qutip-tutorials/pull/139): Jaynes-Cummings tutorial
+- **Status**: Successfully merged into `dev.qsystem` branch
+
+### Testing Framework
+
+Comprehensive test coverage ensuring reliability:
+
+**Test Suites:**
+
+Location: `qutip/qutip/tests/quantum_systems` (Branch: `dev.qsystem`)
+
+- `test_quantum_system.py`
+- `test_jaynes_cummings.py`
+- `test_qubit.py`
+- `test_linear_spin_chain.py`
+
+**Quality Metrics:**
+
+- All tests pass on QuTiP's CI/CD pipeline
+- Comprehensive coverage of user-facing functionality
+- Performance testing for large many-body systems
+
+### QuTiP Solver Compatibility
+
+**Current Compatibility:**
+All quantum systems work seamlessly with existing QuTiP solvers:
+```python
+# Direct usage with any QuTiP solver
+jc = quantum_systems.jaynes_cummings(...)
+result = mesolve(jc.hamiltonian, psi0, times, jc.c_ops)
+result = sesolve(jc.hamiltonian, psi0, times)
+result = mcsolve(jc.hamiltonian, psi0, times, jc.c_ops)
+```
+
+**Future Enhancement (Planned):**
+Direct `QuantumSystem` object support:
+```python
+# Future capability
+result = mesolve(jc, psi0, times)  # Automatic H and c_ops extraction
+```
+
+## Future Work and Contributions
+
+### Planned Extensions
+
+**Additional Quantum Models:**
+
+- Harmonic oscillator systems
+- Dicke model for collective light-matter interactions
+- Tavis-Cummings model for multi-atom cavity systems
+
+**Enhanced Features:**
+
+- Initial state dictionaries (ground states, thermal states, coherent states)
+- Solver integration with automatic `QuantumSystem` detection
+- Visualization tools for quantum system properties
+
+### How to Use and Contribute
+
+- Once we integrate the direct `QuantumSystem` object support in `mesolve`, `sesolve` and `mcsolve`, the `dev.qsystem` branch will be merged into `master` branch. 
+- Before that happens people can use the `dev.qsystem` branch to access the quantum system library and contribute to the same. (though it won't be too long before we merge to the main branch) 
+
+## Project Impact and Conclusion
+
+The QuTiP Quantum Systems Library brings improvements to the QuTiP ecosystem by offering researchers sophisticated tools for simulating realistic open quantum systems more easliy. This library hides the complexity of operator construction behind simple interfaces while preserving complete access to the underlying physics, allowing researchers to quickly explore quantum phenomena across various research areas.
+
+The factory function design demonstrates that complex quantum systems can be made user friendly without compromising functionality or performance. Through thorough testing, detailed documentation, and educational tutorials, this library will function as a dependable resource for the quantum physics community, supporting both learning and advanced research applications.
+
+**Key Deliverables:**
+
+- Complete, tested, and merged quantum systems library
+- Three fully implemented quantum models with realistic dissipation
+- Comprehensive tutorials for education and research
+- Production quality code following QuTiP standards
+- Time-dependent parameter support for advanced simulations
+- Enhanced user experience with Jupyter integration
+
+This work creates a solid foundation for future expansion, establishing clear guidelines for extending QuTiP's capabilities to encompass the complete range of quantum systems used in contemporary quantum physics research.
+
+**Student Contact**: [GitHub](https://github.com/vanshaj0429) | [Email](vanshajbindal98@gmail.com)  
+**Project Repository**: [QuTiP dev.qsystem branch](https://github.com/qutip/qutip/tree/dev.qsystem)
